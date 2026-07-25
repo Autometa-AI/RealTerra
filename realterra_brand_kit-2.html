@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>RealTerra — Brand Kit v2.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14201C; --pine:#0F3D33; --pine-deep:#0A2921;
+    --paper:#FAF9F6; --paper-alt:#F1EFE9; --steel:#6B7573; --steel-line: rgba(20,32,28,0.12);
+    --signal:#2BA890; --rust:#B5502E;
+    --serif:'Newsreader', Georgia, serif; --sans:'Inter', -apple-system, sans-serif; --data:'IBM Plex Mono', monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--paper); color:var(--ink); font-family:var(--sans); line-height:1.5; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1040px; margin:0 auto; padding:0 40px;}
+  .rule{border:none; border-top:1px solid var(--steel-line);}
+  .eyebrow{font-family:var(--sans); font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--signal); font-weight:700; margin-bottom:10px; display:block;}
+  .section{padding:88px 0;}
+  .section-tight{padding:56px 0;}
+  h1,h2,h3{font-family:var(--serif); letter-spacing:-0.01em; color:var(--ink);}
+  h2.section-title{font-size:32px; margin-bottom:6px; font-weight:700;}
+  .section-desc{color:var(--steel); font-size:14.5px; max-width:640px; margin-bottom:8px;}
+
+  /* NAV */
+  .topnav{position:sticky; top:0; z-index:10; background:rgba(250,249,246,0.94); backdrop-filter:blur(6px); border-bottom:1px solid var(--steel-line);}
+  .topnav .wrap{display:flex; align-items:center; justify-content:space-between; padding:14px 40px; gap:24px;}
+  .topnav-brand{font-family:var(--serif); font-weight:600; font-size:16px;}
+  .topnav-links{display:flex; gap:20px; flex-wrap:wrap;}
+  .topnav-links a{font-size:11.5px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--steel); text-decoration:none;}
+  .topnav-links a:hover{color:var(--pine);}
+
+  /* MASTHEAD */
+  .masthead{background:var(--pine); color:var(--paper); padding:100px 0 70px;}
+  .masthead .wrap{display:flex; flex-direction:column; gap:34px;}
+  .masthead-top{display:flex; justify-content:space-between; align-items:flex-start; font-family:var(--sans); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:rgba(250,249,246,0.55); font-weight:600;}
+  .brand-name{font-family:var(--serif); font-size:80px; line-height:0.95; letter-spacing:-0.02em; font-weight:500;}
+  .brand-sub{font-family:var(--sans); font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:rgba(250,249,246,0.6); font-weight:500; margin-top:14px;}
+  .masthead-sub{font-family:var(--sans); font-size:16px; color:rgba(250,249,246,0.72); max-width:520px; font-weight:400;}
+  .masthead-stats{display:flex; gap:48px; margin-top:20px; border-top:1px solid rgba(250,249,246,0.18); padding-top:24px;}
+  .mstat{font-family:var(--sans); font-size:11px; color:rgba(250,249,246,0.6); text-transform:uppercase; letter-spacing:.08em; font-weight:600;}
+  .mstat b{display:block; font-family:var(--serif); font-size:26px; color:var(--paper); letter-spacing:0; font-weight:600; margin-top:4px; text-transform:none;}
+
+  /* RATIONALE */
+  .rationale-grid{display:grid; grid-template-columns:200px 1fr; gap:40px; align-items:baseline;}
+  .rationale-grid p{font-size:16.5px; color:#2C3835; max-width:640px; font-weight:400;}
+  .rationale-grid p + p{margin-top:16px;}
+
+  /* LOGO */
+  .logo-hero{background:var(--pine); border-radius:3px; padding:80px 40px; display:flex; align-items:center; justify-content:center; margin-top:32px;}
+  .wordmark-lg{font-family:var(--serif); font-weight:600; font-size:56px; letter-spacing:0.3px; color:var(--paper); text-align:center;}
+  .logo-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--steel-line); border:1px solid var(--steel-line); margin-top:1px;}
+  .logo-tile{padding:50px 30px; display:flex; align-items:center; justify-content:center; min-height:130px; text-align:center;}
+  .logo-tile.light{background:var(--paper);}
+  .logo-tile.dark{background:var(--pine-deep);}
+  .wordmark-md{font-family:var(--serif); font-weight:600; font-size:32px; letter-spacing:0.3px;}
+  .logo-caption-row{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--steel-line); border-left:1px solid var(--steel-line); border-right:1px solid var(--steel-line); border-bottom:1px solid var(--steel-line);}
+  .logo-caption{background:var(--paper); padding:16px 30px; font-family:var(--sans); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--steel); font-weight:600; text-align:center;}
+  .spec-list{margin-top:36px; display:grid; grid-template-columns:1fr 1fr; gap:32px;}
+  .spec-list h4{font-family:var(--sans); font-size:13px; font-weight:700; margin-bottom:10px;}
+  .spec-list p{font-size:13.5px; color:#2C3835; line-height:1.6;}
+  .clearspace-box{margin-top:40px; background:var(--paper-alt); border:1px dashed var(--steel-line); padding:50px; display:flex; align-items:center; justify-content:center;}
+  .clearspace-inner{border:1px dashed var(--rust); padding:24px 40px; display:inline-flex; align-items:center; justify-content:center;}
+  .wordmark-sm{font-family:var(--serif); font-weight:600; font-size:26px;}
+  .avatar-row{display:flex; gap:16px; margin-top:32px; align-items:center; flex-wrap:wrap;}
+  .avatar{width:64px; height:64px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-weight:600; font-size:26px;}
+  .avatar.pine{background:var(--pine); color:var(--paper);}
+  .avatar.paper{background:var(--paper); color:var(--pine); border:1px solid var(--steel-line);}
+  .avatar-sq{width:64px; height:64px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-weight:600; font-size:26px; background:var(--pine-deep); color:var(--paper);}
+  .avatar-cap{font-family:var(--sans); font-size:11px; color:var(--steel); text-transform:uppercase; letter-spacing:.06em; font-weight:600;}
+  .avatar-col{display:flex; flex-direction:column; align-items:center; gap:8px;}
+
+  /* COLOR */
+  .palette-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--steel-line); border:1px solid var(--steel-line); margin-top:36px;}
+  .swatch{background:var(--paper); padding:28px 24px;}
+  .swatch-block{height:96px; border-radius:2px; margin-bottom:16px;}
+  .swatch-name{font-family:var(--serif); font-size:19px; font-weight:600;}
+  .swatch-role{font-size:12.5px; color:var(--steel); margin:4px 0 12px;}
+  .swatch-hex{font-family:var(--data); font-size:12px; color:var(--ink); display:flex; justify-content:space-between; border-top:1px solid var(--steel-line); padding-top:10px;}
+  .data-row{display:flex; gap:1px; background:var(--steel-line); border:1px solid var(--steel-line); margin-top:14px;}
+  .data-chip{background:var(--paper); flex:1; padding:18px 20px;}
+  .data-chip .dot{width:9px; height:9px; border-radius:50%; display:inline-block; margin-right:8px;}
+  .data-chip-title{font-size:13px; font-weight:700;}
+  .data-chip-hex{font-family:var(--data); font-size:11px; color:var(--steel); margin-top:6px;}
+  .contrast-note{margin-top:18px; font-size:12.5px; color:var(--steel);}
+
+  /* TYPE */
+  .type-block{padding:32px 0; border-top:1px solid var(--steel-line);}
+  .type-block:last-child{border-bottom:1px solid var(--steel-line);}
+  .type-label{font-family:var(--sans); font-size:11px; text-transform:uppercase; letter-spacing:.12em; color:var(--signal); margin-bottom:14px; font-weight:700;}
+  .type-sample-serif{font-family:var(--serif); font-size:44px; letter-spacing:-0.01em; line-height:1.08; font-weight:500;}
+  .type-sample-sans{font-family:var(--sans); font-size:19px; color:var(--ink); max-width:600px;}
+  .type-sample-data{font-family:var(--data); font-size:28px; letter-spacing:-0.01em; font-weight:500;}
+  .type-meta{font-size:12.5px; color:var(--steel); margin-top:12px;}
+  .rule-box{margin-top:32px; background:var(--paper-alt); border-left:3px solid var(--signal); padding:16px 22px; font-size:13.5px; color:#2C3835;}
+
+  /* DATA VIZ */
+  .chart-card{background:var(--paper-alt); border:1px solid var(--steel-line); padding:36px; margin-top:32px;}
+  .chart-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:24px;}
+  .chart-title{font-family:var(--sans); font-weight:700; font-size:14px;}
+  .chart-sub{font-family:var(--data); font-size:12px; color:var(--steel);}
+  .bars{display:flex; align-items:flex-end; gap:18px; height:160px;}
+  .bar-col{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%;}
+  .bar{width:100%; border-radius:2px 2px 0 0; background:var(--pine);}
+  .bar.highlight{background:var(--signal);}
+  .bar-val{font-family:var(--data); font-size:11px; margin-bottom:6px; color:var(--ink);}
+  .bar-label{font-family:var(--sans); font-size:10.5px; color:var(--steel); margin-top:8px; text-transform:uppercase; letter-spacing:.04em;}
+
+  /* ICONOGRAPHY */
+  .icon-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--steel-line); border:1px solid var(--steel-line); margin-top:32px;}
+  .icon-tile{background:var(--pine-deep); padding:34px 18px 20px; text-align:center;}
+  .icon-tile span{font-family:var(--sans); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:rgba(250,249,246,0.7); display:block; margin-top:14px; font-weight:600;}
+  .icon-note{font-size:13.5px; color:var(--steel); margin-top:16px; max-width:640px;}
+
+  /* PHOTOGRAPHY */
+  .photo-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:32px;}
+  .photo-card{aspect-ratio:4/5; border-radius:2px; position:relative; overflow:hidden; display:flex; align-items:flex-end;}
+  .photo-1{background:linear-gradient(160deg,#0F3D33,#0A2921 60%,#14201C);}
+  .photo-2{background:linear-gradient(160deg,#1C4A3E,#0A2921 55%,#14201C);}
+  .photo-3{background:linear-gradient(160deg,#0A2921,#0F3D33 50%,#1C4A3E);}
+  .photo-card::before{content:'';position:absolute; inset:0; background:repeating-linear-gradient(115deg, rgba(250,249,246,0.05) 0 2px, transparent 2px 26px);}
+  .photo-tag{position:relative; z-index:1; padding:14px 16px; font-family:var(--sans); font-size:11px; color:rgba(250,249,246,0.85); text-transform:uppercase; letter-spacing:.06em; font-weight:600;}
+
+  /* VOICE */
+  .voice-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--steel-line); border:1px solid var(--steel-line); margin-top:32px;}
+  .voice-card{background:var(--paper); padding:26px 28px;}
+  .voice-card h4{font-family:var(--serif); font-size:19px; font-weight:600; margin-bottom:8px;}
+  .voice-card p{font-size:13.5px; color:#2C3835; line-height:1.6;}
+
+  /* BUTTONS */
+  .btn-row{display:flex; gap:16px; margin-top:28px; flex-wrap:wrap; align-items:center;}
+  .btn{font-family:var(--sans); font-size:13.5px; font-weight:600; letter-spacing:.01em; padding:13px 26px; border-radius:2px; cursor:default; display:inline-flex; align-items:center; gap:8px;}
+  .btn-primary{background:var(--pine); color:var(--paper);}
+  .btn-secondary{background:transparent; color:var(--pine); border:1px solid var(--pine);}
+  .btn-data{background:var(--paper-alt); color:var(--ink); font-family:var(--data); font-size:12px; border:1px solid var(--steel-line);}
+
+  /* APPLIED EXAMPLE */
+  .applied-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:32px;}
+  .ad-mock{background:var(--pine-deep); border-radius:3px; overflow:hidden;}
+  .ad-mock-inner{padding:36px 30px; color:var(--paper);}
+  .ad-eyebrow{font-family:var(--sans); font-size:10px; color:var(--signal); letter-spacing:.14em; text-transform:uppercase; font-weight:700;}
+  .ad-headline{font-family:var(--serif); font-size:34px; line-height:1.05; margin:14px 0 20px; font-weight:600;}
+  .ad-stat{font-family:var(--data); font-size:13px; color:rgba(250,249,246,0.85); border-top:1px solid rgba(250,249,246,0.2); padding-top:14px; margin-top:6px;}
+  .ad-stat b{color:var(--signal); font-size:15px;}
+  .ad-cta{margin-top:22px; display:inline-block; font-family:var(--sans); font-weight:700; font-size:12.5px; background:var(--signal); color:var(--pine-deep); padding:11px 20px; border-radius:2px;}
+  .wa-mock{background:var(--paper-alt); border:1px solid var(--steel-line); border-radius:3px; padding:24px; display:flex; flex-direction:column; gap:10px;}
+  .wa-bubble{background:var(--paper); border:1px solid var(--steel-line); border-radius:10px; padding:14px 16px; font-size:13px; max-width:88%;}
+  .wa-bubble.out{align-self:flex-end; background:var(--pine); color:var(--paper); border:none;}
+  .wa-label{font-family:var(--sans); font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--steel); font-weight:600; margin-bottom:4px;}
+
+  .footer{background:var(--pine-deep); color:rgba(250,249,246,0.55); padding:36px 0; font-family:var(--sans); font-size:11px; letter-spacing:.06em; text-transform:uppercase; font-weight:600;}
+  .footer .wrap{display:flex; justify-content:space-between; align-items:center;}
+  .footer .ver{font-family:var(--data); text-transform:none; letter-spacing:0; color:rgba(250,249,246,0.5);}
+
+  @media(max-width:760px){
+    .wrap{padding:0 22px;}
+    .brand-name{font-size:46px;}
+    .rationale-grid{grid-template-columns:1fr;}
+    .palette-grid{grid-template-columns:1fr 1fr;}
+    .icon-grid{grid-template-columns:repeat(2,1fr);}
+    .logo-grid, .logo-caption-row, .spec-list, .voice-grid, .photo-grid, .applied-grid{grid-template-columns:1fr;}
+    .data-row{flex-wrap:wrap;}
+    .masthead-stats{flex-wrap:wrap; gap:24px;}
+    .topnav-links{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <div class="wrap">
+    <div class="topnav-brand">RealTerra</div>
+    <div class="topnav-links">
+      <a href="#logo">Logo</a>
+      <a href="#colour">Colour</a>
+      <a href="#type">Type</a>
+      <a href="#dataviz">Data</a>
+      <a href="#icons">Icons</a>
+      <a href="#photo">Imagery</a>
+      <a href="#voice">Voice</a>
+      <a href="#cta">CTA</a>
+      <a href="#applied">Applied</a>
+    </div>
+  </div>
+</div>
+
+<div class="masthead">
+  <div class="wrap">
+    <div class="masthead-top">
+      <span>Brand Identity Guidelines — Version 2.0</span>
+      <span>Dubai, UAE</span>
+    </div>
+    <div>
+      <div class="brand-name">RealTerra</div>
+      <div class="brand-sub">Global Properties</div>
+    </div>
+    <div class="masthead-sub">An analytical brokerage for ultra-high-net-worth investors. Every asset, trajectory, and exit window — quantified before it's sold.</div>
+    <div class="masthead-stats">
+      <div class="mstat">Positioning<b>Analytical</b></div>
+      <div class="mstat">Audience<b>UHNWI · AED 4M+</b></div>
+      <div class="mstat">Tone<b>Editorial, Minimal</b></div>
+    </div>
+  </div>
+</div>
+
+<!-- POSITIONING -->
+<div class="section-tight">
+  <div class="wrap">
+    <span class="eyebrow">Brand Positioning</span>
+    <div class="rationale-grid">
+      <h2 style="font-size:24px; font-weight:700;">Point of view</h2>
+      <div>
+        <p>RealTerra exists for investors who want their real estate decisions underwritten the way a portfolio allocation would be — with a defined trajectory, exit window, and liquidity profile, not a lifestyle narrative. The brand should read first as an analytics practice, and second as a luxury one.</p>
+        <p>Every decision in this kit — the cooler pine over a warmer heritage green, the editorial serif over a classical one, the reserved use of colour inside data only — exists to keep that order intact.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- LOGO -->
+<div class="section" id="logo">
+  <div class="wrap">
+    <span class="eyebrow">Logo</span>
+    <h2 class="section-title">Wordmark only.</h2>
+    <p class="section-desc">The wordmark is the entire mark — no icon, no monogram, no symbol. One typeface, one weight, one colour at a time.</p>
+
+    <div class="logo-hero"><div class="wordmark-lg">RealTerra</div></div>
+
+    <div class="logo-grid">
+      <div class="logo-tile light"><div class="wordmark-md" style="color:var(--ink);">RealTerra</div></div>
+      <div class="logo-tile dark"><div class="wordmark-md" style="color:var(--paper);">RealTerra</div></div>
+    </div>
+    <div class="logo-caption-row">
+      <div class="logo-caption">Wordmark on Paper</div>
+      <div class="logo-caption">Wordmark on Pine Deep</div>
+    </div>
+
+    <div class="clearspace-box">
+      <div class="clearspace-inner"><div class="wordmark-sm" style="color:var(--ink);">RealTerra</div></div>
+    </div>
+
+    <div class="spec-list">
+      <div>
+        <h4>Clear space & minimum size</h4>
+        <p>Maintain clear space on all sides equal to the cap-height of the "R." Do not scale the wordmark below 90px wide for digital, or 20mm for print.</p>
+      </div>
+      <div>
+        <h4>Usage rules</h4>
+        <p>The wordmark renders in a single colour only — Pine or Ink on light backgrounds, Paper on dark. Always Newsreader, always this weight. No drop shadows, outlines, gradients, or rotation.</p>
+      </div>
+      <div>
+        <h4>Small-format placements</h4>
+        <p>For app icons, favicons, and social avatars, set a single capital "R" in Newsreader, same weight and colour rules as the wordmark. No separate symbol is designed — typography carries the brand at every size.</p>
+      </div>
+      <div>
+        <h4>Incorrect use</h4>
+        <p>Do not recolour the wordmark, add a background shape or container behind it, stretch it off-ratio, or substitute any other typeface.</p>
+      </div>
+    </div>
+
+    <div class="avatar-row">
+      <div class="avatar-col"><div class="avatar pine">R</div><span class="avatar-cap">Social — Circle</span></div>
+      <div class="avatar-col"><div class="avatar paper">R</div><span class="avatar-cap">Social — Reversed</span></div>
+      <div class="avatar-col"><div class="avatar-sq">R</div><span class="avatar-cap">App Icon / Favicon</span></div>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- COLOUR -->
+<div class="section" id="colour">
+  <div class="wrap">
+    <span class="eyebrow">Colour</span>
+    <h2 class="section-title">Five tokens.</h2>
+    <p class="section-desc">No gold, no beige-luxury cliché. Every colour has a functional job — brand, background, or data.</p>
+
+    <div class="palette-grid">
+      <div class="swatch"><div class="swatch-block" style="background:#0F3D33;"></div><div class="swatch-name">Pine</div><div class="swatch-role">Primary brand colour — wordmark, headers, primary CTAs</div><div class="swatch-hex"><span>#0F3D33</span><span>RGB 15,61,51</span></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#0A2921;"></div><div class="swatch-name">Pine Deep</div><div class="swatch-role">Dark backgrounds, ad creative, video lower-thirds</div><div class="swatch-hex"><span>#0A2921</span><span>RGB 10,41,33</span></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#14201C;"></div><div class="swatch-name">Ink</div><div class="swatch-role">Body text on paper — never pure black</div><div class="swatch-hex"><span>#14201C</span><span>RGB 20,32,28</span></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#FAF9F6; border:1px solid var(--steel-line);"></div><div class="swatch-name">Paper</div><div class="swatch-role">Primary background — warm off-white, not stark white</div><div class="swatch-hex"><span>#FAF9F6</span><span>RGB 250,249,246</span></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#F1EFE9; border:1px solid var(--steel-line);"></div><div class="swatch-name">Paper Alt</div><div class="swatch-role">Card fills, table stripes, subtle section breaks</div><div class="swatch-hex"><span>#F1EFE9</span><span>RGB 241,239,233</span></div></div>
+      <div class="swatch"><div class="swatch-block" style="background:#6B7573;"></div><div class="swatch-name">Steel</div><div class="swatch-role">Captions, hairline rules, secondary labels</div><div class="swatch-hex"><span>#6B7573</span><span>RGB 107,117,115</span></div></div>
+    </div>
+
+    <div style="margin-top:56px;">
+      <span class="eyebrow" style="margin-bottom:2px;">Data-Only Accents</span>
+      <p class="section-desc">These two colours appear <b>only</b> inside charts, stats, and indicators — never as decoration, never in the wordmark or backgrounds.</p>
+      <div class="data-row">
+        <div class="data-chip"><span class="dot" style="background:#2BA890;"></span><span class="data-chip-title">Signal Teal — growth / positive</span><div class="data-chip-hex">#2BA890 · price appreciation, rental yield up, positive delta</div></div>
+        <div class="data-chip"><span class="dot" style="background:#B5502E;"></span><span class="data-chip-title">Rust — caution / negative</span><div class="data-chip-hex">#B5502E · softening demand, downside risk, negative delta</div></div>
+      </div>
+      <p class="contrast-note">Accessibility: Paper text on Pine/Pine Deep and Ink text on Paper/Paper Alt both exceed WCAG AA contrast (4.5:1) at body-text sizes — safe for report PDFs, landing pages, and ad captions alike.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- TYPE -->
+<div class="section" id="type">
+  <div class="wrap">
+    <span class="eyebrow">Typography</span>
+    <h2 class="section-title">Three faces, three jobs.</h2>
+    <p class="section-desc">A financial-editorial serif for authority, a clean grotesk for everything you read, and IBM Plex Mono reserved strictly for numerals.</p>
+
+    <div class="type-block">
+      <div class="type-label">Display — Newsreader, Semibold / Italic</div>
+      <div class="type-sample-serif">Off-plan, quantified.</div>
+      <div class="type-meta">Headlines, report titles, hero statements, and the wordmark. Roman for authority, italic sparingly on a single word — never full sentences.</div>
+    </div>
+    <div class="type-block">
+      <div class="type-label">Body & UI — Inter, Regular / Semibold</div>
+      <div class="type-sample-sans">Every property is underwritten against liquidity, exit window, and five-year trajectory before it reaches an investor.</div>
+      <div class="type-meta">All body copy, section labels, captions, buttons, navigation, icon labels. Semibold for emphasis — never italics, never mono.</div>
+    </div>
+    <div class="type-block">
+      <div class="type-label">Data — IBM Plex Mono</div>
+      <div class="type-sample-data">AED 4.2M · +18.6% <span style="color:var(--signal);">▲</span></div>
+      <div class="type-meta">Numerals only: prices, percentages, dates, hex codes, chart values. Never section titles, never labels, never prose — that discipline is what makes the mono read as data and not decoration.</div>
+    </div>
+
+    <div class="rule-box"><b>The one rule that governs this whole system:</b> if it's a number, it's mono. If it's a word, it's Inter or Newsreader. No exceptions, no borderline cases — this is what was inconsistent in earlier drafts and is now fixed throughout.</div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- DATA VIZ -->
+<div class="section" id="dataviz">
+  <div class="wrap">
+    <span class="eyebrow">Data Visualisation</span>
+    <h2 class="section-title">How a chart should look.</h2>
+    <p class="section-desc">Every report, deck, and reel that shows performance data follows this exact palette logic — Pine for standard bars, Signal Teal for the one data point being highlighted.</p>
+
+    <div class="chart-card">
+      <div class="chart-head">
+        <span class="chart-title">5-Yr Price Appreciation by Submarket</span>
+        <span class="chart-sub">SOURCE: DLD, 2025</span>
+      </div>
+      <div class="bars">
+        <div class="bar-col"><span class="bar-val">6.8%</span><div class="bar" style="height:44%;"></div><span class="bar-label">JVC</span></div>
+        <div class="bar-col"><span class="bar-val">8.1%</span><div class="bar" style="height:54%;"></div><span class="bar-label">Business Bay</span></div>
+        <div class="bar-col"><span class="bar-val">11.4%</span><div class="bar highlight" style="height:78%;"></div><span class="bar-label">Dubai South</span></div>
+        <div class="bar-col"><span class="bar-val">7.2%</span><div class="bar" style="height:48%;"></div><span class="bar-label">Al Marjan</span></div>
+        <div class="bar-col"><span class="bar-val">9.0%</span><div class="bar" style="height:60%;"></div><span class="bar-label">Maritime City</span></div>
+      </div>
+    </div>
+    <p class="icon-note">Rule: never highlight more than one bar or line per chart. Multiple teal highlights dilute the signal and defeat the purpose of the accent colour.</p>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- ICONOGRAPHY -->
+<div class="section" id="icons">
+  <div class="wrap">
+    <span class="eyebrow">Iconography</span>
+    <h2 class="section-title">Investment terms, rendered as a system.</h2>
+    <p class="section-desc">Duotone: a Pine container, a Paper outline, and a single Signal Teal accent shape carrying the meaning of each term — enough presence to sit in front of an audience that reads financial dashboards daily.</p>
+
+    <div class="icon-grid">
+      <div class="icon-tile"><svg width="52" height="52" viewBox="0 0 52 52"><rect width="52" height="52" rx="8" fill="#0F3D33"/><path d="M14 30l12-9 12 9" stroke="#FAF9F6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 28v10h18V28" stroke="#FAF9F6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="23" y="32" width="6" height="6" fill="#2BA890"/></svg><span>Asset</span></div>
+      <div class="icon-tile"><svg width="52" height="52" viewBox="0 0 52 52"><rect width="52" height="52" rx="8" fill="#0F3D33"/><path d="M13 34l8-9 6 5 11-13" stroke="#FAF9F6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="38" cy="17" r="3" fill="#2BA890"/></svg><span>Trajectory</span></div>
+      <div class="icon-tile"><svg width="52" height="52" viewBox="0 0 52 52"><rect width="52" height="52" rx="8" fill="#0F3D33"/><circle cx="26" cy="27" r="11" stroke="#FAF9F6" stroke-width="2" fill="none"/><path d="M26 20v7l6 3" stroke="#2BA890" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><span>Exit Window</span></div>
+      <div class="icon-tile"><svg width="52" height="52" viewBox="0 0 52 52"><rect width="52" height="52" rx="8" fill="#0F3D33"/><path d="M26 15c6 7 9 11.5 9 16a9 9 0 01-18 0c0-4.5 3-9 9-16z" stroke="#FAF9F6" stroke-width="2" fill="none" stroke-linejoin="round"/><path d="M26 26c0 4-4 5-4 9" stroke="#2BA890" stroke-width="2" fill="none" stroke-linecap="round"/></svg><span>Liquidity</span></div>
+      <div class="icon-tile"><svg width="52" height="52" viewBox="0 0 52 52"><rect width="52" height="52" rx="8" fill="#0F3D33"/><path d="M26 15a12 12 0 100 24 12 12 0 000-24z" stroke="#FAF9F6" stroke-width="2" fill="none"/><path d="M26 15a12 12 0 016 22.2L26 27z" fill="#2BA890"/></svg><span>Allocation</span></div>
+      <div class="icon-tile"><svg width="52" height="52" viewBox="0 0 52 52"><rect width="52" height="52" rx="8" fill="#0F3D33"/><rect x="15" y="17" width="22" height="18" rx="1" stroke="#FAF9F6" stroke-width="2" fill="none"/><path d="M19 35v-6M26 35v-9M33 35v-4" stroke="#FAF9F6" stroke-width="2" stroke-linecap="round"/><circle cx="33" cy="17" r="2.5" fill="#2BA890"/></svg><span>Off-Plan</span></div>
+      <div class="icon-tile"><svg width="52" height="52" viewBox="0 0 52 52"><rect width="52" height="52" rx="8" fill="#0F3D33"/><path d="M26 15l10 4v8c0 7-4.5 11-10 13-5.5-2-10-6-10-13v-8z" stroke="#FAF9F6" stroke-width="2" fill="none" stroke-linejoin="round"/><path d="M21 27l4 4 7-8" stroke="#2BA890" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Due Diligence</span></div>
+      <div class="icon-tile"><svg width="52" height="52" viewBox="0 0 52 52"><rect width="52" height="52" rx="8" fill="#0F3D33"/><circle cx="26" cy="26" r="11" stroke="#FAF9F6" stroke-width="2" fill="none"/><path d="M15 26h22M26 15a17 17 0 010 22M26 15a17 17 0 000 22" stroke="#FAF9F6" stroke-width="1.4" fill="none"/><circle cx="34" cy="19" r="2.5" fill="#2BA890"/></svg><span>Residency</span></div>
+    </div>
+    <p class="icon-note">Container is always Pine at 8px corner radius. Line work is always Paper. Signal Teal marks exactly one meaningful detail per icon — never the whole glyph.</p>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- PHOTOGRAPHY -->
+<div class="section" id="photo">
+  <div class="wrap">
+    <span class="eyebrow">Photography & Imagery</span>
+    <h2 class="section-title">Architecture, not lifestyle.</h2>
+    <p class="section-desc">Skyline, structure, and material — not stock portraiture. Every image is treated with a Pine-to-Ink gradient duotone at low opacity, with a fine diagonal linework overlay that echoes the trajectory icon.</p>
+    <div class="photo-grid">
+      <div class="photo-card photo-1"><div class="photo-tag">Skyline / Wide</div></div>
+      <div class="photo-card photo-2"><div class="photo-tag">Facade Detail</div></div>
+      <div class="photo-card photo-3"><div class="photo-tag">Interior / Structural</div></div>
+    </div>
+    <div class="spec-list">
+      <div><h4>Subject matter</h4><p>Building facades, structural detail, skylines at dusk, construction/off-plan progress. Avoid people as the primary subject — if a person appears, they are secondary to the architecture, never a lifestyle model.</p></div>
+      <div><h4>Treatment</h4><p>Apply the Pine → Ink duotone gradient at 60–75% opacity over source imagery, plus the diagonal hairline overlay used in this kit, so every asset feels part of one system regardless of source photo.</p></div>
+      <div><h4>Colour temperature</h4><p>Cool, not warm. Avoid golden-hour amber tones that pull toward the heritage-luxury look this brand deliberately moved away from.</p></div>
+      <div><h4>Never use</h4><p>Stock fashion portraiture, gold-toned filters, motivational-poster text overlays, or any image where the property itself isn't the visible subject.</p></div>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- VOICE -->
+<div class="section" id="voice">
+  <div class="wrap">
+    <span class="eyebrow">Voice & Tone</span>
+    <h2 class="section-title">Write like an analyst, not a salesperson.</h2>
+    <p class="section-desc">Four working rules for anyone writing captions, scripts, or report copy for RealTerra.</p>
+    <div class="voice-grid">
+      <div class="voice-card"><h4>Number before narrative</h4><p>Open with the data point, then explain it. "11.4% five-year appreciation in Dubai South" — not "Dubai South is booming."</p></div>
+      <div class="voice-card"><h4>Cite the source, every time</h4><p>Every stat carries an attribution — DLD, Property Monitor, developer disclosure. An unsourced number is a claim, not a data point.</p></div>
+      <div class="voice-card"><h4>No superlatives without evidence</h4><p>"Best," "guaranteed," and "hottest" are banned unless a specific figure backs the claim in the same sentence.</p></div>
+      <div class="voice-card"><h4>Address the allocation, not the lifestyle</h4><p>Speak to yield, exit window, and liquidity — not to how a property will make someone feel.</p></div>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- CTA -->
+<div class="section" id="cta">
+  <div class="wrap">
+    <span class="eyebrow">CTA System</span>
+    <h2 class="section-title">Named actions only.</h2>
+    <p class="section-desc">Every CTA names the action and the asset — never a generic label.</p>
+    <div class="btn-row">
+      <span class="btn btn-primary">View the Report →</span>
+      <span class="btn btn-secondary">Request Access</span>
+      <span class="btn btn-data">↳ SEE_THE_DATA.PDF</span>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- APPLIED -->
+<div class="section" id="applied">
+  <div class="wrap">
+    <span class="eyebrow">Applied Examples</span>
+    <h2 class="section-title">Ad creative and WhatsApp opt-in.</h2>
+    <p class="section-desc">Palette, type, and CTA system applied to the two placements this funnel actually runs on.</p>
+    <div class="applied-grid">
+      <div class="ad-mock">
+        <div class="ad-mock-inner">
+          <div class="ad-eyebrow">Dubai South · Market Brief</div>
+          <div class="ad-headline">Off-plan,<br>quantified.</div>
+          <div class="ad-stat">5-YR AVG APPRECIATION <b>+11.4%</b> <span style="color:var(--signal);">▲</span><br>SOURCE: DLD TRANSACTION DATA, 2025</div>
+          <span class="ad-cta">View the Report →</span>
+        </div>
+      </div>
+      <div class="wa-mock">
+        <div>
+          <div class="wa-label">Incoming — Landing Page Opt-in</div>
+          <div class="wa-bubble">Hi, I'd like the Dubai South CMA report — saw the +11.4% stat on your ad.</div>
+        </div>
+        <div>
+          <div class="wa-label" style="text-align:right;">RealTerra</div>
+          <div class="wa-bubble out">Sending it now — 7-page comparative snapshot across 3 active launches. Happy to walk through the exit-window math on a call this week.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="wrap">
+    <span>RealTerra Global Properties LLC</span>
+    <span class="ver">v2.0 — Jul 2026</span>
+  </div>
+</div>
+
+</body>
+</html>
