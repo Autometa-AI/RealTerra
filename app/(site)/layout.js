@@ -6,9 +6,10 @@ import Dock from '../../components/Dock';
 import Effects from '../../components/Effects';
 import { getContent } from '../../lib/content';
 
-// Content is DB-backed and editable from /admin — always render fresh so
-// CMS saves show up immediately instead of waiting for a rebuild.
-export const dynamic = 'force-dynamic';
+// Content is DB-backed but pages render statically (cached, fast TTFB) —
+// CMS saves explicitly invalidate the cache via revalidateTag/revalidatePath
+// in /api/admin/save, so edits still show up immediately without giving up
+// static performance the rest of the time.
 
 /* Three faces, three jobs.
    Display — Newsreader.  Body & UI — Inter.  Data — IBM Plex Mono. */
