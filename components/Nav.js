@@ -4,18 +4,10 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-const LINKS = [
-  { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  { href: '/markets', label: 'Markets' },
-  { href: '/projects', label: 'Projects' },
-  { href: '/insights', label: 'Insights' },
-  { href: '/contact', label: 'Contact' },
-];
-
-export default function Nav() {
+export default function Nav({ site }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const links = site.nav.links;
 
   // Close on navigation — the drawer must never survive a route change.
   useEffect(() => setOpen(false), [pathname]);
@@ -50,12 +42,12 @@ export default function Nav() {
     <>
       <nav>
         {/* Wordmark only — the mark is the entire logo. */}
-        <Link href="/" className="nav-logo" aria-label="RealTerra — home">
-          RealTerra
+        <Link href="/" className="nav-logo" aria-label={`${site.nav.wordmark} — home`}>
+          {site.nav.wordmark}
         </Link>
 
         <ul className="nav-links">
-          {LINKS.map((l) => (
+          {links.map((l) => (
             <li key={l.href}>
               <Link
                 href={l.href}
@@ -69,7 +61,7 @@ export default function Nav() {
         </ul>
 
         <Link href="/contact" className="nav-cta">
-          Request Access
+          {site.nav.ctaLabel}
         </Link>
 
         <button
@@ -86,7 +78,7 @@ export default function Nav() {
 
       <div id="nav-drawer" className={`nav-drawer${open ? ' open' : ''}`}>
         <ul className="nav-drawer-links">
-          {LINKS.map((l, i) => (
+          {links.map((l, i) => (
             <li key={l.href}>
               <Link
                 href={l.href}
@@ -108,13 +100,13 @@ export default function Nav() {
           className="nav-drawer-cta"
           tabIndex={open ? undefined : -1}
         >
-          Request Access
+          {site.nav.ctaLabel}
         </Link>
 
         <p className="nav-drawer-meta">
-          RealTerra Global Properties
+          {site.nav.drawerMetaLine1}
           <br />
-          Dubai, UAE · RERA Licensed
+          {site.nav.drawerMetaLine2}
         </p>
       </div>
 

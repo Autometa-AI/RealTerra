@@ -1,0 +1,99 @@
+{
+  "hero": {
+    "eyebrow": "Curated Developments",
+    "headline": "Developments\nWe Recommend",
+    "subhead": "Every project passes our five-point screening: developer track record, completion risk, yield floor, exit liquidity, and growth thesis. We show fewer projects. That is the point.",
+    "image": "/images/luxury-development.jpg",
+    "criteriaTags": [
+      "Developer track record",
+      "Yield floor verified",
+      "Exit liquidity assessed"
+    ]
+  },
+  "filters": ["All", "Emaar", "DAMAC", "Binghatti", "Villas", "Apartments", "Off-Plan"],
+  "featured": {
+    "tag": "Featured · Al Marjan Island · RAK",
+    "name": "Wynn Al Marjan Precinct",
+    "description": "The residential precinct surrounding the UAE's first integrated gaming resort. Infrastructure spend, hospitality footfall, and employment density are converging to create one of the decade's clearest appreciation plays. Entry windows at current pricing are narrowing.",
+    "image": "/images/al-marjan-island.jpg",
+    "stats": [
+      { "value": "AED 800K+", "label": "Starting Price" },
+      { "value": "8.8%", "label": "Gross Yield" },
+      { "value": "2027", "label": "Handover" }
+    ],
+    "linkLabel": "Enquire about this project"
+  },
+  "projects": [
+    {
+      "developer": "Emaar Properties",
+      "name": "The Valley",
+      "location": "Dubai–Al Ain Road · Villas & Townhouses",
+      "description": "Masterplanned villa community at entry price below replacement cost. Strong capital growth underpinned by family-driven rental demand from the expanding Dubai South corridor.",
+      "image": "/images/meydan-mbr.jpg",
+      "badge": "Off-Plan",
+      "from": "AED 1.2M+",
+      "yield": "6.4%",
+      "handover": "2026"
+    },
+    {
+      "developer": "DAMAC Properties",
+      "name": "DAMAC Islands 2",
+      "location": "Dubailand · Waterfront Villas",
+      "description": "Island-living concept with private lagoon access. Phase 2 captures demand from investors priced out of Palm Jumeirah — at a fraction of the cost, with comparable lifestyle credentials.",
+      "image": "/images/dubai-architecture.jpg",
+      "badge": "Off-Plan",
+      "from": "AED 2.1M+",
+      "yield": "7.1%",
+      "handover": "2028"
+    },
+    {
+      "developer": "Binghatti",
+      "name": "Binghatti Skyrise",
+      "location": "Business Bay · Apartments",
+      "description": "Binghatti's signature architectural density in Business Bay. Short handover timelines and Bugatti / Mercedes co-branded residences redefining branded living in Dubai.",
+      "image": "/images/developer-analysis.jpg",
+      "badge": "Off-Plan",
+      "from": "AED 950K+",
+      "yield": "7.4%",
+      "handover": "2026"
+    },
+    {
+      "developer": "Emaar Properties",
+      "name": "Creek Harbour",
+      "location": "Dubai Creek · Apartments",
+      "description": "The city's next downtown. The Creek Tower — when completed — will shift Dubai's iconic skyline. Early-mover advantage on apartments here is compressing rapidly as global awareness builds.",
+      "image": "/images/generic-skyline.jpg",
+      "badge": "Off-Plan",
+      "from": "AED 1.5M+",
+      "yield": "6.0%",
+      "handover": "2026"
+    },
+    {
+      "developer": "DAMAC Properties",
+      "name": "DAMAC Lagoons",
+      "location": "Dubailand · Mediterranean Villas",
+      "description": "Mediterranean-themed villa clusters with private lagoon access. Proven sellout record and secondary market liquidity make this one of DAMAC's most investable masterplans.",
+      "image": "/images/damac-lagoons.jpg",
+      "badge": "Off-Plan",
+      "from": "AED 1.8M+",
+      "yield": "6.8%",
+      "handover": "2027"
+    },
+    {
+      "developer": "Emaar Properties",
+      "name": "Emaar Beachfront",
+      "location": "Dubai Harbour · Waterfront Apartments",
+      "description": "Private beach access, marina views, and proximity to Dubai Marina. One of the most liquid residential addresses in the emirate — holds value in any market cycle.",
+      "image": "/images/luxury-development.jpg",
+      "badge": "Limited Inventory",
+      "from": "AED 2.4M+",
+      "yield": "5.8%",
+      "handover": "Ready"
+    }
+  ],
+  "closingCta": {
+    "eyebrow": "Off-market access",
+    "headline": "Some of our best projects\nnever appear here.",
+    "buttonLabel": "Request Off-Market Access"
+  }
+}

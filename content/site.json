@@ -1,0 +1,56 @@
+{
+  "seo": {
+    "titleDefault": "RealTerra Global Properties — Off-plan, quantified.",
+    "description": "An analytical brokerage for ultra-high-net-worth investors. Every asset, trajectory, and exit window — quantified before it's sold.",
+    "keywords": [
+      "Dubai real estate",
+      "UAE property investment",
+      "off-plan Dubai",
+      "UHNWI property advisory",
+      "Al Marjan Island",
+      "Dubai South"
+    ]
+  },
+  "nav": {
+    "wordmark": "RealTerra",
+    "ctaLabel": "Request Access",
+    "drawerMetaLine1": "RealTerra Global Properties",
+    "drawerMetaLine2": "Dubai, UAE · RERA Licensed",
+    "links": [
+      { "href": "/", "label": "Home" },
+      { "href": "/about", "label": "About" },
+      { "href": "/markets", "label": "Markets" },
+      { "href": "/projects", "label": "Projects" },
+      { "href": "/insights", "label": "Insights" },
+      { "href": "/contact", "label": "Contact" }
+    ]
+  },
+  "footer": {
+    "logo": "RealTerra",
+    "logoSub": "Global Properties",
+    "tagline": "An analytical brokerage for ultra-high-net-worth investors. Every asset, trajectory, and exit window — quantified before it's sold.",
+    "marketLinks": [
+      "Al Marjan Island",
+      "Dubai South",
+      "Dubai Maritime City",
+      "Business Bay",
+      "Saadiyat Island"
+    ],
+    "email": "hello@realterra.ae",
+    "copyright": "© 2025 RealTerra Global Properties LLC. All rights reserved.",
+    "licenseLine": "RERA Licensed · Dubai Land Department"
+  },
+  "dock": {
+    "name": "RealTerra",
+    "meta": "Dubai · UHNWI Advisory",
+    "whatsappUrl": "https://wa.me/971500000000",
+    "whatsappLabel": "WhatsApp",
+    "ctaLabel": "Request Access"
+  },
+  "contactInfo": {
+    "email": "hello@realterra.ae",
+    "phoneDisplay": "+971 50 000 0000",
+    "whatsappUrl": "https://wa.me/971500000000",
+    "location": "Dubai, UAE · By appointment"
+  }
+}

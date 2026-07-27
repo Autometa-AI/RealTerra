@@ -1,0 +1,72 @@
+{
+  "hero": {
+    "eyebrow": "Market Intelligence",
+    "headline": "Research &\nInsights",
+    "intro": "We publish independently-produced research on UAE real estate — area analyses, developer comparisons, and investment frameworks for serious allocators. All available on request."
+  },
+  "featured": {
+    "type": "Flagship Report · 2025",
+    "title": "The Al Marjan Inflection: Why the Wynn Effect Will Permanently Reprice RAK Residential",
+    "excerpt": "A 42-page deep-dive into the supply-demand dynamics, infrastructure commitments, and comparable case studies — Macau, Singapore Marina Bay — that make Al Marjan one of the clearest asymmetric real estate bets in the GCC this decade. Covers entry windows, developer selection, and projected 5-year IRR bands.",
+    "image": "/images/al-marjan-report.jpg",
+    "linkLabel": "Request this report",
+    "meta": "42 pages · Available to qualified investors"
+  },
+  "reports": [
+    {
+      "type": "Market Brief",
+      "title": "Dubai South: Reading the Airport Signal Before the Market Does",
+      "excerpt": "Al Maktoum's expansion timeline decoded — what it means for residential demand, which sub-zones sit in the appreciation corridor, and how to size a position today.",
+      "meta": "Area Analysis",
+      "image": "/images/dubai-south.jpg"
+    },
+    {
+      "type": "Developer Analysis",
+      "title": "DAMAC vs Emaar: Completion Rate and Yield Comparison Across 12 Projects",
+      "excerpt": "A forensic comparison of handover performance, escrow compliance, and secondary market behaviour across the UAE's two largest off-plan developers.",
+      "meta": "Comparative · 2025",
+      "image": "/images/developer-analysis.jpg"
+    },
+    {
+      "type": "Area Spotlight",
+      "title": "Dubai Maritime City: The Waterfront District the Market Hasn't Priced Yet",
+      "excerpt": "Infrastructure convergence, zoning history, and our forward price model for the Maritime City precinct through 2029. The case for early entry.",
+      "meta": "Area Analysis · 2025",
+      "image": "/images/dubai-maritime-city.jpg"
+    },
+    {
+      "type": "Investor Guide",
+      "title": "Building a UAE Portfolio Across Three Horizons: Yield, Growth & Off-Plan Value",
+      "excerpt": "A framework for structuring property exposure across short, medium, and long time horizons — using the UAE's unique tax environment to compound returns.",
+      "meta": "Framework · 2025",
+      "image": "/images/founders-strip.jpg"
+    },
+    {
+      "type": "Area Spotlight",
+      "title": "Saadiyat Island: Why Abu Dhabi's Cultural District Is an Institutional-Grade Bet",
+      "excerpt": "Louvre, Guggenheim, Formula 1 — and a government-linked developer track record that reduces completion risk to near zero. The full investment case.",
+      "meta": "Area Analysis · 2025",
+      "image": "/images/saadiyat-island.jpg"
+    },
+    {
+      "type": "Macro Brief",
+      "title": "UAE Real Estate in 2025: The Four Structural Tailwinds Every Investor Should Understand",
+      "excerpt": "Zero CGT, Golden Visa demand lock-in, infrastructure pipeline, and HNI inflows. The macro case for UAE real estate — written for allocators, not speculators.",
+      "meta": "Macro · Q1 2025",
+      "image": "/images/dubai-skyline.jpg"
+    }
+  ],
+  "requestLinkLabel": "Request",
+  "newsletter": {
+    "eyebrow": "Stay Informed",
+    "headline": "Receive our research\nas it's published.",
+    "body": "Quarterly briefings, area reports, and developer analyses — delivered directly. No spam. Unsubscribe anytime.",
+    "buttonLabel": "Subscribe",
+    "disclaimer": "We respect your privacy. No third-party sharing."
+  },
+  "closingCta": {
+    "eyebrow": "Custom Research",
+    "headline": "Need a bespoke market\nanalysis? We do that.",
+    "buttonLabel": "Request a Bespoke Analysis"
+  }
+}

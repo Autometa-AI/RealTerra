@@ -1,0 +1,116 @@
+{
+  "hero": {
+    "labelLine1": "RealTerra Global Properties",
+    "labelLine2": "Dubai, UAE",
+    "headline": "Off-plan,",
+    "headlineEm": "quantified.",
+    "subhead": "An analytical brokerage for ultra-high-net-worth investors. Every asset, trajectory, and exit window — quantified before it's sold.",
+    "ctaPrimary": "View the Market Data",
+    "ctaSecondary": "Read the research",
+    "image": "/images/dubai-skyline.jpg",
+    "miniStats": [
+      { "value": "AED 528B", "label": "Market Volume 2024" },
+      { "value": "0%", "label": "Capital Gains Tax" },
+      { "value": "17.4%", "label": "Villa Growth YoY" }
+    ]
+  },
+  "statRow": [
+    { "value": "AED 528B", "label": "Dubai Transactions 2024", "counterTarget": "528B" },
+    { "value": "17.4%", "label": "Avg. Villa Growth YoY", "counterTarget": "17.4%" },
+    { "value": "160K+", "label": "New HNI Residents 2024", "counterTarget": "160K+" },
+    { "value": "0%", "label": "Capital Gains Tax" }
+  ],
+  "marquee": [
+    "Al Marjan Island",
+    "Dubai South",
+    "Dubai Maritime City",
+    "DAMAC Islands 2",
+    "Emaar The Valley",
+    "Data-Driven Advisory",
+    "Ultra-HNI Specialists"
+  ],
+  "philosophyIntro": {
+    "eyebrow": "Philosophy",
+    "headline": "An analytics practice\nfirst. A luxury one\nsecond.",
+    "body": "RealTerra exists for investors who want their real estate decisions underwritten the way a portfolio allocation would be — with a defined trajectory, exit window, and liquidity profile, not a lifestyle narrative.",
+    "linkLabel": "Our approach"
+  },
+  "philosophyPanel": {
+    "eyebrow": "Four Pillars",
+    "headline": "How We Select",
+    "subtext": "Every recommendation rests on a documented investment thesis. No exceptions.",
+    "pillars": [
+      "Thesis-Driven Selection",
+      "Infrastructure Alpha",
+      "Developer Due Diligence",
+      "Portfolio Architecture"
+    ],
+    "linkLabel": "Read our methodology",
+    "image": "/images/dubai-architecture.jpg"
+  },
+  "focusMarkets": {
+    "eyebrow": "Market Intelligence",
+    "headline": "Focus Markets",
+    "linkLabel": "All markets",
+    "cards": [
+      {
+        "tag": "Ras Al Khaimah",
+        "name": "Al Marjan Island",
+        "description": "The UAE's most anticipated gaming and hospitality destination. The Wynn effect will permanently reprice this market.",
+        "yield": "Yield 7.2 – 9.1%",
+        "image": "/images/al-marjan-island.jpg"
+      },
+      {
+        "tag": "Dubai",
+        "name": "Dubai South",
+        "description": "Al Maktoum International's expansion makes this the decade's most significant long-play in the emirate.",
+        "yield": "Yield 6.8 – 8.4%",
+        "image": "/images/dubai-south.jpg"
+      },
+      {
+        "tag": "Dubai",
+        "name": "Dubai Maritime City",
+        "description": "Waterfront living between Port Rashid and Business Bay — the decade's most underpriced waterfront opportunity.",
+        "yield": "Yield 6.2 – 7.8%",
+        "image": "/images/dubai-maritime-city.jpg"
+      }
+    ]
+  },
+  "foundersStrip": {
+    "eyebrow": "Leadership",
+    "headline": "Two Founders.\nOne Standard.",
+    "body": "An investment professional with a lifelong foundation in capital allocation. A former Mrs. India Worldwide who became one of the UAE's most respected luxury real estate practitioners. RealTerra is where analytical rigour meets market intuition.",
+    "linkLabel": "Meet the team",
+    "image": "/images/founders-strip.jpg"
+  },
+  "insightsPreview": {
+    "eyebrow": "Research",
+    "headline": "Latest Insights",
+    "linkLabel": "All reports",
+    "cards": [
+      {
+        "tag": "Flagship Report",
+        "title": "The Al Marjan Inflection: Why the Wynn Effect Will Permanently Reprice RAK Residential",
+        "meta": "42-page deep-dive · Available on request",
+        "image": "/images/al-marjan-report.jpg"
+      },
+      {
+        "tag": "Market Brief",
+        "title": "Dubai South: Reading the Airport Signal Before the Market Does",
+        "meta": "Area analysis · 2025",
+        "image": "/images/generic-skyline.jpg"
+      },
+      {
+        "tag": "Developer Analysis",
+        "title": "DAMAC vs Emaar: Completion Rate and Yield Comparison Across 12 Projects",
+        "meta": "Comparative · 2025",
+        "image": "/images/developer-analysis.jpg"
+      }
+    ]
+  },
+  "closingCta": {
+    "eyebrow": "Ready to begin?",
+    "headline": "The first conversation\nis always a listening exercise.",
+    "buttonLabel": "Book an Introductory Call"
+  }
+}

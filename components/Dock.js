@@ -12,9 +12,10 @@ import { useEffect, useState } from 'react';
  * viewport instead. It stays hidden until the hero has scrolled past, so
  * it never competes with the hero's own call to action.
  */
-export default function Dock() {
+export default function Dock({ site }) {
   const pathname = usePathname();
   const [visible, setVisible] = useState(false);
+  const { dock } = site;
 
   useEffect(() => {
     const update = () => setVisible(window.scrollY > 320);
@@ -26,21 +27,21 @@ export default function Dock() {
   return (
     <div className={`dock${visible ? ' visible' : ''}`}>
       <div className="dock-mark">
-        <div className="dock-mark-name">RealTerra</div>
-        <div className="dock-mark-meta">Dubai · UHNWI Advisory</div>
+        <div className="dock-mark-name">{dock.name}</div>
+        <div className="dock-mark-meta">{dock.meta}</div>
       </div>
       <div className="dock-actions">
         <a
           className="dock-btn dock-btn-ghost"
-          href="https://wa.me/971500000000"
+          href={dock.whatsappUrl}
           target="_blank"
           rel="noreferrer"
-          aria-label="Message RealTerra on WhatsApp"
+          aria-label={`Message ${dock.name} on WhatsApp`}
         >
-          WhatsApp
+          {dock.whatsappLabel}
         </a>
         <Link className="dock-btn dock-btn-primary" href="/contact">
-          Request Access
+          {dock.ctaLabel}
         </Link>
       </div>
     </div>
