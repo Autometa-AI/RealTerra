@@ -35,7 +35,7 @@
 .market-full:nth-child(even) .market-img { order: 2; }
 .market-full:nth-child(even) .market-text { order: 1; }
 .market-img { position: relative; overflow: hidden; }
-.market-img img { position: absolute; inset:0; width:100%; height:100%; object-fit:cover; filter: var(--duotone-filter-card); transition: transform 0.7s ease; }
+.market-img img { position: absolute; inset:0; width:100%; height:100%; object-fit:cover; transition: transform 0.7s ease; }
 .market-full:hover .market-img img { transform: scale(1.03); }
 .market-text {
   padding: 4rem 3.5rem;

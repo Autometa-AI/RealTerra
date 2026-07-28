@@ -37,7 +37,6 @@ export default async function Home() {
         <div className="hero-right">
           <div className="hero-right-parallax">
             <Image src={c.hero.image} alt="Dubai skyline" fill priority sizes="(max-width: 900px) 100vw, 50vw" />
-            <div className="hero-atmosphere"></div>
           </div>
         </div>
       </div>

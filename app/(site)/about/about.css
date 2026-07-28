@@ -17,7 +17,6 @@
 .about-hero-right { position: relative; overflow: hidden; }
 .about-hero-right img {
   position: absolute; inset:0; width:100%; height:100%; object-fit:cover;
-  filter: var(--duotone-filter);
   /* Ken Burns handled by global CSS: kenBurnsB keyframe */
 }
 
@@ -34,11 +33,8 @@
 .founder-full { display: grid; grid-template-columns: 380px 1fr; gap: 5rem; margin-bottom: 5rem; padding-bottom: 5rem; border-bottom: 1px solid var(--border-light); align-items: start; }
 .founder-full:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
 .founder-full-img { height: 500px; overflow: hidden; position: relative; }
-/* Portraits stay recognisably human — a full pine duotone reads as a
-   graphic treatment on a face. Cooled and desaturated only. */
 .founder-full-img img {
   width:100%; height:100%; object-fit:cover;
-  filter: saturate(0.55) contrast(1.04) brightness(0.97);
   transition: transform var(--t-slow) var(--ease);
 }
 .founder-full-img:hover img { transform: scale(1.02); }

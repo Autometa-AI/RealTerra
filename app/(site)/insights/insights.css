@@ -15,7 +15,7 @@
   border-bottom: 1px solid var(--border);
 }
 .fi-img { position:relative; overflow:hidden; }
-.fi-img img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter: var(--duotone-filter-card); transition:transform 0.7s; animation: kenBurnsB 22s ease-in-out infinite; will-change: transform; }
+.fi-img img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform 0.7s; animation: kenBurnsB 22s ease-in-out infinite; will-change: transform; }
 .featured-insight:hover .fi-img img { transform: scale(1.03); }
 .fi-body {
   padding: 4rem 3.5rem;
@@ -42,7 +42,7 @@
 }
 .insight-card-full:hover { border-color: var(--text-2); }
 .ic-img { height: 200px; overflow:hidden; position: relative; }
-.ic-img img { width:100%; height:100%; object-fit:cover; filter: var(--duotone-filter-card); transition:transform 0.6s; }
+.ic-img img { width:100%; height:100%; object-fit:cover; transition:transform 0.6s; }
 .insight-card-full:hover .ic-img img { transform: scale(1.04); }
 .ic-body { padding: 1.6rem; }
 .ic-type { font-size:0.58rem; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:var(--text-2); margin-bottom:0.6rem; }

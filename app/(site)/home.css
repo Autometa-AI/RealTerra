@@ -64,25 +64,7 @@
   width: 100%; height: 100%;
   object-fit: cover;
   object-position: center;
-  /* Cool the warm Dubai tones */
-  filter: var(--duotone-filter);
   /* Animation handled by global CSS — heroCinema keyframe */
-}
-/* Atmospheric depth overlay handled by .hero-atmosphere div */
-.hero-right::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(to right, var(--white) 0%, rgba(250,249,246,0.15) 22%, transparent 42%);
-  z-index: 1;
-}
-/* Subtle overlay grid on image */
-.hero-right::before {
-  content: '';
-  position: absolute; inset: 0; z-index: 2;
-  background-image:
-    linear-gradient(rgba(20,32,28,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(20,32,28,0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
 }
 
 /* ── INTRO STRIP ───────────────────────── */
@@ -117,7 +99,6 @@
 .philosophy-right { position: relative; overflow: hidden; }
 .philosophy-right img {
   position: absolute; inset:0; width:100%; height:100%; object-fit:cover;
-  filter: var(--duotone-filter);
   transition: transform var(--t-slow) var(--ease);
 }
 .philosophy-preview:hover .philosophy-right img { transform: scale(1.02); }
@@ -151,7 +132,7 @@
   box-shadow: 0 4px 20px rgba(20,32,28,0.06);
 }
 .area-img { height: 200px; overflow: hidden; position: relative; }
-.area-img img { height:100%; width:100%; object-fit:cover; transition: transform var(--t-slow) var(--ease); filter: var(--duotone-filter-card); }
+.area-img img { height:100%; width:100%; object-fit:cover; transition: transform var(--t-slow) var(--ease); }
 .area-card-home:hover .area-img img { transform: scale(1.04); }
 .area-body { padding: 1.4rem; }
 .area-name { font-family: var(--serif); font-size: 1.12rem; font-weight: 600; color: var(--text-1); margin-bottom: 0.4rem; }
@@ -162,7 +143,7 @@
 /* ── FOUNDERS STRIP ────────────────────── */
 .founders-strip { display: grid; grid-template-columns: 1fr 1fr; min-height: 460px; }
 .founder-strip-img { position: relative; overflow: hidden; }
-.founder-strip-img img { position: absolute; inset:0; width:100%; height:100%; object-fit:cover; filter: var(--duotone-filter); transition: transform var(--t-slow) var(--ease); }
+.founder-strip-img img { position: absolute; inset:0; width:100%; height:100%; object-fit:cover; transition: transform var(--t-slow) var(--ease); }
 .founders-strip:hover .founder-strip-img img { transform: scale(1.02); }
 .founder-strip-text {
   background: var(--surface);
@@ -188,7 +169,7 @@
   box-shadow: 0 4px 20px rgba(20,32,28,0.06);
 }
 .insight-img { height: 180px; overflow: hidden; position: relative; }
-.insight-img img { height:100%; width:100%; object-fit:cover; transition: transform var(--t-slow) var(--ease); filter: var(--duotone-filter-card); }
+.insight-img img { height:100%; width:100%; object-fit:cover; transition: transform var(--t-slow) var(--ease); }
 .insight-card-home:hover .insight-img img { transform: scale(1.04); }
 .insight-body { padding: 1.4rem; }
 .insight-title-home { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; color: var(--text-1); line-height: 1.4; margin-bottom: 0.6rem; }
@@ -219,9 +200,6 @@
   .hero-left::before { display: none; }
   .hero-left p.large { max-width: none; }
   .hero-right { height: 58vw; min-height: 220px; }
-  .hero-right::after {
-    background: linear-gradient(to bottom, var(--paper) 0%, transparent 32%);
-  }
 
   .intro-strip {
     grid-template-columns: 1fr;
