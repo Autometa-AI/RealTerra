@@ -1,64 +1,46 @@
-import { Fragment } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import './home.css';
-import { getContent } from '../../lib/content';
+import Media from '../../components/Media';
+import Reviews from '../../components/Reviews';
+import Faq from '../../components/Faq';
 import Lines from '../../components/Lines';
+import { getContent } from '../../lib/content';
 
 export default async function Home() {
   const c = await getContent('home');
 
   return (
     <main className="page">
-      {/* HERO */}
+      {/* HERO — full-bleed background with the copy overlaid, so a wide
+          landscape image is never squeezed into a half-width column. */}
       <div className="hero">
-        <div className="hero-left">
-          <div className="hero-label reveal">
-            <span className="hero-label-line"></span>
-            <span>{c.hero.labelLine1}</span>
-            <span className="hero-label-sep">·</span>
-            <span>{c.hero.labelLine2}</span>
-          </div>
-          <h1 className="reveal d1">{c.hero.headline}<br /><em>{c.hero.headlineEm}</em></h1>
-          <p className="large reveal d2">{c.hero.subhead}</p>
-          <div className="hero-actions reveal d3">
-            <Link href="/markets" className="btn btn-dark">{c.hero.ctaPrimary}</Link>
-            <Link href="/insights" className="arrow-link">{c.hero.ctaSecondary}</Link>
-          </div>
-          <div className="hero-mini-stats reveal d4">
-            {c.hero.miniStats.map((s) => (
-              <div className="hero-mini-stat" key={s.label}>
-                <span className="hero-mini-num">{s.value}</span>
-                <span className="hero-mini-label">{s.label}</span>
-              </div>
-            ))}
-          </div>
+        <div className="hero-media">
+          <Media src={c.hero.image} alt="" fill priority sizes="100vw" />
         </div>
-        <div className="hero-right">
-          <div className="hero-right-parallax">
-            <Image src={c.hero.image} alt="Dubai skyline" fill priority sizes="(max-width: 900px) 100vw, 50vw" />
+        <div className="hero-inner">
+          <div className="hero-copy">
+            <div className="hero-label reveal">
+              <span className="hero-label-line"></span>
+              <span>{c.hero.eyebrow}</span>
+            </div>
+            <h1 className="reveal d1"><Lines text={c.hero.headline} /></h1>
+            <p className="hero-sub reveal d2">{c.hero.subhead}</p>
+            <div className="hero-actions reveal d3">
+              <Link href="/markets" className="btn btn-light">{c.hero.ctaPrimary}</Link>
+              <Link href="/blogs" className="arrow-link arrow-link-light">{c.hero.ctaSecondary}</Link>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* STAT ROW */}
-      <div className="stat-row">
-        {c.statRow.map((s, i) => (
-          <div className={`stat-item reveal${i ? ` d${i}` : ''}`} key={s.label}>
-            <div className="stat-num" data-target={s.counterTarget || undefined}>{s.value}</div>
-            <div className="stat-label">{s.label}</div>
-          </div>
-        ))}
-      </div>
-
-      {/* MARQUEE */}
+      {/* TICKER */}
       <div className="marquee-bar">
         <div className="marquee-track">
           {[...c.marquee, ...c.marquee].map((item, i) => (
-            <Fragment key={i}>
+            <span className="marquee-cell" key={i}>
               <span className={`marquee-item${i % c.marquee.length < 3 ? ' accent' : ''}`}>{item}</span>
-              <span className="marquee-item">·</span>
-            </Fragment>
+              <span className="marquee-item" aria-hidden="true">·</span>
+            </span>
           ))}
         </div>
       </div>
@@ -81,19 +63,20 @@ export default async function Home() {
           <div>
             <p className="eyebrow eyebrow-dark">{c.philosophyPanel.eyebrow}</p>
             <h2 style={{ color: 'var(--white)' }}>{c.philosophyPanel.headline}</h2>
-            <p style={{ color: 'rgba(250,249,246,0.5)', marginTop: '1rem', fontSize: '0.88rem', maxWidth: '340px' }}>{c.philosophyPanel.subtext}</p>
+            <p className="philosophy-sub">{c.philosophyPanel.subtext}</p>
           </div>
           <div className="pillars-mini">
             {c.philosophyPanel.pillars.map((label, i) => (
-              <div className="pillar-mini" key={label}><span className="pillar-num">{String(i + 1).padStart(2, '0')}</span><span className="pillar-label">{label}</span></div>
+              <div className="pillar-mini" key={`${label}-${i}`}>
+                <span className="pillar-num">{String(i + 1).padStart(2, '0')}</span>
+                <span className="pillar-label">{label}</span>
+              </div>
             ))}
           </div>
           <Link href="/about" className="arrow-link arrow-link-light" style={{ marginTop: '2.5rem' }}>{c.philosophyPanel.linkLabel}</Link>
         </div>
         <div className="philosophy-right">
-          <div className="philosophy-right-wrap">
-            <Image src={c.philosophyPanel.image} alt="Dubai architecture" fill sizes="(max-width: 900px) 100vw, 50vw" />
-          </div>
+          <Media src={c.philosophyPanel.image} alt="" fill sizes="(max-width: 900px) 100vw, 50vw" />
         </div>
       </div>
 
@@ -105,9 +88,9 @@ export default async function Home() {
         </div>
         <div className="areas-grid-home">
           {c.focusMarkets.cards.map((card, i) => (
-            <div className={`area-card-home reveal${i ? ` d${i}` : ''}`} key={card.name}>
+            <div className={`area-card-home reveal${i ? ` d${i}` : ''}`} key={`${card.name}-${i}`}>
               <div className="area-img img-zoom">
-                <Image src={card.image} alt={card.name} fill sizes="(max-width: 900px) 100vw, 33vw" />
+                <Media src={card.image} alt={card.name} fill sizes="(max-width: 900px) 100vw, 33vw" />
               </div>
               <div className="area-body">
                 <div className="tag">{card.tag}</div>
@@ -123,9 +106,7 @@ export default async function Home() {
       {/* FOUNDERS STRIP */}
       <div className="founders-strip">
         <div className="founder-strip-img">
-          <div className="founder-strip-parallax">
-            <Image src={c.foundersStrip.image} alt="RealTerra advisory" fill sizes="(max-width: 900px) 100vw, 50vw" />
-          </div>
+          <Media src={c.foundersStrip.image} alt="" fill sizes="(max-width: 900px) 100vw, 50vw" />
         </div>
         <div className="founder-strip-text">
           <p className="eyebrow reveal">{c.foundersStrip.eyebrow}</p>
@@ -135,17 +116,17 @@ export default async function Home() {
         </div>
       </div>
 
-      {/* INSIGHTS */}
+      {/* BLOGS PREVIEW */}
       <div className="insight-preview">
         <div className="insight-preview-header reveal">
-          <div><p className="eyebrow">{c.insightsPreview.eyebrow}</p><h2>{c.insightsPreview.headline}</h2></div>
-          <Link href="/insights" className="arrow-link">{c.insightsPreview.linkLabel}</Link>
+          <div><p className="eyebrow">{c.blogsPreview.eyebrow}</p><h2>{c.blogsPreview.headline}</h2></div>
+          <Link href="/blogs" className="arrow-link">{c.blogsPreview.linkLabel}</Link>
         </div>
         <div className="insight-cards-row">
-          {c.insightsPreview.cards.map((card, i) => (
-            <div className={`insight-card-home reveal${i ? ` d${i}` : ''}`} key={card.title}>
+          {c.blogsPreview.cards.map((card, i) => (
+            <div className={`insight-card-home reveal${i ? ` d${i}` : ''}`} key={`${card.title}-${i}`}>
               <div className="insight-img img-zoom">
-                <Image src={card.image} alt={card.title} fill sizes="(max-width: 900px) 100vw, 33vw" />
+                <Media src={card.image} alt={card.title} fill sizes="(max-width: 900px) 100vw, 33vw" />
               </div>
               <div className="insight-body">
                 <div className="tag">{card.tag}</div>
@@ -156,6 +137,9 @@ export default async function Home() {
           ))}
         </div>
       </div>
+
+      <Faq content={c.faq} />
+      <Reviews content={c.reviews} />
 
       {/* CTA */}
       <div className="cta-band">

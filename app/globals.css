@@ -90,7 +90,10 @@ body {
 body > main { flex: 1 0 auto; }
 body > footer { flex-shrink: 0; }
 
-img { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* Media fills whatever box it is placed in. Every such box is given an
+   aspect-ratio that matches the size the CMS recommends, so `cover` has
+   nothing left to crop. Videos behave identically to images. */
+img, video { display: block; width: 100%; height: 100%; object-fit: cover; }
 a { text-decoration: none; color: inherit; }
 
 /* Numerals are always mono — the one rule that governs the system. */
@@ -129,7 +132,8 @@ nav {
    One typeface, one weight, one colour at a time. */
 .nav-logo {
   font-family: var(--serif);
-  font-size: 1.32rem;
+  /* 25% larger than the original 1.32rem. */
+  font-size: 1.65rem;
   font-weight: 600;
   letter-spacing: 0.02em;
   color: var(--paper);
@@ -401,6 +405,9 @@ em, .accent-italic { font-family: var(--serif); font-style: italic; }
   color: var(--pine-deep);
   border-color: var(--signal);
 }
+/* Solid light button, for use over photography in the hero. */
+.btn-light { background: var(--paper); color: var(--pine-deep); }
+.btn-light:hover { background: var(--signal); color: var(--pine-deep); }
 
 .arrow-link {
   display: inline-flex; align-items: center; gap: 0.5rem;
@@ -414,7 +421,7 @@ em, .accent-italic { font-family: var(--serif); font-style: italic; }
 .arrow-link:hover { gap: 0.9rem; color: var(--pine-deep); }
 .arrow-link::after { content: '→'; transition: transform var(--t-base) var(--ease); }
 .arrow-link:hover::after { transform: translateX(2px); }
-.arrow-link-light { color: rgba(250,249,246,0.5); }
+.arrow-link-light { color: rgba(250,249,246,0.78); }
 .arrow-link-light:hover { color: var(--signal); }
 
 /* ─────────────────────────────────────────
@@ -423,22 +430,6 @@ em, .accent-italic { font-family: var(--serif); font-style: italic; }
 .divider { height: 1px; background: var(--border-light); }
 .divider-dark { height: 1px; background: var(--line-dark); }
 
-/* ─────────────────────────────────────────
-   STAT ROW
-───────────────────────────────────────── */
-.stat-row {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  border-top: 1px solid var(--border-light);
-  border-bottom: 1px solid var(--border-light);
-}
-.stat-item {
-  padding: 2.4rem 2rem;
-  border-right: 1px solid var(--border-light);
-  transition: background var(--t-base);
-}
-.stat-item:last-child { border-right: none; }
-.stat-item:hover { background: var(--paper-alt); }
 .stat-num {
   font-size: 1.85rem;
   font-weight: 500;
@@ -619,6 +610,29 @@ footer {
   transition: color var(--t-fast);
 }
 .footer-links a:hover { color: rgba(250,249,246,0.85); }
+
+/* Social icons — order and visibility are both CMS-controlled. */
+.footer-social {
+  list-style: none;
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1.6rem;
+  flex-wrap: wrap;
+}
+.footer-social a {
+  display: grid;
+  place-items: center;
+  width: 38px; height: 38px;
+  border: 1px solid var(--line-dark-2);
+  border-radius: 50%;
+  color: rgba(250,249,246,0.55);
+  transition: color var(--t-fast), border-color var(--t-fast), background var(--t-fast);
+}
+.footer-social a:hover {
+  color: var(--pine-deep);
+  background: var(--signal);
+  border-color: var(--signal);
+}
 .footer-bottom {
   padding-top: 2rem;
   display: flex; justify-content: space-between; align-items: center; gap: 1rem;
@@ -713,6 +727,7 @@ footer {
   border-bottom: 1px solid var(--line-dark);
 }
 .marquee-track { display: inline-flex; animation: marquee 34s linear infinite; }
+.marquee-cell { display: inline-flex; align-items: center; }
 .marquee-item {
   font-size: 0.58rem;
   font-weight: 500;
@@ -834,30 +849,10 @@ footer {
   h1 { font-size: clamp(2.1rem, 8.5vw, 3.1rem); }
   h2 { font-size: clamp(1.65rem, 6.5vw, 2.4rem); }
 
-  .hero { grid-template-columns: 1fr; height: auto; min-height: 100svh; }
-  .hero-left { padding: 2.5rem 1.5rem 3rem; justify-content: flex-end; min-height: 62svh; }
-  .hero-right { height: 48vw; min-height: 200px; }
   .hero-scroll { display: none; }
-
-  /* The stats are the proposition — they stay on mobile, just tighter. */
-  .hero-mini-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.9rem;
-    margin-top: 2rem;
-    padding-top: 1.4rem;
-  }
-  .hero-mini-num { font-size: 1.02rem; }
-  .hero-mini-label { font-size: 0.52rem; letter-spacing: 0.1em; line-height: 1.35; }
-
-  .stat-row { grid-template-columns: 1fr 1fr; }
-  .stat-item { border-right: none; border-bottom: 1px solid var(--border-light); padding: 1.5rem; }
-  .stat-item:nth-child(odd) { border-right: 1px solid var(--border-light); }
-  .stat-item:last-child, .stat-item:nth-last-child(-n+2):nth-child(odd) { border-bottom: none; }
 
   .philosophy-preview { grid-template-columns: 1fr; }
   .philosophy-left { padding: 3rem 1.5rem; }
-  .philosophy-right { height: 260px; }
 
   .areas-grid-home,
   .insight-cards-row,
@@ -933,9 +928,9 @@ footer {
   .footer-top > :first-child { grid-column: 1 / -1; }
   .footer-tagline { max-width: none; }
 
-  /* Horizontal filter rail — edge-to-edge, no visible scrollbar. */
+  /* Horizontal filter rail — no wrapping, no visible scrollbar. */
   .filter-bar {
-    padding: 0.85rem var(--gutter);
+    flex-wrap: nowrap;
     overflow-x: auto;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
@@ -945,15 +940,12 @@ footer {
 }
 
 @media (max-width: 560px) {
-  .stat-row { grid-template-columns: 1fr 1fr; }
   .fp-stats { flex-wrap: wrap; gap: 1.2rem 2rem; }
   .footer-bottom { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
 }
 
 @media (max-width: 400px) {
   :root { --gutter: 1.15rem; }
-  .hero-mini-stats { grid-template-columns: repeat(2, 1fr); }
-  .hero-mini-stat:last-child { display: none; }
   .dock-mark-meta { display: none; }
 }
 
@@ -992,9 +984,9 @@ footer {
    Applied to: Markets, Projects, Contact
 ───────────────────────────────────────── */
 .page-hero-split {
-  min-height: 54vh;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  align-items: stretch;
 }
 
 .page-hero-split-left {
@@ -1027,13 +1019,18 @@ footer {
   pointer-events: none;
 }
 
+/* Aspect-ratio box matching the 1600x1000 panel guidance, so the photo
+   keeps its shape instead of being cropped into a tall half-column. */
 .page-hero-split-right {
   position: relative;
   overflow: hidden;
   background: var(--surface);
+  aspect-ratio: 8 / 5;
+  min-height: 100%;
 }
 
-.page-hero-split-right img {
+.page-hero-split-right img,
+.page-hero-split-right video {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
@@ -1052,7 +1049,7 @@ footer {
 ───────────────────────────────────────── */
 
 /* Remove hover-only scale; perpetual animation handles depth */
-.hero-right img {
+.hero-media img {
   animation: heroCinema 22s ease-in-out infinite !important;
   transition: none !important;
   will-change: transform;
@@ -1112,7 +1109,7 @@ nav.scrolled {
    REDUCED MOTION — Full accessibility compliance
 ───────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .hero-right img,
+  .hero-media img,
   .about-hero-right img,
   .page-hero-split-right img,
   .fi-img img,
@@ -1132,7 +1129,7 @@ nav.scrolled {
 ───────────────────────────────────────── */
 @media (max-width: 900px) {
   /* Disable cinematic animations on mobile */
-  .hero-right img,
+  .hero-media img,
   .about-hero-right img,
   .page-hero-split-right img,
   .fi-img img {
@@ -1153,37 +1150,6 @@ nav.scrolled {
   .page-hero-split-right {
     height: 260px;
   }
-}
-
-/* ─────────────────────────────────────────
-   SCROLL PARALLAX WRAPPERS
-   JS sets --parallax-y via setProperty()
-   translate is independent of animation transform
-───────────────────────────────────────── */
-.hero-right-parallax,
-.philosophy-right-wrap,
-.founder-strip-parallax {
-  --parallax-y: 0px;
-}
-
-/* Apply parallax via CSS translate (separate from @keyframes transform) */
-.hero-right-parallax {
-  position: absolute;
-  inset: -8%; /* extra room so parallax never shows edges */
-  translate: 0 var(--parallax-y);
-  will-change: translate;
-}
-
-.philosophy-right-wrap {
-  position: absolute; inset: -6%;
-  translate: 0 var(--parallax-y);
-  will-change: translate;
-}
-
-.founder-strip-parallax {
-  position: absolute; inset: -6%;
-  translate: 0 var(--parallax-y);
-  will-change: translate;
 }
 
 /* Page hero split right — overflow hidden clips Ken Burns animation */
@@ -1214,13 +1180,7 @@ nav.scrolled {
     filter: none !important;
     transition: none !important;
   }
-  .hero-right-parallax,
-  .philosophy-right-wrap,
-  .founder-strip-parallax {
-    translate: none !important;
-    will-change: auto;
-  }
-  .hero-right img,
+  .hero-media img,
   .about-hero-right img,
   .page-hero-split-right img,
   .fi-img img {
@@ -1230,15 +1190,8 @@ nav.scrolled {
 }
 
 @media (max-width: 900px) {
-  /* Disable parallax and heavy animations on mobile */
-  .hero-right-parallax,
-  .philosophy-right-wrap,
-  .founder-strip-parallax {
-    inset: 0;
-    translate: none !important;
-  }
-  /* page-hero-split-right has no parallax — nothing to reset */
-  .hero-right img,
+  /* Heavy animations off on mobile */
+  .hero-media img,
   .about-hero-right img,
   .page-hero-split-right img,
   .fi-img img {

@@ -10,16 +10,37 @@
       "Exit liquidity assessed"
     ]
   },
-  "filters": ["All", "Emaar", "DAMAC", "Binghatti", "Villas", "Apartments", "Off-Plan"],
+  "search": {
+    "placeholder": "Search by project, developer, or location",
+    "noResults": "No projects match that search. Try a different keyword or clear the filters."
+  },
+  "filters": [
+    "All",
+    "Emaar",
+    "DAMAC",
+    "Binghatti",
+    "Villas",
+    "Apartments",
+    "Off-Plan"
+  ],
   "featured": {
     "tag": "Featured · Al Marjan Island · RAK",
     "name": "Wynn Al Marjan Precinct",
     "description": "The residential precinct surrounding the UAE's first integrated gaming resort. Infrastructure spend, hospitality footfall, and employment density are converging to create one of the decade's clearest appreciation plays. Entry windows at current pricing are narrowing.",
     "image": "/images/al-marjan-island.jpg",
     "stats": [
-      { "value": "AED 800K+", "label": "Starting Price" },
-      { "value": "8.8%", "label": "Gross Yield" },
-      { "value": "2027", "label": "Handover" }
+      {
+        "value": "AED 800K+",
+        "label": "Starting Price"
+      },
+      {
+        "value": "8.8%",
+        "label": "Gross Yield"
+      },
+      {
+        "value": "2027",
+        "label": "Handover"
+      }
     ],
     "linkLabel": "Enquire about this project"
   },

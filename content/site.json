@@ -13,7 +13,6 @@
   },
   "nav": {
     "wordmark": "RealTerra",
-    "ctaLabel": "Request Access",
     "drawerMetaLine1": "RealTerra Global Properties",
     "drawerMetaLine2": "Dubai, UAE · RERA Licensed",
     "links": [
@@ -21,9 +20,22 @@
       { "href": "/about", "label": "About" },
       { "href": "/markets", "label": "Markets" },
       { "href": "/projects", "label": "Projects" },
-      { "href": "/insights", "label": "Insights" },
+      { "href": "/blogs", "label": "Blogs" },
       { "href": "/contact", "label": "Contact" }
     ]
+  },
+  "askUs": {
+    "label": "Ask Us Question",
+    "phone": "971555084911",
+    "message": "Hi RealTerra, I have a question about investing in UAE property."
+  },
+  "ebook": {
+    "enabled": false,
+    "buttonLabel": "Download E-Book",
+    "title": "The UAE Off-Plan Investor's Guide",
+    "description": "A practical guide to entry windows, developer selection, and yield expectations across our six focus markets.",
+    "coverImage": "",
+    "fileUrl": ""
   },
   "footer": {
     "logo": "RealTerra",
@@ -40,17 +52,21 @@
     "copyright": "© 2025 RealTerra Global Properties LLC. All rights reserved.",
     "licenseLine": "RERA Licensed · Dubai Land Department"
   },
+  "social": [
+    { "platform": "Instagram", "url": "https://instagram.com/", "visible": true },
+    { "platform": "LinkedIn", "url": "https://linkedin.com/", "visible": true },
+    { "platform": "WhatsApp", "url": "https://wa.me/971555084911", "visible": true },
+    { "platform": "Facebook", "url": "https://facebook.com/", "visible": false },
+    { "platform": "YouTube", "url": "https://youtube.com/", "visible": false }
+  ],
   "dock": {
     "name": "RealTerra",
     "meta": "Dubai · UHNWI Advisory",
-    "whatsappUrl": "https://wa.me/971500000000",
-    "whatsappLabel": "WhatsApp",
-    "ctaLabel": "Request Access"
+    "whatsappLabel": "WhatsApp"
   },
   "contactInfo": {
     "email": "hello@realterra.ae",
-    "phoneDisplay": "+971 50 000 0000",
-    "whatsappUrl": "https://wa.me/971500000000",
+    "phoneDisplay": "+971 55 508 4911",
     "location": "Dubai, UAE · By appointment"
   }
 }

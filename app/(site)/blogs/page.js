@@ -1,16 +1,16 @@
 import Link from 'next/link';
-import Image from 'next/image';
-import './insights.css';
+import './blogs.css';
+import Media from '../../../components/Media';
 import { getContent } from '../../../lib/content';
 import Lines from '../../../components/Lines';
 import NewsletterForm from '../../../components/NewsletterForm';
 
 export const metadata = {
-  title: 'Insights',
+  title: 'Blogs',
 };
 
-export default async function Insights() {
-  const c = await getContent('insights');
+export default async function Blogs() {
+  const c = await getContent('blogs');
 
   return (
     <main className="page">
@@ -30,7 +30,7 @@ export default async function Insights() {
       {/* FEATURED */}
       <div className="featured-insight">
         <div className="fi-img">
-          <Image src={c.featured.image} alt={c.featured.title} fill priority sizes="(max-width: 900px) 100vw, 50vw" />
+          <Media src={c.featured.image} alt={c.featured.title} fill priority sizes="(max-width: 900px) 100vw, 50vw" />
         </div>
         <div className="fi-body reveal">
           <p className="fi-type">{c.featured.type}</p>
@@ -44,10 +44,10 @@ export default async function Insights() {
       {/* GRID */}
       <div className="insights-main">
         <div className="insights-grid-full">
-          {c.reports.map((r, i) => (
+          {c.posts.map((r, i) => (
             <div className={`insight-card-full reveal${i % 3 ? ` d${i % 3}` : ''}`} key={r.title}>
               <div className="ic-img img-zoom">
-                <Image src={r.image} alt={r.title} fill sizes="(max-width: 900px) 100vw, 33vw" />
+                <Media src={r.image} alt={r.title} fill sizes="(max-width: 900px) 100vw, 33vw" />
               </div>
               <div className="ic-body">
                 <p className="ic-type">{r.type}</p>

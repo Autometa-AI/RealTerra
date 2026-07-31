@@ -40,43 +40,6 @@ export default function Effects() {
       cleanups.push(() => window.removeEventListener('scroll', update));
     })();
 
-    // ── Animated stat counters ─────────────────────────────────────
-    (function initCounters() {
-      const items = document.querySelectorAll('.stat-num[data-target]');
-      if (!items.length) return;
-      const obs = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (!e.isIntersecting) return;
-            const el = e.target;
-            const raw = el.dataset.target;
-            const prefix = raw.match(/^[A-Za-z]+/)?.[0] || '';
-            const suffix = raw.match(/[^0-9.]+$/)?.[0] || '';
-            const num = parseFloat(raw.replace(/[^0-9.]/g, ''));
-            const decimals = num % 1 !== 0 ? 1 : 0;
-            const duration = 1400;
-            const start = performance.now();
-            const animate = (now) => {
-              const p = Math.min((now - start) / duration, 1);
-              const eased = 1 - Math.pow(1 - p, 3);
-              const val = (num * eased).toFixed(decimals);
-              el.textContent =
-                prefix + (decimals ? val : Math.floor(val).toLocaleString()) + suffix;
-              if (p < 1) requestAnimationFrame(animate);
-              else
-                el.textContent =
-                  prefix + (decimals ? num.toFixed(decimals) : num.toLocaleString()) + suffix;
-            };
-            requestAnimationFrame(animate);
-            obs.unobserve(el);
-          });
-        },
-        { threshold: 0.5 }
-      );
-      items.forEach((el) => obs.observe(el));
-      cleanups.push(() => obs.disconnect());
-    })();
-
     // ── Nav scroll state ───────────────────────────────────────────
     (function initNavScroll() {
       const nav = document.querySelector('nav');
@@ -87,46 +50,6 @@ export default function Effects() {
       window.addEventListener('scroll', update, { passive: true });
       update();
       cleanups.push(() => window.removeEventListener('scroll', update));
-    })();
-
-    // ── Scroll Parallax ────────────────────────────────────────────
-    (function initScrollParallax() {
-      if (window.matchMedia('(max-width: 900px)').matches) return;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-      const targets = [
-        { sel: '.hero-right-parallax', speed: 0.22 },
-        { sel: '.philosophy-right-wrap', speed: 0.18 },
-        { sel: '.founder-strip-parallax', speed: 0.14 },
-      ]
-        .map((t) => ({ el: document.querySelector(t.sel), speed: t.speed }))
-        .filter((t) => t.el);
-
-      if (!targets.length) return;
-
-      let rafId = null;
-
-      const update = () => {
-        const scrollY = window.scrollY;
-        targets.forEach(({ el, speed }) => {
-          const rect = el.getBoundingClientRect();
-          if (rect.bottom < -200 || rect.top > window.innerHeight + 200) return;
-          const elCenterY = scrollY + rect.top + rect.height / 2;
-          const offset = (scrollY - elCenterY + window.innerHeight * 0.5) * speed;
-          el.style.setProperty('--parallax-y', offset.toFixed(2) + 'px');
-        });
-        rafId = null;
-      };
-
-      const onScroll = () => {
-        if (!rafId) rafId = requestAnimationFrame(update);
-      };
-      window.addEventListener('scroll', onScroll, { passive: true });
-      update();
-      cleanups.push(() => {
-        window.removeEventListener('scroll', onScroll);
-        if (rafId) cancelAnimationFrame(rafId);
-      });
     })();
 
     // ── Image hover parallax — subtle ─────────────────────────────

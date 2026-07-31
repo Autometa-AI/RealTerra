@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import './markets.css';
+import Media from '../../../components/Media';
 import { getContent } from '../../../lib/content';
 import Lines from '../../../components/Lines';
 
@@ -29,7 +29,7 @@ export default async function Markets() {
           </div>
         </div>
         <div className="page-hero-split-right">
-          <Image src={c.hero.image} alt="UAE skyline" fill priority sizes="(max-width: 900px) 100vw, 50vw" />
+          <Media src={c.hero.image} alt="UAE skyline" fill priority sizes="(max-width: 900px) 100vw, 50vw" />
         </div>
       </div>
 
@@ -50,7 +50,7 @@ export default async function Markets() {
       {c.markets.map((m) => (
         <div className="market-full" key={m.name}>
           <div className="market-img img-zoom">
-            <Image src={m.image} alt={m.name} fill sizes="(max-width: 900px) 100vw, 50vw" />
+            <Media src={m.image} alt={m.name} fill sizes="(max-width: 900px) 100vw, 50vw" />
           </div>
           <div className="market-text reveal">
             <p className="market-location">{m.location}</p>

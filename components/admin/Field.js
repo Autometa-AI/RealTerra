@@ -1,7 +1,15 @@
 'use client';
 
 import { getPath, setPath } from '../../lib/deep';
-import { TextField, TextAreaField, ListField, ImageField } from './FieldEditor';
+import {
+  TextField,
+  TextAreaField,
+  ListField,
+  MediaField,
+  FileField,
+  ToggleField,
+  SelectField,
+} from './FieldEditor';
 
 export default function Field({ field, container, onContainerChange }) {
   const value = getPath(container, field.path);
@@ -15,7 +23,13 @@ export default function Field({ field, container, onContainerChange }) {
     case 'list':
       return <ListField field={field} value={value} onChange={onChange} />;
     case 'image':
-      return <ImageField field={field} value={value} onChange={onChange} />;
+      return <MediaField field={field} value={value} onChange={onChange} />;
+    case 'file':
+      return <FileField field={field} value={value} onChange={onChange} />;
+    case 'toggle':
+      return <ToggleField field={field} value={value} onChange={onChange} />;
+    case 'select':
+      return <SelectField field={field} value={value} onChange={onChange} />;
     case 'repeat':
       return <RepeatField field={field} value={value} onChange={onChange} />;
     default:
@@ -23,8 +37,14 @@ export default function Field({ field, container, onContainerChange }) {
   }
 }
 
+// Best-effort label for a repeated row, so a long list stays navigable.
+function itemSummary(item) {
+  return item?.name || item?.title || item?.label || item?.question || item?.platform || '';
+}
+
 function RepeatField({ field, value, onChange }) {
   const items = value || [];
+  const noun = (field.itemNoun || field.label.replace(/s$/, '')).toLowerCase();
 
   function updateItem(i, newItem) {
     const next = [...items];
@@ -36,38 +56,69 @@ function RepeatField({ field, value, onChange }) {
     onChange(items.filter((_, idx) => idx !== i));
   }
 
-  function addItem() {
+  function move(i, delta) {
+    const j = i + delta;
+    if (j < 0 || j >= items.length) return;
+    const next = [...items];
+    [next[i], next[j]] = [next[j], next[i]];
+    onChange(next);
+  }
+
+  // Seed a new row with every key the schema knows about, so the editor
+  // renders a full set of inputs instead of a partially-empty card.
+  function blankItem() {
     const blank = {};
     field.fields.forEach((f) => {
-      blank[f.path] = f.type === 'repeat' || f.type === 'list' ? [] : '';
+      if (f.type === 'repeat' || f.type === 'list') blank[f.path] = [];
+      else if (f.type === 'toggle') blank[f.path] = true;
+      else blank[f.path] = '';
     });
-    onChange([...items, blank]);
+    return blank;
   }
 
   return (
     <div className="a-field">
-      <label className="a-label">{field.label}</label>
-      {items.map((item, i) => (
-        <div className="a-repeat-item" key={i}>
-          <div className="a-repeat-label">
-            {field.label.replace(/s$/, '')} {i + 1}
-            {item.name ? ` — ${item.name}` : item.title ? ` — ${item.title}` : ''}
+      <label className="a-label">
+        {field.label}
+        <span className="a-label-hint">{items.length} item{items.length === 1 ? '' : 's'}</span>
+      </label>
+      {field.help && <p className="a-help">{field.help}</p>}
+
+      {items.length === 0 && (
+        <p className="a-help">Nothing here yet. Use the button below to add the first one.</p>
+      )}
+
+      {items.map((item, i) => {
+        const summary = itemSummary(item);
+        return (
+          <div className="a-repeat-item" key={i}>
+            <div className="a-repeat-head">
+              <div className="a-repeat-label">
+                {noun} {i + 1}
+                {summary ? ` — ${summary}` : ''}
+              </div>
+              <div className="a-repeat-tools">
+                <button type="button" className="a-btn a-btn-ghost" onClick={() => move(i, -1)} disabled={i === 0} aria-label="Move up">↑</button>
+                <button type="button" className="a-btn a-btn-ghost" onClick={() => move(i, 1)} disabled={i === items.length - 1} aria-label="Move down">↓</button>
+                <button type="button" className="a-btn a-btn-danger" onClick={() => removeItem(i)}>
+                  Remove
+                </button>
+              </div>
+            </div>
+            {field.fields.map((sub) => (
+              <Field
+                key={sub.path}
+                field={sub}
+                container={item}
+                onContainerChange={(newItem) => updateItem(i, newItem)}
+              />
+            ))}
           </div>
-          {field.fields.map((sub) => (
-            <Field
-              key={sub.path}
-              field={sub}
-              container={item}
-              onContainerChange={(newItem) => updateItem(i, newItem)}
-            />
-          ))}
-          <button type="button" className="a-btn a-btn-ghost" onClick={() => removeItem(i)}>
-            Remove this item
-          </button>
-        </div>
-      ))}
-      <button type="button" className="a-btn a-btn-ghost" onClick={addItem}>
-        + Add {field.label.replace(/s$/, '').toLowerCase()}
+        );
+      })}
+
+      <button type="button" className="a-btn a-btn-add" onClick={() => onChange([...items, blankItem()])}>
+        + Add {noun}
       </button>
     </div>
   );

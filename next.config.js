@@ -16,6 +16,13 @@ const nextConfig = {
       ? [{ protocol: 'https', hostname: supabaseHostname, pathname: '/storage/v1/object/public/**' }]
       : [],
   },
+  async redirects() {
+    return [
+      // /insights was live and may be indexed or linked. A permanent
+      // redirect hands its search ranking to the renamed page.
+      { source: '/insights', destination: '/blogs', permanent: true },
+    ];
+  },
 };
 
 module.exports = nextConfig;

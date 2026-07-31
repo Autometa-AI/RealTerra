@@ -1,12 +1,19 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import './about.css';
+import Media from '../../../components/Media';
 import { getContent } from '../../../lib/content';
 import Lines from '../../../components/Lines';
 
 export const metadata = {
   title: 'About',
 };
+
+// Same block, mirrored. `flip` only moves the photo to the other side —
+// the column widths and portrait box stay identical for both founders.
+const FOUNDERS = [
+  { key: 'gaurav', flip: false },
+  { key: 'ruchika', flip: true },
+];
 
 export default async function About() {
   const c = await getContent('about');
@@ -20,7 +27,7 @@ export default async function About() {
           <p className="reveal d2">{c.hero.subhead}</p>
         </div>
         <div className="about-hero-right">
-          <Image src={c.hero.image} alt="Dubai skyline" fill priority sizes="(max-width: 900px) 100vw, 50vw" />
+          <Media src={c.hero.image} alt="" fill priority sizes="(max-width: 900px) 100vw, 50vw" />
         </div>
       </div>
 
@@ -51,43 +58,28 @@ export default async function About() {
       <div className="founders-section">
         <div className="reveal" style={{ marginBottom: '4rem' }}><p className="eyebrow">{c.founders.eyebrow}</p><h2>{c.founders.headline}</h2></div>
 
-        {/* GAURAV */}
-        <div className="founder-full">
-          <div className="founder-full-img reveal">
-            <Image src={c.founders.gaurav.image} alt={c.founders.gaurav.name} fill sizes="(max-width: 900px) 100vw, 45vw" />
-          </div>
-          <div className="founder-full-text reveal d1">
-            <p className="founder-role-tag">{c.founders.gaurav.roleTag}</p>
-            <h2 className="founder-full-name"><Lines text={c.founders.gaurav.name.replace(' ', '\n')} /></h2>
-            <div className="founder-full-bio">
-              {c.founders.gaurav.bio.map((p, i) => <p key={i}>{p}</p>)}
+        {FOUNDERS.map(({ key, flip }) => {
+          const f = c.founders[key];
+          return (
+            <div className={`founder-full${flip ? ' flip' : ''}`} key={key}>
+              <div className="founder-full-img reveal">
+                <Media src={f.image} alt={f.name} fill sizes="(max-width: 900px) 100vw, 34vw" />
+              </div>
+              <div className="founder-full-text reveal d1">
+                <p className="founder-role-tag">{f.roleTag}</p>
+                <h2 className="founder-full-name"><Lines text={f.name.replace(' ', '\n')} /></h2>
+                <div className="founder-full-bio">
+                  {f.bio.map((p, i) => <p key={i}>{p}</p>)}
+                </div>
+                <div className="founder-capabilities">
+                  {f.capabilities.map((cap) => (
+                    <div className="cap-row" key={cap}><span className="cap-label">{cap}</span></div>
+                  ))}
+                </div>
+              </div>
             </div>
-            <div className="founder-capabilities">
-              {c.founders.gaurav.capabilities.map((cap) => (
-                <div className="cap-row" key={cap}><span className="cap-label">{cap}</span></div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* RUCHIKA */}
-        <div className="founder-full">
-          <div className="founder-full-text founder-full-text reversed reveal">
-            <p className="founder-role-tag">{c.founders.ruchika.roleTag}</p>
-            <h2 className="founder-full-name"><Lines text={c.founders.ruchika.name.replace(' ', '\n')} /></h2>
-            <div className="founder-full-bio">
-              {c.founders.ruchika.bio.map((p, i) => <p key={i}>{p}</p>)}
-            </div>
-            <div className="founder-capabilities">
-              {c.founders.ruchika.capabilities.map((cap) => (
-                <div className="cap-row" key={cap}><span className="cap-label">{cap}</span></div>
-              ))}
-            </div>
-          </div>
-          <div className="founder-full-img founder-full-img reversed reveal d1">
-            <Image src={c.founders.ruchika.image} alt={c.founders.ruchika.name} fill sizes="(max-width: 900px) 100vw, 45vw" />
-          </div>
-        </div>
+          );
+        })}
       </div>
 
       {/* SERVICES */}

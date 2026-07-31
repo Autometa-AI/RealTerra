@@ -3,11 +3,14 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { whatsappUrl, askUsLabel } from '../lib/site';
 
 export default function Nav({ site }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const links = site.nav.links;
+  const waHref = whatsappUrl(site);
+  const waLabel = askUsLabel(site);
 
   // Close on navigation — the drawer must never survive a route change.
   useEffect(() => setOpen(false), [pathname]);
@@ -60,9 +63,9 @@ export default function Nav({ site }) {
           ))}
         </ul>
 
-        <Link href="/contact" className="nav-cta">
-          {site.nav.ctaLabel}
-        </Link>
+        <a className="nav-cta" href={waHref} target="_blank" rel="noreferrer">
+          {waLabel}
+        </a>
 
         <button
           type="button"
@@ -95,13 +98,15 @@ export default function Nav({ site }) {
           ))}
         </ul>
 
-        <Link
-          href="/contact"
+        <a
+          href={waHref}
+          target="_blank"
+          rel="noreferrer"
           className="nav-drawer-cta"
           tabIndex={open ? undefined : -1}
         >
-          {site.nav.ctaLabel}
-        </Link>
+          {waLabel}
+        </a>
 
         <p className="nav-drawer-meta">
           {site.nav.drawerMetaLine1}

@@ -1,8 +1,8 @@
 'use client';
 
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { whatsappUrl, askUsLabel } from '../lib/site';
 
 /**
  * Sticky mobile action dock.
@@ -16,6 +16,7 @@ export default function Dock({ site }) {
   const pathname = usePathname();
   const [visible, setVisible] = useState(false);
   const { dock } = site;
+  const waHref = whatsappUrl(site);
 
   useEffect(() => {
     const update = () => setVisible(window.scrollY > 320);
@@ -33,16 +34,16 @@ export default function Dock({ site }) {
       <div className="dock-actions">
         <a
           className="dock-btn dock-btn-ghost"
-          href={dock.whatsappUrl}
+          href={waHref}
           target="_blank"
           rel="noreferrer"
           aria-label={`Message ${dock.name} on WhatsApp`}
         >
           {dock.whatsappLabel}
         </a>
-        <Link className="dock-btn dock-btn-primary" href="/contact">
-          {dock.ctaLabel}
-        </Link>
+        <a className="dock-btn dock-btn-primary" href={waHref} target="_blank" rel="noreferrer">
+          {askUsLabel(site)}
+        </a>
       </div>
     </div>
   );

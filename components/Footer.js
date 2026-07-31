@@ -1,7 +1,11 @@
 import Link from 'next/link';
+import SocialIcon from './SocialIcon';
+import { visibleSocials } from '../lib/site';
 
 export default function Footer({ site }) {
   const { footer } = site;
+  const socials = visibleSocials(site);
+
   return (
     <footer>
       <div className="footer-top">
@@ -9,6 +13,24 @@ export default function Footer({ site }) {
           <div className="footer-logo">{footer.logo}</div>
           <p className="footer-logo-sub">{footer.logoSub}</p>
           <p className="footer-tagline">{footer.tagline}</p>
+
+          {socials.length > 0 && (
+            <ul className="footer-social">
+              {socials.map((s) => (
+                <li key={`${s.platform}-${s.url}`}>
+                  <a
+                    href={s.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={s.platform}
+                    title={s.platform}
+                  >
+                    <SocialIcon platform={s.platform} />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
         <div>
           <p className="footer-col-title">Pages</p>

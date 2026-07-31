@@ -1,25 +1,12 @@
 {
   "hero": {
-    "labelLine1": "RealTerra Global Properties",
-    "labelLine2": "Dubai, UAE",
-    "headline": "Off-plan,",
-    "headlineEm": "quantified.",
-    "subhead": "An analytical brokerage for ultra-high-net-worth investors. Every asset, trajectory, and exit window — quantified before it's sold.",
+    "eyebrow": "RealTerra Global Properties · Dubai, UAE",
+    "headline": "Off-plan property in Dubai,\nquantified before it's sold.",
+    "subhead": "An analytical brokerage for ultra-high-net-worth investors. We map every asset, trajectory, and exit window before we recommend a single square foot.",
     "ctaPrimary": "View the Market Data",
     "ctaSecondary": "Read the research",
-    "image": "/images/dubai-skyline.jpg",
-    "miniStats": [
-      { "value": "AED 528B", "label": "Market Volume 2024" },
-      { "value": "0%", "label": "Capital Gains Tax" },
-      { "value": "17.4%", "label": "Villa Growth YoY" }
-    ]
+    "image": "/images/dubai-skyline.jpg"
   },
-  "statRow": [
-    { "value": "AED 528B", "label": "Dubai Transactions 2024", "counterTarget": "528B" },
-    { "value": "17.4%", "label": "Avg. Villa Growth YoY", "counterTarget": "17.4%" },
-    { "value": "160K+", "label": "New HNI Residents 2024", "counterTarget": "160K+" },
-    { "value": "0%", "label": "Capital Gains Tax" }
-  ],
   "marquee": [
     "Al Marjan Island",
     "Dubai South",
@@ -83,10 +70,10 @@
     "linkLabel": "Meet the team",
     "image": "/images/founders-strip.jpg"
   },
-  "insightsPreview": {
+  "blogsPreview": {
     "eyebrow": "Research",
-    "headline": "Latest Insights",
-    "linkLabel": "All reports",
+    "headline": "Latest Blogs",
+    "linkLabel": "All blogs",
     "cards": [
       {
         "tag": "Flagship Report",
@@ -105,6 +92,62 @@
         "title": "DAMAC vs Emaar: Completion Rate and Yield Comparison Across 12 Projects",
         "meta": "Comparative · 2025",
         "image": "/images/developer-analysis.jpg"
+      }
+    ]
+  },
+  "reviews": {
+    "eyebrow": "Client Feedback",
+    "headline": "What our clients say",
+    "ratingSummary": "Rated 5.0 on Google",
+    "linkLabel": "Read all reviews",
+    "linkUrl": "",
+    "items": [
+      {
+        "name": "Client name",
+        "avatar": "",
+        "rating": "5",
+        "text": "Replace this with a real review. Keep each one to a few sentences so the cards stay the same height.",
+        "date": "March 2026"
+      },
+      {
+        "name": "Client name",
+        "avatar": "",
+        "rating": "5",
+        "text": "Replace this with a real review. Keep each one to a few sentences so the cards stay the same height.",
+        "date": "February 2026"
+      },
+      {
+        "name": "Client name",
+        "avatar": "",
+        "rating": "5",
+        "text": "Replace this with a real review. Keep each one to a few sentences so the cards stay the same height.",
+        "date": "January 2026"
+      }
+    ]
+  },
+  "faq": {
+    "eyebrow": "Questions",
+    "headline": "Frequently asked questions",
+    "items": [
+      {
+        "question": "Can foreign nationals buy property in the UAE?",
+        "answer": "Yes. Foreign nationals can buy freehold property in designated areas across Dubai, Abu Dhabi and Ras Al Khaimah, with full ownership rights and no requirement to be a resident."
+      },
+      {
+        "question": "What is off-plan property, and how does payment work?",
+        "answer": "Off-plan means buying before completion, directly from the developer. Payment is staged against construction milestones, and buyer funds are held in a government-regulated escrow account until handover."
+      },
+      {
+        "question": "What taxes apply to UAE property investment?",
+        "answer": "There is no capital gains tax and no income tax on rental proceeds. A one-off Dubai Land Department transfer fee of 4% applies at purchase, plus standard registration and agency costs."
+      },
+      {
+        "question": "Does buying property qualify me for a Golden Visa?",
+        "answer": "A property investment of AED 2 million or more can qualify you for a 10-year renewable Golden Visa, covering your spouse and dependants. We can walk you through the current requirements."
+      },
+      {
+        "question": "How does RealTerra select the projects it recommends?",
+        "answer": "Every project passes a five-point screen: developer track record, completion risk, yield floor, exit liquidity, and a documented growth thesis. If a launch fails any of them, we do not present it."
       }
     ]
   },

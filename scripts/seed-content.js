@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const { createClient } = require('@supabase/supabase-js');
 
-const PAGES = ['site', 'home', 'about', 'markets', 'projects', 'insights', 'contact'];
+const PAGES = ['site', 'home', 'about', 'markets', 'projects', 'blogs', 'contact'];
 
 async function main() {
   const url = process.env.SUPABASE_URL;

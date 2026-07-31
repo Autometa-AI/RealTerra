@@ -33,9 +33,19 @@ export default function AdminShell({ user, children }) {
               </Link>
             );
           })}
-          <div style={{ borderTop: '1px solid var(--a-border)', margin: '0.5rem 0' }} />
-          <Link href="/admin/submissions" className={`admin-nav-link${pathname === '/admin/submissions' ? ' active' : ''}`}>
-            Submissions
+          <div className="admin-nav-sep" />
+          <p className="admin-nav-heading">Enquiries</p>
+          <Link
+            href="/admin/contact-submissions"
+            className={`admin-nav-link${pathname === '/admin/contact-submissions' ? ' active' : ''}`}
+          >
+            Contact Page Fillups
+          </Link>
+          <Link
+            href="/admin/newsletter"
+            className={`admin-nav-link${pathname === '/admin/newsletter' ? ' active' : ''}`}
+          >
+            Newsletter Subscribed
           </Link>
         </nav>
         <div className="admin-sidebar-foot">

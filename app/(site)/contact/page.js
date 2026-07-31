@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import './contact.css';
+import Media from '../../../components/Media';
 import { getContent } from '../../../lib/content';
 import Lines from '../../../components/Lines';
 import ContactForm from '../../../components/ContactForm';
@@ -37,7 +37,7 @@ export default async function Contact() {
           </div>
         </div>
         <div className="page-hero-split-right">
-          <Image src={c.hero.image} alt="RealTerra office Dubai" fill priority sizes="(max-width: 900px) 100vw, 50vw" />
+          <Media src={c.hero.image} alt="RealTerra office Dubai" fill priority sizes="(max-width: 900px) 100vw, 50vw" />
         </div>
       </div>
 
@@ -94,7 +94,7 @@ export default async function Contact() {
 
       {/* MAP */}
       <div className="map-area">
-        <Image src={c.map.image} alt="Dubai aerial view" fill sizes="100vw" />
+        <Media src={c.map.image} alt="Dubai aerial view" fill sizes="100vw" />
         <div className="map-overlay">
           <div className="map-pin">{c.map.pinLabel}</div>
         </div>
