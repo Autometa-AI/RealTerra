@@ -111,16 +111,15 @@
   position: relative;
   overflow: hidden;
   aspect-ratio: 8 / 5;
-  min-height: 100%;
+  align-self: start;
+  width: 100%;
   background: var(--surface);
 }
 .philosophy-right img,
 .philosophy-right video {
   position: absolute; inset: 0;
   width: 100%; height: 100%; object-fit: cover;
-  transition: transform var(--t-slow) var(--ease);
 }
-.philosophy-preview:hover .philosophy-right img { transform: scale(1.02); }
 
 .pillars-mini {
   display: flex; flex-direction: column;
@@ -154,8 +153,7 @@
 }
 /* 3:2 matches the size the CMS recommends for card images. */
 .area-img { aspect-ratio: 3 / 2; overflow: hidden; position: relative; }
-.area-img img, .area-img video { position: absolute; inset: 0; height:100%; width:100%; object-fit:cover; transition: transform var(--t-slow) var(--ease); }
-.area-card-home:hover .area-img img { transform: scale(1.04); }
+.area-img img, .area-img video { position: absolute; inset: 0; height:100%; width:100%; object-fit:cover; }
 .area-body { padding: 1.4rem; display: flex; flex-direction: column; flex: 1; }
 .area-name { font-family: var(--serif); font-size: 1.12rem; font-weight: 600; color: var(--text-1); margin-bottom: 0.4rem; }
 .area-sub { font-size: 0.78rem; color: var(--text-3); margin-bottom: 1rem; line-height: 1.65; flex: 1; }
@@ -168,12 +166,12 @@
   position: relative;
   overflow: hidden;
   aspect-ratio: 8 / 5;
-  min-height: 100%;
+  align-self: start;
+  width: 100%;
   background: var(--surface);
 }
 .founder-strip-img img,
-.founder-strip-img video { position: absolute; inset:0; width:100%; height:100%; object-fit:cover; transition: transform var(--t-slow) var(--ease); }
-.founders-strip:hover .founder-strip-img img { transform: scale(1.02); }
+.founder-strip-img video { position: absolute; inset:0; width:100%; height:100%; object-fit:cover; }
 .founder-strip-text {
   background: var(--surface);
   padding: 4rem 3.5rem;
@@ -200,8 +198,7 @@
   box-shadow: 0 4px 20px rgba(20,32,28,0.06);
 }
 .insight-img { aspect-ratio: 3 / 2; overflow: hidden; position: relative; }
-.insight-img img, .insight-img video { position: absolute; inset: 0; height:100%; width:100%; object-fit:cover; transition: transform var(--t-slow) var(--ease); }
-.insight-card-home:hover .insight-img img { transform: scale(1.04); }
+.insight-img img, .insight-img video { position: absolute; inset: 0; height:100%; width:100%; object-fit:cover; }
 .insight-body { padding: 1.4rem; display: flex; flex-direction: column; flex: 1; }
 .insight-title-home { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; color: var(--text-1); line-height: 1.4; margin-bottom: 0.6rem; flex: 1; }
 .insight-meta { font-size: 0.64rem; color: var(--text-3); letter-spacing: 0.06em; }
@@ -245,7 +242,6 @@
   content: '';
   position: absolute;
   background: var(--text-2);
-  transition: transform var(--t-base) var(--ease), opacity var(--t-base);
 }
 .faq-mark::before { top: 6px; left: 0; width: 13px; height: 1px; }
 .faq-mark::after  { left: 6px; top: 0; width: 1px; height: 13px; }
@@ -324,13 +320,33 @@
 }
 
 @media (max-width: 900px) {
-  /* A floor, never a fixed ratio: the hero has to be free to grow with
-     whatever headline the CMS holds, or `overflow: hidden` clips the copy
-     on narrow screens. */
-  .hero { min-height: 86svh; }
-  .hero-inner { padding: 6rem var(--gutter) 3rem; }
+  /* Stacked on mobile rather than overlaid. A wide landscape photo forced
+     behind a tall portrait viewport loses most of its width, and the copy
+     ends up stranded at the bottom over a random slice of image. Putting
+     the photo in normal flow at its own ratio shows all of it, and the copy
+     sits below on solid pine where it is always readable. */
+  .hero {
+    display: block;
+    min-height: 0;
+    overflow: visible;
+  }
+  .hero-media {
+    position: relative;
+    inset: auto;
+    aspect-ratio: 16 / 10;
+    width: 100%;
+  }
+  /* The scrim exists to make overlaid text legible. Nothing overlays the
+     photo here, so it would only dull the image. */
+  .hero::after { content: none; }
+  .hero-inner {
+    padding: 2.75rem var(--gutter) 3.25rem;
+    background: var(--pine-deep);
+  }
+  .hero-copy { max-width: none; }
+  .hero-label { margin-bottom: 1.1rem; }
   .hero h1 { max-width: none; }
-  .hero-sub { max-width: none; font-size: 0.92rem; }
+  .hero-sub { max-width: none; font-size: 0.92rem; margin-bottom: 2rem; }
 
   .intro-strip {
     grid-template-columns: 1fr;

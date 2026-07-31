@@ -38,11 +38,11 @@
   position: relative;
   overflow: hidden;
   aspect-ratio: 3 / 2;
-  min-height: 100%;
+  align-self: start;
+  width: 100%;
   background: var(--surface);
 }
-.market-img img, .market-img video { position: absolute; inset:0; width:100%; height:100%; object-fit:cover; transition: transform 0.7s ease; }
-.market-full:hover .market-img img { transform: scale(1.03); }
+.market-img img, .market-img video { position: absolute; inset:0; width:100%; height:100%; object-fit:cover; }
 .market-text {
   padding: 4rem 3.5rem;
   display: flex; flex-direction: column; justify-content: center;

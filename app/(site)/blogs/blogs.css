@@ -18,11 +18,11 @@
   position: relative;
   overflow: hidden;
   aspect-ratio: 3 / 2;
-  min-height: 100%;
+  align-self: start;
+  width: 100%;
   background: var(--surface);
 }
-.fi-img img, .fi-img video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform 0.7s; animation: kenBurnsB 22s ease-in-out infinite; will-change: transform; }
-.featured-insight:hover .fi-img img { transform: scale(1.03); }
+.fi-img img, .fi-img video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover;   }
 .fi-body {
   padding: 4rem 3.5rem;
   background: var(--white);
@@ -48,8 +48,7 @@
 }
 .insight-card-full:hover { border-color: var(--text-2); }
 .ic-img { aspect-ratio: 3 / 2; overflow:hidden; position: relative; }
-.ic-img img, .ic-img video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform 0.6s; }
-.insight-card-full:hover .ic-img img { transform: scale(1.04); }
+.ic-img img, .ic-img video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
 .ic-body { padding: 1.6rem; }
 .ic-type { font-size:0.58rem; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:var(--text-2); margin-bottom:0.6rem; }
 .ic-title { font-family: var(--serif); font-size:1.1rem; font-weight:600; color:var(--text-1); line-height:1.4; margin-bottom:0.8rem; }

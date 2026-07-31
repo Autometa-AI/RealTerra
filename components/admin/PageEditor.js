@@ -4,6 +4,42 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Field from './Field';
 
+// A short single-line field takes half a row; anything that needs room
+// (paragraphs, media, repeating groups) takes the full width. This is what
+// stops a page turning into one tall column of near-empty text boxes.
+function isCompact(field) {
+  if (field.type !== 'text' && field.type !== 'toggle' && field.type !== 'select') return false;
+  if (field.type === 'text' && field.words && field.words[1] > 8) return false;
+  return true;
+}
+
+function Section({ group, content, setContent, open, onToggle }) {
+  const count = group.fields.length;
+  return (
+    <section className={`a-section${open ? ' open' : ''}`}>
+      <button type="button" className="a-section-head" onClick={onToggle} aria-expanded={open}>
+        <span className="a-section-title">{group.title}</span>
+        <span className="a-section-meta">
+          {count} field{count === 1 ? '' : 's'}
+          <span className="a-section-chevron" aria-hidden="true" />
+        </span>
+      </button>
+
+      {open && (
+        <div className="a-section-body">
+          <div className="a-fields">
+            {group.fields.map((field) => (
+              <div className={`a-cell${isCompact(field) ? ' a-cell-half' : ''}`} key={field.path}>
+                <Field field={field} container={content} onContainerChange={setContent} />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
+
 export default function PageEditor({ pageKey, pageLabel, groups, initialContent }) {
   const [content, setContent] = useState(initialContent);
   // What is currently in the database. Advancing this after each save is
@@ -13,6 +49,23 @@ export default function PageEditor({ pageKey, pageLabel, groups, initialContent 
   const [saved, setSaved] = useState(initialContent);
   const [status, setStatus] = useState('idle'); // idle | saving | success | error
   const [error, setError] = useState('');
+  // Only the first section starts open, so the page opens as a short list
+  // of headings you can scan instead of every field at once.
+  const [openSections, setOpenSections] = useState(() => new Set([groups[0]?.title]));
+
+  function toggleSection(title) {
+    setOpenSections((prev) => {
+      const next = new Set(prev);
+      if (next.has(title)) next.delete(title);
+      else next.add(title);
+      return next;
+    });
+  }
+
+  const allOpen = openSections.size === groups.length;
+  function toggleAll() {
+    setOpenSections(allOpen ? new Set() : new Set(groups.map((g) => g.title)));
+  }
 
   async function onSave() {
     setStatus('saving');
@@ -43,18 +96,23 @@ export default function PageEditor({ pageKey, pageLabel, groups, initialContent 
         <div>
           <h1 className="admin-h1">{pageLabel}</h1>
           <p className="admin-sub" style={{ marginBottom: 0 }}>
-            Word counts and image sizes below are suggestions, not limits — save whatever reads best.
+            Pick a section to open it. Word counts and image sizes are suggestions, not limits.
           </p>
         </div>
+        <button type="button" className="a-btn a-btn-ghost" onClick={toggleAll}>
+          {allOpen ? 'Collapse all' : 'Expand all'}
+        </button>
       </div>
 
       {groups.map((group) => (
-        <div className="a-section" key={group.title}>
-          <div className="a-section-title">{group.title}</div>
-          {group.fields.map((field) => (
-            <Field key={field.path} field={field} container={content} onContainerChange={setContent} />
-          ))}
-        </div>
+        <Section
+          key={group.title}
+          group={group}
+          content={content}
+          setContent={setContent}
+          open={openSections.has(group.title)}
+          onToggle={() => toggleSection(group.title)}
+        />
       ))}
 
       <div className="admin-savebar">

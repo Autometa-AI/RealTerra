@@ -52,29 +52,6 @@ export default function Effects() {
       cleanups.push(() => window.removeEventListener('scroll', update));
     })();
 
-    // ── Image hover parallax — subtle ─────────────────────────────
-    (function initImgParallax() {
-      document.querySelectorAll('.img-zoom').forEach((wrap) => {
-        const img = wrap.querySelector('img');
-        if (!img) return;
-        const onMove = (e) => {
-          const r = wrap.getBoundingClientRect();
-          const x = ((e.clientX - r.left) / r.width - 0.5) * 6;
-          const y = ((e.clientY - r.top) / r.height - 0.5) * 6;
-          img.style.transform = `scale(1.04) translate(${x}px, ${y}px)`;
-        };
-        const onLeave = () => {
-          img.style.transform = '';
-        };
-        wrap.addEventListener('mousemove', onMove);
-        wrap.addEventListener('mouseleave', onLeave);
-        cleanups.push(() => {
-          wrap.removeEventListener('mousemove', onMove);
-          wrap.removeEventListener('mouseleave', onLeave);
-        });
-      });
-    })();
-
     // ── Button press feedback ──────────────────────────────────────
     (function initButtonFeedback() {
       document.querySelectorAll('.btn, .nav-cta').forEach((btn) => {

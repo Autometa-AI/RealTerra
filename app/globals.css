@@ -481,6 +481,8 @@ em, .accent-italic { font-family: var(--serif); font-style: italic; }
 .founder-capabilities {
   margin-top: 2.5rem;
   border-top: 1px solid var(--border-light);
+  /* Matches the bio measure so the block reads as one column. */
+  max-width: 68ch;
 }
 .cap-row {
   display: flex; align-items: center; gap: 1rem;
@@ -775,14 +777,9 @@ footer {
 .d3 { transition-delay: 240ms; }
 .d4 { transition-delay: 320ms; }
 
-/* ─────────────────────────────────────────
-   IMAGE HOVER — Subtle zoom
-───────────────────────────────────────── */
+/* Images are deliberately static: no zoom, no drift, no hover scale.
+   `.img-zoom` is kept only as the overflow clip for its container. */
 .img-zoom { overflow: hidden; }
-.img-zoom img {
-  transition: transform var(--t-slow) var(--ease);
-}
-.img-zoom:hover img { transform: scale(1.04); }
 
 /* ─────────────────────────────────────────
    SECTION CTA BAND
@@ -955,28 +952,10 @@ footer {
 ───────────────────────────────────────── */
 
 /* Primary Ken Burns — slow zoom + gentle drift */
-@keyframes kenBurns {
-  0%   { transform: scale(1.04) translate(0, 0); }
-  33%  { transform: scale(1.08) translate(-0.7%, 0.25%); }
-  66%  { transform: scale(1.06) translate(0.35%, -0.4%); }
-  100% { transform: scale(1.04) translate(0, 0); }
-}
 
 /* Alternate — starts wider, drifts left */
-@keyframes kenBurnsB {
-  0%   { transform: scale(1.06) translate(0.3%, 0.15%); }
-  50%  { transform: scale(1.1) translate(-0.55%, -0.25%); }
-  100% { transform: scale(1.06) translate(0.3%, 0.15%); }
-}
 
 /* Homepage hero — very slow, barely perceptible */
-@keyframes heroCinema {
-  0%   { transform: scale(1.0) translate(0, 0); }
-  30%  { transform: scale(1.04) translate(-0.4%, 0.2%); }
-  65%  { transform: scale(1.05) translate(-0.15%, 0.35%); }
-  85%  { transform: scale(1.04) translate(0.25%, -0.2%); }
-  100% { transform: scale(1.0) translate(0, 0); }
-}
 
 /* ─────────────────────────────────────────
    PAGE HERO SPLIT SYSTEM
@@ -1026,7 +1005,8 @@ footer {
   overflow: hidden;
   background: var(--surface);
   aspect-ratio: 8 / 5;
-  min-height: 100%;
+  align-self: start;
+  width: 100%;
 }
 
 .page-hero-split-right img,
@@ -1034,8 +1014,6 @@ footer {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
-  animation: kenBurns 18s ease-in-out infinite;
-  will-change: transform;
 }
 
 /* ─────────────────────────────────────────
@@ -1050,17 +1028,13 @@ footer {
 
 /* Remove hover-only scale; perpetual animation handles depth */
 .hero-media img {
-  animation: heroCinema 22s ease-in-out infinite !important;
   transition: none !important;
-  will-change: transform;
 }
 
 /* ─────────────────────────────────────────
    ABOUT + INSIGHTS — Apply Ken Burns
 ───────────────────────────────────────── */
 .about-hero-right img {
-  animation: kenBurnsB 20s ease-in-out infinite;
-  will-change: transform;
 }
 
 /* ─────────────────────────────────────────
@@ -1109,10 +1083,6 @@ nav.scrolled {
    REDUCED MOTION — Full accessibility compliance
 ───────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .hero-media img,
-  .about-hero-right img,
-  .page-hero-split-right img,
-  .fi-img img,
   .marquee-track {
     animation: none !important;
     transition: none !important;
@@ -1128,15 +1098,6 @@ nav.scrolled {
    MOBILE — Disable heavy animations + layout
 ───────────────────────────────────────── */
 @media (max-width: 900px) {
-  /* Disable cinematic animations on mobile */
-  .hero-media img,
-  .about-hero-right img,
-  .page-hero-split-right img,
-  .fi-img img {
-    animation: none !important;
-    will-change: auto;
-  }
-
   /* Page hero split — stack vertically */
   .page-hero-split {
     grid-template-columns: 1fr;
@@ -1180,24 +1141,10 @@ nav.scrolled {
     filter: none !important;
     transition: none !important;
   }
-  .hero-media img,
-  .about-hero-right img,
-  .page-hero-split-right img,
-  .fi-img img {
-    animation: none !important;
-  }
-  .marquee-track   { animation: none; }
+  .marquee-track { animation: none; }
 }
 
 @media (max-width: 900px) {
-  /* Heavy animations off on mobile */
-  .hero-media img,
-  .about-hero-right img,
-  .page-hero-split-right img,
-  .fi-img img {
-    animation: none !important;
-    will-change: auto;
-  }
   /* Simpler reveal on mobile — no blur, smaller distance */
   .reveal {
     transform: translateY(18px);

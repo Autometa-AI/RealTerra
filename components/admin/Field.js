@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { getPath, setPath } from '../../lib/deep';
 import {
   TextField,
@@ -42,9 +43,28 @@ function itemSummary(item) {
   return item?.name || item?.title || item?.label || item?.question || item?.platform || '';
 }
 
+// A short single-line field takes half a row inside a repeated card too.
+function isCompactSub(f) {
+  if (f.type !== 'text' && f.type !== 'toggle' && f.type !== 'select') return false;
+  if (f.type === 'text' && f.words && f.words[1] > 8) return false;
+  return true;
+}
+
 function RepeatField({ field, value, onChange }) {
   const items = value || [];
   const noun = (field.itemNoun || field.label.replace(/s$/, '')).toLowerCase();
+  // Rows start collapsed. Six projects at nine fields each is 54 inputs on
+  // screen at once; collapsed they are six lines you can scan.
+  const [openRows, setOpenRows] = useState(() => new Set());
+
+  function toggleRow(i) {
+    setOpenRows((prev) => {
+      const next = new Set(prev);
+      if (next.has(i)) next.delete(i);
+      else next.add(i);
+      return next;
+    });
+  }
 
   function updateItem(i, newItem) {
     const next = [...items];
@@ -76,6 +96,12 @@ function RepeatField({ field, value, onChange }) {
     return blank;
   }
 
+  // A newly added row is opened straight away — you added it to fill it in.
+  function addItem() {
+    setOpenRows((prev) => new Set(prev).add(items.length));
+    onChange([...items, blankItem()]);
+  }
+
   return (
     <div className="a-field">
       <label className="a-label">
@@ -90,13 +116,22 @@ function RepeatField({ field, value, onChange }) {
 
       {items.map((item, i) => {
         const summary = itemSummary(item);
+        const open = openRows.has(i);
         return (
-          <div className="a-repeat-item" key={i}>
+          <div className={`a-repeat-item${open ? ' open' : ''}`} key={i}>
             <div className="a-repeat-head">
-              <div className="a-repeat-label">
-                {noun} {i + 1}
-                {summary ? ` — ${summary}` : ''}
-              </div>
+              <button
+                type="button"
+                className="a-repeat-label"
+                onClick={() => toggleRow(i)}
+                aria-expanded={open}
+              >
+                <span className="a-repeat-chevron" aria-hidden="true" />
+                <span className="a-repeat-name">
+                  {noun} {i + 1}
+                  {summary ? ` — ${summary}` : ''}
+                </span>
+              </button>
               <div className="a-repeat-tools">
                 <button type="button" className="a-btn a-btn-ghost" onClick={() => move(i, -1)} disabled={i === 0} aria-label="Move up">↑</button>
                 <button type="button" className="a-btn a-btn-ghost" onClick={() => move(i, 1)} disabled={i === items.length - 1} aria-label="Move down">↓</button>
@@ -105,19 +140,24 @@ function RepeatField({ field, value, onChange }) {
                 </button>
               </div>
             </div>
-            {field.fields.map((sub) => (
-              <Field
-                key={sub.path}
-                field={sub}
-                container={item}
-                onContainerChange={(newItem) => updateItem(i, newItem)}
-              />
-            ))}
+            {open && (
+              <div className="a-fields a-repeat-body">
+                {field.fields.map((sub) => (
+                  <div className={`a-cell${isCompactSub(sub) ? ' a-cell-half' : ''}`} key={sub.path}>
+                    <Field
+                      field={sub}
+                      container={item}
+                      onContainerChange={(newItem) => updateItem(i, newItem)}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         );
       })}
 
-      <button type="button" className="a-btn a-btn-add" onClick={() => onChange([...items, blankItem()])}>
+      <button type="button" className="a-btn a-btn-add" onClick={addItem}>
         + Add {noun}
       </button>
     </div>
