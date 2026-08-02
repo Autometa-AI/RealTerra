@@ -73,10 +73,13 @@
 .whatsapp-icon { font-size: 0.95rem; color: var(--signal); transition: color var(--t-base); }
 .whatsapp-btn:hover .whatsapp-icon { color: var(--pine-deep); }
 
-/* MAP PLACEHOLDER */
+/* MAP BAND
+   An explicit height, not aspect-ratio + max-height: when the cap bites,
+   the ratio drives the width back down and the band stops short of the
+   page edge instead of spanning it. */
 .map-area {
-  aspect-ratio: 1800 / 700;
-  max-height: 420px;
+  width: 100%;
+  height: clamp(260px, 28vw, 420px);
   background: var(--surface);
   display: flex; align-items: center; justify-content: center;
   border-top: 1px solid var(--border);
@@ -106,5 +109,5 @@
   }
   .contact-form-panel { padding: 3rem var(--gutter); }
   .contact-form-panel h2 { font-size: 1.55rem; }
-  .map-area { aspect-ratio: 16 / 9; max-height: none; }
+  .map-area { height: 56vw; max-height: 320px; }
 }

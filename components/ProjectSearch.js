@@ -1,7 +1,9 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import Link from 'next/link';
 import Media from './Media';
+import { uniqueSlugs } from '../lib/slug';
 
 /**
  * Keyword search plus filter pills over the CMS project list.
@@ -11,6 +13,9 @@ import Media from './Media';
  * nothing to gain from a round trip, and results stay instant as you type.
  */
 export default function ProjectSearch({ projects, filters, search }) {
+  // Computed over the full list, not the filtered one, so a card's link
+  // never shifts when the visible set changes.
+  const slugs = useMemo(() => uniqueSlugs(projects, 'name'), [projects]);
   const [query, setQuery] = useState('');
   const [active, setActive] = useState(filters?.[0] || 'All');
 
@@ -80,7 +85,7 @@ export default function ProjectSearch({ projects, filters, search }) {
 
       <div className="projects-grid">
         {visible.map((p, i) => (
-          <div className="project-card-full" key={`${p.name}-${i}`}>
+          <Link href={`/projects/${slugs[projects.indexOf(p)]}`} className="project-card-full" key={`${p.name}-${i}`}>
             <div className="project-img img-zoom">
               <Media src={p.image} alt={p.name} fill sizes="(max-width: 900px) 100vw, (max-width: 1024px) 50vw, 33vw" />
               {p.badge && <span className="project-badge">{p.badge}</span>}
@@ -96,7 +101,7 @@ export default function ProjectSearch({ projects, filters, search }) {
                 <div className="p-stat"><div className="p-stat-val">{p.handover}</div><div className="p-stat-label">Handover</div></div>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
 

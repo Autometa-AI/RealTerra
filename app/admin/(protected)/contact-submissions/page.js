@@ -8,6 +8,8 @@ export default async function ContactSubmissions() {
   const { data: rows, error } = await getSupabase()
     .from('contact_submissions')
     .select('*')
+    // Project-page enquiries have their own section.
+    .is('project', null)
     .order('created_at', { ascending: false })
     .limit(500);
 
@@ -17,7 +19,7 @@ export default async function ContactSubmissions() {
         <div>
           <h1 className="admin-h1">Contact Page Fillups</h1>
           <p className="admin-sub" style={{ marginBottom: 0 }}>
-            Every enquiry submitted through the contact form, newest first.
+            Enquiries submitted through the contact page form, newest first. Project-page enquiries are listed separately.
           </p>
         </div>
         {rows?.length > 0 && (

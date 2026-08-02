@@ -781,6 +781,20 @@ footer {
    `.img-zoom` is kept only as the overflow clip for its container. */
 .img-zoom { overflow: hidden; }
 
+/* Cards that are whole links: the title carries the hover, since the
+   image itself never moves. */
+/* Only inherit colour — these classes already set their own display
+   (flex / grid) and overriding it here would collapse their layout. */
+a.project-card-full,
+a.insight-card-full,
+a.featured-insight { color: inherit; }
+a.project-card-full .project-name-full,
+a.insight-card-full .ic-title,
+a.featured-insight .fi-title { transition: color var(--t-fast); }
+a.project-card-full:hover .project-name-full,
+a.insight-card-full:hover .ic-title,
+a.featured-insight:hover .fi-title { color: var(--pine); }
+
 /* ─────────────────────────────────────────
    SECTION CTA BAND
 ───────────────────────────────────────── */
@@ -867,10 +881,6 @@ footer {
   .founder-strip-text { padding: 3rem 1.5rem; border-left: none !important; border-top: 1px solid var(--border-light); }
 
   .insight-preview { padding: 3.5rem 1.5rem; }
-
-  .about-hero { grid-template-columns: 1fr; min-height: auto; }
-  .about-hero-left { padding: 4rem 1.5rem 3rem; min-height: 52vh; justify-content: flex-end; }
-  .about-hero-right { height: 260px; }
 
   .philosophy-full { padding: 4rem 1.5rem; }
   .philosophy-full-grid { grid-template-columns: 1fr !important; gap: 2rem; margin-top: 2.5rem; }
@@ -966,11 +976,14 @@ footer {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: stretch;
-  min-height: 56vh;
+  /* A floor above the tallest hero's own content (Contact, at ~694px with
+     its three detail rows), so every page header renders at exactly the
+     same height instead of each being sized by its own copy. */
+  min-height: 700px;
 }
 
 .page-hero-split-left {
-  padding: 7rem var(--gutter) 5rem;
+  padding: 6.5rem var(--gutter) 5rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -1033,12 +1046,6 @@ footer {
 /* Remove hover-only scale; perpetual animation handles depth */
 .hero-media img {
   transition: none !important;
-}
-
-/* ─────────────────────────────────────────
-   ABOUT + INSIGHTS — Apply Ken Burns
-───────────────────────────────────────── */
-.about-hero-right img {
 }
 
 /* ─────────────────────────────────────────

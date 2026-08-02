@@ -1,0 +1,30 @@
+.nf {
+  min-height: 68svh;
+  display: grid;
+  place-items: center;
+  padding: 6rem var(--gutter);
+  text-align: center;
+}
+.nf-inner { max-width: 620px; }
+.nf-code {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  color: var(--signal);
+  margin-bottom: 1.5rem;
+}
+.nf h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.2; margin-bottom: 1.1rem; }
+.nf-body { color: var(--text-3); font-size: 0.95rem; line-height: 1.8; margin-bottom: 2.2rem; }
+.nf-actions {
+  display: flex; gap: 1.5rem; align-items: center; justify-content: center;
+  flex-wrap: wrap; margin-bottom: 3rem;
+}
+.nf-links {
+  list-style: none; display: flex; gap: 1.75rem; justify-content: center;
+  flex-wrap: wrap; padding-top: 2rem; border-top: 1px solid var(--border-light);
+}
+.nf-links a {
+  font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-3); transition: color var(--t-fast);
+}
+.nf-links a:hover { color: var(--pine); }

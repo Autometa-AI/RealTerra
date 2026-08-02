@@ -40,3 +40,8 @@ on conflict (id) do nothing;
 alter table cms_content enable row level security;
 alter table contact_submissions enable row level security;
 alter table newsletter_subscribers enable row level security;
+
+-- Added 2026-08: project detail pages carry their own enquiry form, so a
+-- submission records which project it came from. Null means it came from
+-- the general contact page.
+alter table contact_submissions add column if not exists project text;

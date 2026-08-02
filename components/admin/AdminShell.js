@@ -42,6 +42,12 @@ export default function AdminShell({ user, children }) {
             Contact Page Fillups
           </Link>
           <Link
+            href="/admin/project-enquiries"
+            className={`admin-nav-link${pathname === '/admin/project-enquiries' ? ' active' : ''}`}
+          >
+            Project Enquiries
+          </Link>
+          <Link
             href="/admin/newsletter"
             className={`admin-nav-link${pathname === '/admin/newsletter' ? ' active' : ''}`}
           >

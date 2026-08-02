@@ -20,27 +20,33 @@ export default async function About() {
 
   return (
     <main className="page">
-      <div className="about-hero">
-        <div className="about-hero-left">
-          <p className="eyebrow eyebrow-dark reveal">{c.hero.eyebrow}</p>
+      {/* Same hero component as Markets, Projects and Contact, so every
+          page header is exactly the same height. */}
+      <div className="about-hero page-hero-split">
+        <div className="page-hero-split-left dark">
+          <p className="eyebrow reveal">{c.hero.eyebrow}</p>
           <h1 className="reveal d1"><Lines text={c.hero.headline} /></h1>
-          <p className="reveal d2">{c.hero.subhead}</p>
+          <p className="reveal d2" style={{ maxWidth: '400px', marginTop: '1rem' }}>{c.hero.subhead}</p>
         </div>
-        <div className="about-hero-right">
+        <div className="page-hero-split-right">
           <Media src={c.hero.image} alt="" fill priority sizes="(max-width: 900px) 100vw, 50vw" />
         </div>
       </div>
 
-      {/* PHILOSOPHY */}
+      {/* PHILOSOPHY
+          Heading sits inside the left column rather than above the grid, so
+          the intro block and the pillar block are close to the same height
+          and the row reads as two balanced columns. */}
       <div className="philosophy-full">
-        <div className="reveal"><p className="eyebrow">{c.methodology.eyebrow}</p><h2>{c.methodology.headline}</h2></div>
         <div className="philosophy-full-grid">
-          <div className="reveal d1">
+          <div className="reveal">
+            <p className="eyebrow">{c.methodology.eyebrow}</p>
+            <h2 className="philosophy-full-title">{c.methodology.headline}</h2>
             {c.methodology.paragraphs.map((p, i) => (
               <p key={i} style={i ? { marginTop: '1.2rem' } : undefined}>{p}</p>
             ))}
           </div>
-          <div className="reveal d2">
+          <div className="pillars-full-grid reveal d2">
             {c.methodology.pillars.map((pillar, i) => (
               <div className="pillar-full" key={pillar.title}>
                 <span className="pillar-full-num">{String(i + 1).padStart(2, '0')}</span>
