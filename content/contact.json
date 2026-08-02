@@ -6,14 +6,40 @@
     "image": "/images/generic-skyline.jpg"
   },
   "infoPanel": {
-    "office": { "label": "Office", "value": "Dubai, UAE", "sub": "By appointment" },
-    "email": { "label": "Email", "sub": "Replies within 24 hours" },
-    "whatsapp": { "label": "WhatsApp", "buttonLabel": "Message on WhatsApp" },
-    "managingDirector": { "label": "Managing Director", "name": "Gaurav Sabhachandani", "sub": "Investment advisory & portfolio structuring" },
-    "ceo": { "label": "CEO", "name": "Ruchika Malhotra", "sub": "Ultra-luxury sales & developer relationships" },
-    "licensedBy": { "label": "Licensed By", "value": "Dubai Land Department", "sub": "RERA Registered · UAE" }
+    "office": {
+      "label": "Office",
+      "value": "Dubai, UAE",
+      "sub": "By appointment"
+    },
+    "email": {
+      "label": "Email",
+      "sub": "Replies within 24 hours"
+    },
+    "whatsapp": {
+      "label": "WhatsApp",
+      "buttonLabel": "Message on WhatsApp"
+    },
+    "managingDirector": {
+      "label": "Managing Director",
+      "name": "Gaurav Sabhachandani",
+      "sub": "Investment advisory & portfolio structuring"
+    },
+    "ceo": {
+      "label": "CEO",
+      "name": "Ruchika Malhotra",
+      "sub": "Ultra-luxury sales & developer relationships"
+    },
+    "licensedBy": {
+      "label": "Licensed By",
+      "value": "Dubai Land Department",
+      "sub": "RERA Registered · UAE"
+    }
   },
-  "heroDetailLabels": { "email": "Email", "whatsapp": "WhatsApp", "location": "Location" },
+  "heroDetailLabels": {
+    "email": "Email",
+    "whatsapp": "WhatsApp",
+    "location": "Location"
+  },
   "form": {
     "headline": "Send an Enquiry",
     "intro": "Tell us about your investment goals or the property you're looking for. We'll come back to you with a considered response — not a sales call.",
@@ -37,6 +63,7 @@
   },
   "map": {
     "image": "/images/dubai-skyline.jpg",
-    "pinLabel": "RealTerra · Dubai, UAE"
+    "pinLabel": "RealTerra · Dubai, UAE",
+    "query": "Business Bay, Dubai, United Arab Emirates"
   }
 }

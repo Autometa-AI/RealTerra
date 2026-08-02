@@ -54,7 +54,32 @@
       "badge": "Off-Plan",
       "from": "AED 1.2M+",
       "yield": "6.4%",
-      "handover": "2026"
+      "handover": "2026",
+      "slug": "the-valley",
+      "propertyType": "Villas & Townhouses",
+      "bedrooms": "3 – 5",
+      "size": "2,400 – 3,900 sq ft",
+      "paymentPlan": "80 / 20",
+      "overview": [
+        "The Valley is a masterplanned community on the Dubai–Al Ain Road, built around a town centre, sports village and a large stretch of open parkland. It is aimed squarely at families, and the product reflects that: generous plots, low-rise density and a walkable centre rather than a tower cluster.",
+        "The investment case rests on entry pricing that still sits below replacement cost for comparable villa stock closer to the city, combined with rental demand from the expanding Dubai South employment corridor immediately to the west. Emaar has a consistent delivery record on communities of this type, which lowers the completion risk that usually dominates off-plan villa purchases."
+      ],
+      "highlights": [
+        "Entry below replacement cost for comparable villa stock",
+        "Family-driven rental demand from the Dubai South corridor",
+        "Emaar delivery record on comparable masterplans",
+        "Low-rise density with significant open parkland"
+      ],
+      "amenities": [
+        "Town centre retail",
+        "Sports village",
+        "Community parkland",
+        "Swimming pools",
+        "Cycling and running tracks",
+        "Schools within the masterplan"
+      ],
+      "gallery": [],
+      "mapQuery": "The Valley by Emaar, Dubai-Al Ain Road, Dubai"
     },
     {
       "developer": "DAMAC Properties",
@@ -65,7 +90,32 @@
       "badge": "Off-Plan",
       "from": "AED 2.1M+",
       "yield": "7.1%",
-      "handover": "2028"
+      "handover": "2028",
+      "slug": "damac-islands-2",
+      "propertyType": "Waterfront Villas",
+      "bedrooms": "4 – 7",
+      "size": "3,100 – 6,200 sq ft",
+      "paymentPlan": "75 / 25",
+      "overview": [
+        "DAMAC Islands 2 extends the island-living concept in Dubailand, with clusters arranged around private lagoons and sand-edged waterways. Phase 2 follows a first phase that sold through quickly, which gives some evidence of genuine demand rather than purely speculative absorption.",
+        "The thesis is substitution. Buyers priced out of Palm Jumeirah and comparable waterfront addresses can access lagoon frontage and equivalent lifestyle credentials at a materially lower entry point. The risk to watch is delivery timing, where DAMAC has shown wider variance than its peers."
+      ],
+      "highlights": [
+        "Private lagoon frontage at a fraction of Palm pricing",
+        "Phase 1 sold through, evidencing real demand",
+        "Large plot sizes relative to the price point",
+        "Strong secondary market for DAMAC lagoon product"
+      ],
+      "amenities": [
+        "Private lagoons and beaches",
+        "Water sports",
+        "Clubhouse",
+        "Landscaped island parks",
+        "Gymnasium",
+        "Retail promenade"
+      ],
+      "gallery": [],
+      "mapQuery": "DAMAC Islands, Dubailand, Dubai"
     },
     {
       "developer": "Binghatti",
@@ -76,7 +126,32 @@
       "badge": "Off-Plan",
       "from": "AED 950K+",
       "yield": "7.4%",
-      "handover": "2026"
+      "handover": "2026",
+      "slug": "binghatti-skyrise",
+      "propertyType": "Apartments",
+      "bedrooms": "Studio – 3",
+      "size": "420 – 1,850 sq ft",
+      "paymentPlan": "70 / 30",
+      "overview": [
+        "Binghatti Skyrise sits in Business Bay, within walking distance of the Dubai Canal and a short drive from Downtown. Binghatti's signature here is architectural density and short handover timelines, both of which matter to an investor: the capital is committed for less time before it starts producing.",
+        "Business Bay is the most liquid apartment market in the emirate outside Downtown and Marina, which makes the exit straightforward. This is a yield-and-liquidity position rather than a high-growth one."
+      ],
+      "highlights": [
+        "Short handover timeline relative to comparable off-plan",
+        "Business Bay secondary market depth",
+        "Canal proximity",
+        "Branded residence components within the tower"
+      ],
+      "amenities": [
+        "Rooftop pool",
+        "Fitness centre",
+        "Concierge",
+        "Covered parking",
+        "Retail at podium level",
+        "Landscaped deck"
+      ],
+      "gallery": [],
+      "mapQuery": "Binghatti Skyrise, Business Bay, Dubai"
     },
     {
       "developer": "Emaar Properties",
@@ -87,7 +162,32 @@
       "badge": "Off-Plan",
       "from": "AED 1.5M+",
       "yield": "6.0%",
-      "handover": "2026"
+      "handover": "2026",
+      "slug": "creek-harbour",
+      "propertyType": "Apartments",
+      "bedrooms": "1 – 4",
+      "size": "700 – 2,900 sq ft",
+      "paymentPlan": "80 / 20",
+      "overview": [
+        "Dubai Creek Harbour is positioned as the city's next downtown, built around the creek with a marina, a central park and a retail district. Emaar is master developer, and the delivery record across the completed phases has been consistent.",
+        "The long-term catalyst is Creek Tower. Its completion would materially change the skyline and the address, though the timeline has moved before and any thesis that depends solely on it carries real timing risk. The nearer-term case is simpler: a well-executed waterfront masterplan by a proven developer, within reach of the airport and Downtown."
+      ],
+      "highlights": [
+        "Emaar master developer with consistent delivery",
+        "Waterfront and creek frontage",
+        "Central park and retail district within the masterplan",
+        "Proximity to Downtown and the airport"
+      ],
+      "amenities": [
+        "Marina and yacht club",
+        "Central park",
+        "Waterfront promenade",
+        "Swimming pools",
+        "Fitness facilities",
+        "Retail district"
+      ],
+      "gallery": [],
+      "mapQuery": "Dubai Creek Harbour, Dubai"
     },
     {
       "developer": "DAMAC Properties",
@@ -98,7 +198,32 @@
       "badge": "Off-Plan",
       "from": "AED 1.8M+",
       "yield": "6.8%",
-      "handover": "2027"
+      "handover": "2027",
+      "slug": "damac-lagoons",
+      "propertyType": "Mediterranean Villas",
+      "bedrooms": "3 – 6",
+      "size": "2,200 – 5,100 sq ft",
+      "paymentPlan": "75 / 25",
+      "overview": [
+        "DAMAC Lagoons is a villa masterplan in Dubailand organised into Mediterranean-themed clusters, each arranged around swimmable lagoons. The community has a proven sellout record across earlier clusters and, importantly, an active secondary market, which is the harder test.",
+        "For an investor the appeal is a villa product at a townhouse price point with genuine differentiation on amenity. The location is inland, so this is a lifestyle-demand play rather than a proximity-to-employment one."
+      ],
+      "highlights": [
+        "Proven sellout record across earlier clusters",
+        "Active secondary market for the product type",
+        "Swimmable lagoons throughout the community",
+        "Villa product at a townhouse entry point"
+      ],
+      "amenities": [
+        "Swimmable lagoons",
+        "Wave pools",
+        "Floating cinema",
+        "Community clubhouse",
+        "Sports courts",
+        "Landscaped parks"
+      ],
+      "gallery": [],
+      "mapQuery": "DAMAC Lagoons, Dubailand, Dubai"
     },
     {
       "developer": "Emaar Properties",
@@ -109,12 +234,43 @@
       "badge": "Limited Inventory",
       "from": "AED 2.4M+",
       "yield": "5.8%",
-      "handover": "Ready"
+      "handover": "Ready",
+      "slug": "emaar-beachfront",
+      "propertyType": "Waterfront Apartments",
+      "bedrooms": "1 – 4",
+      "size": "750 – 3,400 sq ft",
+      "paymentPlan": "Ready",
+      "overview": [
+        "Emaar Beachfront occupies a private island between Dubai Marina and Palm Jumeirah, with its own beach and direct marina views. It is one of the most liquid residential addresses in the emirate, which is the defining characteristic for anyone who cares about the exit.",
+        "Inventory is limited and largely complete, so this is a different proposition to the off-plan positions elsewhere in the portfolio: income starts immediately, the price reflects the certainty, and the asset holds value through market cycles rather than repricing sharply in either direction."
+      ],
+      "highlights": [
+        "Private beach access",
+        "Among the most liquid addresses in the emirate",
+        "Ready inventory, income from day one",
+        "Marina and Palm Jumeirah views"
+      ],
+      "amenities": [
+        "Private beach",
+        "Infinity pools",
+        "Marina berths nearby",
+        "Fitness and spa",
+        "Beachfront retail",
+        "24-hour security"
+      ],
+      "gallery": [],
+      "mapQuery": "Emaar Beachfront, Dubai Harbour, Dubai"
     }
   ],
   "closingCta": {
     "eyebrow": "Off-market access",
     "headline": "Some of our best projects\nnever appear here.",
     "buttonLabel": "Request Off-Market Access"
+  },
+  "detail": {
+    "enquiryHeadline": "Enquire about this project",
+    "enquiryIntro": "Send us your details and we will come back with pricing, availability and the full project breakdown.",
+    "submitLabel": "Send Enquiry →",
+    "backLabel": "All projects"
   }
 }

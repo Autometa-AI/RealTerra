@@ -34,7 +34,7 @@
 .fi-meta { font-size:0.68rem; color:var(--text-3); letter-spacing:0.08em; margin-top:auto; }
 
 /* GRID */
-.insights-main { padding: 4rem 3.5rem; }
+.insights-main { padding: var(--section-y) var(--gutter); }
 .insights-grid-full {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -58,7 +58,7 @@
 /* REQUEST BAND */
 .request-band {
   background: var(--surface);
-  padding: 4rem 3.5rem;
+  padding: var(--section-y) var(--gutter);
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;

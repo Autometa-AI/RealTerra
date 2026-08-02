@@ -10,7 +10,14 @@
     "excerpt": "A 42-page deep-dive into the supply-demand dynamics, infrastructure commitments, and comparable case studies — Macau, Singapore Marina Bay — that make Al Marjan one of the clearest asymmetric real estate bets in the GCC this decade. Covers entry windows, developer selection, and projected 5-year IRR bands.",
     "image": "/images/al-marjan-report.jpg",
     "linkLabel": "Request this report",
-    "meta": "42 pages · Available to qualified investors"
+    "meta": "42 pages · Available to qualified investors",
+    "slug": "the-al-marjan-inflection-why-the-wynn-effect-will-permanently-reprice-rak-reside",
+    "author": "RealTerra Research",
+    "date": "2026",
+    "readTime": "6 min read",
+    "body": [
+      "A 42-page deep-dive into the supply-demand dynamics, infrastructure commitments, and comparable case studies — Macau, Singapore Marina Bay — that make Al Marjan one of the clearest asymmetric real estate bets in the GCC this decade. Covers entry windows, developer selection, and projected 5-year IRR bands."
+    ]
   },
   "posts": [
     {
@@ -18,42 +25,118 @@
       "title": "Dubai South: Reading the Airport Signal Before the Market Does",
       "excerpt": "Al Maktoum's expansion timeline decoded — what it means for residential demand, which sub-zones sit in the appreciation corridor, and how to size a position today.",
       "meta": "Area Analysis",
-      "image": "/images/dubai-south.jpg"
+      "image": "/images/dubai-south.jpg",
+      "slug": "dubai-south-reading-the-airport-signal-before-the-market-does",
+      "author": "RealTerra Research",
+      "date": "2026",
+      "readTime": "6 min read",
+      "body": [
+        "## Why the airport matters more than the address",
+        "Al Maktoum International is being built out to a planned 260 million passenger capacity, which would make it the largest airport in the world by some distance. Infrastructure of that scale does not sit in isolation. It pulls logistics, aviation employment, hospitality and eventually residential demand into a corridor that, today, still prices like open desert.",
+        "The pattern is well documented elsewhere. Areas within a twenty-minute drive of a major hub tend to reprice in two distinct waves: first when construction contracts are awarded and the workforce arrives, and again when passenger operations begin and permanent employment settles. Dubai South is between those two waves.",
+        "## Which sub-zones sit in the corridor",
+        "Not all of Dubai South benefits equally. The Residential District and the areas bordering the Expo legacy site have the clearest path to demand, because they combine completed infrastructure with genuine amenity. The industrial and logistics zones will see activity, but the residential thesis there is weaker and the exit market thinner.",
+        "We concentrate on masterplans with confirmed handover dates before the next airport phase completes. Buying into a project that hands over after the demand arrives means paying for the repricing rather than capturing it.",
+        "## How to size a position",
+        "Entry pricing in the corridor still starts around AED 650,000, which puts a meaningful position within reach of most portfolios. For clients building UAE exposure from scratch we typically treat Dubai South as the growth sleeve rather than the yield sleeve, and size it accordingly against a stabilised Business Bay or Marina holding.",
+        "The early-mover window here is closing, not closed. Institutional capital has started to appear in the land market, which historically leads retail pricing by twelve to eighteen months."
+      ]
     },
     {
       "type": "Developer Analysis",
       "title": "DAMAC vs Emaar: Completion Rate and Yield Comparison Across 12 Projects",
       "excerpt": "A forensic comparison of handover performance, escrow compliance, and secondary market behaviour across the UAE's two largest off-plan developers.",
       "meta": "Comparative · 2025",
-      "image": "/images/developer-analysis.jpg"
+      "image": "/images/developer-analysis.jpg",
+      "slug": "damac-vs-emaar-completion-rate-and-yield-comparison-across-12-projects",
+      "author": "RealTerra Research",
+      "date": "2026",
+      "readTime": "6 min read",
+      "body": [
+        "## Why developer selection is a risk decision, not a brand decision",
+        "Off-plan buyers are underwriting two things at once: the asset and the developer. The second is frequently ignored. A project that hands over two years late has destroyed a meaningful portion of its own return through financing cost and foregone rent, regardless of how the finished building looks.",
+        "We track handover performance, escrow compliance and secondary market behaviour across the developers we transact with. This comparison covers twelve completed projects, six from each developer, handed over between 2019 and 2025.",
+        "## Completion performance",
+        "Emaar delivered closer to its published handover dates across the sample, with an average slippage measured in months rather than years. DAMAC showed wider variance: its strongest projects delivered on time, but the tail was longer. For a buyer, that variance is the number that matters, not the average.",
+        "## Yield and secondary liquidity",
+        "DAMAC product frequently offers a higher headline gross yield at entry, largely a function of lower entry pricing. Emaar stock tends to hold value better on resale and transacts faster in the secondary market, which matters when the exit is part of the thesis rather than an afterthought.",
+        "## What we conclude",
+        "Neither developer is the answer on its own. We use Emaar as the stability allocation and DAMAC selectively where a specific masterplan and price point justify the wider delivery variance. The full comparison, including the project-level data, is available to qualified investors on request."
+      ]
     },
     {
       "type": "Area Spotlight",
       "title": "Dubai Maritime City: The Waterfront District the Market Hasn't Priced Yet",
       "excerpt": "Infrastructure convergence, zoning history, and our forward price model for the Maritime City precinct through 2029. The case for early entry.",
       "meta": "Area Analysis · 2025",
-      "image": "/images/dubai-maritime-city.jpg"
+      "image": "/images/dubai-maritime-city.jpg",
+      "slug": "dubai-maritime-city-the-waterfront-district-the-market-hasnt-priced-yet",
+      "author": "RealTerra Research",
+      "date": "2026",
+      "readTime": "6 min read",
+      "body": [
+        "## A waterfront district hiding in plain sight",
+        "Dubai Maritime City occupies a peninsula between Port Rashid and Dubai Drydocks, minutes from Downtown and the DIFC. On any comparable waterfront in the emirate that location would command a significant premium. Here it does not, largely because the district spent its first decade zoned around maritime industry rather than residential living.",
+        "That is changing. Zoning has been progressively reclassified, the superyacht marina is operational, and the first genuinely residential towers are under construction.",
+        "## The infrastructure case",
+        "Three things underpin the thesis: the Port Rashid redevelopment immediately north, the completion of the coastal road connections, and the district being effectively supply-capped by its own geography. A peninsula cannot expand. Once the current pipeline delivers, new supply requires redevelopment rather than greenfield launch.",
+        "## Our forward view",
+        "Our price model runs to 2029 and assumes no change to current infrastructure commitments. Even on that conservative basis the district closes a meaningful part of its discount to comparable Dubai waterfront. The full model, including the assumptions we would want a client to challenge, is available on request."
+      ]
     },
     {
       "type": "Investor Guide",
       "title": "Building a UAE Portfolio Across Three Horizons: Yield, Growth & Off-Plan Value",
       "excerpt": "A framework for structuring property exposure across short, medium, and long time horizons — using the UAE's unique tax environment to compound returns.",
       "meta": "Framework · 2025",
-      "image": "/images/founders-strip.jpg"
+      "image": "/images/founders-strip.jpg",
+      "slug": "building-a-uae-portfolio-across-three-horizons-yield-growth-off-plan-value",
+      "author": "RealTerra Research",
+      "date": "2026",
+      "readTime": "6 min read",
+      "body": [
+        "## Three horizons, three different jobs",
+        "Most investors approach UAE property one asset at a time. A portfolio built that way tends to end up concentrated in whatever was being marketed hardest at the time of purchase. The alternative is to decide the shape of the portfolio first, then fill it.",
+        "We structure exposure across three horizons. The short horizon is stabilised, tenanted stock producing income from day one. The medium horizon is completed property in districts with a clear repricing catalyst. The long horizon is off-plan, where capital is committed today against a handover several years out.",
+        "## Why the tax environment changes the maths",
+        "With no capital gains tax and no income tax on rental proceeds, returns compound in a way they cannot in most comparable jurisdictions. Rental income can be recycled into the next position without the drag of an annual tax bill. Over a ten-year horizon that difference dominates almost every other variable.",
+        "## Sizing the sleeves",
+        "There is no universal split. A client drawing income needs the short horizon weighted heavily. A client compounding for a decade can carry far more off-plan risk. What matters is that the split is chosen deliberately and reviewed, rather than emerging by accident.",
+        "We build this allocation with clients before looking at a single specific property. The framework is available in full on request."
+      ]
     },
     {
       "type": "Area Spotlight",
       "title": "Saadiyat Island: Why Abu Dhabi's Cultural District Is an Institutional-Grade Bet",
       "excerpt": "Louvre, Guggenheim, Formula 1 — and a government-linked developer track record that reduces completion risk to near zero. The full investment case.",
       "meta": "Area Analysis · 2025",
-      "image": "/images/saadiyat-island.jpg"
+      "image": "/images/saadiyat-island.jpg",
+      "slug": "saadiyat-island-why-abu-dhabis-cultural-district-is-an-institutional-grade-bet",
+      "author": "RealTerra Research",
+      "date": "2026",
+      "readTime": "6 min read",
+      "body": [
+        "## Culture as permanent infrastructure",
+        "Saadiyat Island is anchored by assets that do not relocate. The Louvre Abu Dhabi is operational, the Guggenheim and the Zayed National Museum are in delivery, and NYU Abu Dhabi has been established on the island for over a decade. These are permanent demand drivers of a kind most masterplans never acquire.",
+        "## Reduced completion risk",
+        "The island is developed largely by government-linked entities. For an off-plan buyer that materially lowers the completion risk that dominates developer selection elsewhere. The trade-off is pricing: entry is higher than comparable Dubai product, and the yield is correspondingly lower.",
+        "## Who this suits",
+        "Saadiyat is not a yield play and we do not present it as one. It suits capital with a long horizon and a preference for downside protection over headline return, and it pairs naturally with a higher-yield Dubai holding. The full investment case is available on request."
+      ]
     },
     {
       "type": "Macro Brief",
       "title": "UAE Real Estate in 2025: The Four Structural Tailwinds Every Investor Should Understand",
       "excerpt": "Zero CGT, Golden Visa demand lock-in, infrastructure pipeline, and HNI inflows. The macro case for UAE real estate — written for allocators, not speculators.",
       "meta": "Macro · Q1 2025",
-      "image": "/images/dubai-skyline.jpg"
+      "image": "/images/dubai-skyline.jpg",
+      "slug": "uae-real-estate-in-2025-the-four-structural-tailwinds-every-investor-should-unde",
+      "author": "RealTerra Research",
+      "date": "2026",
+      "readTime": "6 min read",
+      "body": [
+        "Zero CGT, Golden Visa demand lock-in, infrastructure pipeline, and HNI inflows. The macro case for UAE real estate — written for allocators, not speculators."
+      ]
     }
   ],
   "requestLinkLabel": "Request",

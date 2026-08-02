@@ -1,11 +1,19 @@
 // One-off. Usage: node --env-file=.env.local scripts/seed-detail-content.js
+//        or:      node scripts/seed-detail-content.js --local
 //
 // Blog posts and projects now have their own pages, which need fields the
 // existing rows do not carry (slug, article body, project overview, and so
 // on). This fills those in without touching anything the client has already
 // edited: every assignment is guarded, so a field they later change is left
 // alone on a re-run.
+//
+// `--local` applies the same fill to the content/*.json snapshot instead of
+// the database, which is what `npm run dev` reads when no credentials are set.
+const fs = require('fs');
+const path = require('path');
 const { createClient } = require('@supabase/supabase-js');
+
+const LOCAL = process.argv.includes('--local');
 
 const BLOG_BODIES = {
   'dubai-south-reading-the-airport-signal-before-the-market-does': [
@@ -134,17 +142,35 @@ function slugify(str) {
     .replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').slice(0, 80);
 }
 
+const contentFile = (page) => path.join(__dirname, '..', 'content', `${page}.json`);
+
 async function main() {
-  const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !key) { console.error('Set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY first.'); process.exit(1); }
-  const supabase = createClient(url, key, { auth: { persistSession: false } });
+  let read;
+  let write;
+
+  if (LOCAL) {
+    read = async (page) => JSON.parse(fs.readFileSync(contentFile(page), 'utf-8'));
+    write = async (page, content) =>
+      fs.writeFileSync(contentFile(page), JSON.stringify(content, null, 2) + '\n');
+  } else {
+    const url = process.env.SUPABASE_URL;
+    const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    if (!url || !key) { console.error('Set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY first, or pass --local.'); process.exit(1); }
+    const supabase = createClient(url, key, { auth: { persistSession: false } });
+    read = async (page) => {
+      const { data, error } = await supabase.from('cms_content').select('content').eq('page', page).single();
+      if (error) throw new Error(error.message);
+      return data.content;
+    };
+    write = async (page, content) => {
+      const { error } = await supabase.from('cms_content').upsert({ page, content, updated_by: 'detail-seed' });
+      if (error) throw new Error(error.message);
+    };
+  }
 
   // ── blogs ────────────────────────────────────────────────────────
   {
-    const { data, error } = await supabase.from('cms_content').select('content').eq('page', 'blogs').single();
-    if (error) throw new Error(error.message);
-    const c = JSON.parse(JSON.stringify(data.content));
+    const c = JSON.parse(JSON.stringify(await read('blogs')));
 
     const fill = (post) => {
       const slug = post.slug || slugify(post.title);
@@ -159,17 +185,13 @@ async function main() {
     if (c.featured) fill(c.featured);
     (c.posts || []).forEach(fill);
 
-    const { error: e2 } = await supabase.from('cms_content')
-      .upsert({ page: 'blogs', content: c, updated_by: 'detail-seed' });
-    if (e2) throw new Error(e2.message);
+    await write('blogs', c);
     console.log(`blogs: ${(c.posts || []).length} posts + featured now have slugs and bodies`);
   }
 
   // ── projects ─────────────────────────────────────────────────────
   {
-    const { data, error } = await supabase.from('cms_content').select('content').eq('page', 'projects').single();
-    if (error) throw new Error(error.message);
-    const c = JSON.parse(JSON.stringify(data.content));
+    const c = JSON.parse(JSON.stringify(await read('projects')));
 
     (c.projects || []).forEach((p) => {
       const slug = p.slug || slugify(p.name);
@@ -195,9 +217,7 @@ async function main() {
       };
     }
 
-    const { error: e2 } = await supabase.from('cms_content')
-      .upsert({ page: 'projects', content: c, updated_by: 'detail-seed' });
-    if (e2) throw new Error(e2.message);
+    await write('projects', c);
     console.log(`projects: ${(c.projects || []).length} projects now have slugs and detail content`);
   }
 

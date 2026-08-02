@@ -58,6 +58,11 @@
   /* ── Layout ────────────────────────────── */
   --nav-h:         72px;
   --gutter:        3.5rem;
+  /* One vertical rhythm for every full-width content section. Pages used to
+     set this individually (4rem on Markets and Projects, 5rem on the home
+     page, 6rem on About), which is what made the spacing read as inconsistent
+     when moving between them. Overridden once at the mobile breakpoint. */
+  --section-y:     6rem;
   --dock-h:        0px;   /* mobile action dock — set in media query */
 
   /* ── Type stacks ───────────────────────── */
@@ -351,7 +356,7 @@ em, .accent-italic { font-family: var(--serif); font-style: italic; }
 /* ─────────────────────────────────────────
    SECTIONS
 ───────────────────────────────────────── */
-.section { padding: 6rem var(--gutter); }
+.section { padding: var(--section-y) var(--gutter); }
 .section-sm { padding: 4rem var(--gutter); }
 .section-dark {
   background: var(--pine);
@@ -758,7 +763,11 @@ footer {
    translateY + blur — same technique
    as Stripe, Linear, Apple
 ───────────────────────────────────────── */
-.reveal {
+/* Gated on [data-js], which the inline script in the layout sets before
+   first paint. Without that gate a script error — or a crawler that does not
+   run JavaScript — leaves every headline on the site at opacity 0, because
+   only the IntersectionObserver ever adds `.up`. */
+[data-js] .reveal {
   opacity: 0;
   transform: translateY(36px);
   filter: blur(2px);
@@ -845,7 +854,7 @@ a.featured-insight:hover .fi-title { color: var(--pine); }
 }
 
 @media (max-width: 900px) {
-  :root { --nav-h: 62px; --gutter: 1.5rem; --dock-h: 66px; }
+  :root { --nav-h: 62px; --gutter: 1.5rem; --dock-h: 66px; --section-y: 3.5rem; }
 
   nav { padding: 0 var(--gutter); }
   .nav-links { display: none; }
@@ -978,8 +987,12 @@ a.featured-insight:hover .fi-title { color: var(--pine); }
   align-items: stretch;
   /* A floor above the tallest hero's own content (Contact, at ~694px with
      its three detail rows), so every page header renders at exactly the
-     same height instead of each being sized by its own copy. */
-  min-height: 700px;
+     same height instead of each being sized by its own copy.
+     Capped at the visible area, because 700px plus the fixed nav overruns a
+     laptop viewport and the header lands sliced across the fold — the split
+     reads as a cut rather than a full-height panel. Content still wins if it
+     needs more room; this only sets the floor. */
+  min-height: min(700px, calc(100svh - var(--nav-h)));
 }
 
 .page-hero-split-left {
@@ -1062,7 +1075,7 @@ nav.scrolled {
 .d0  { transition-delay: 0ms; }
 .d5  { transition-delay: 400ms; }
 .reveal-grid { }
-.reveal-grid > * {
+[data-js] .reveal-grid > * {
   opacity: 0;
   transform: translateY(18px);
   transition: opacity var(--t-reveal) var(--ease), transform var(--t-reveal) var(--ease);
@@ -1173,4 +1186,42 @@ nav.scrolled {
   .page-hero-split-right {
     height: 260px;
   }
+}
+
+/* ─────────────────────────────────────────
+   GOOGLE MAP EMBED
+   Shared by the project detail pages and the contact page, so it lives here
+   rather than in either page's stylesheet.
+───────────────────────────────────────── */
+.pd-map-intro { margin-bottom: 1.35rem; }
+.pd-map { border: 1px solid var(--border); }
+.pd-map-frame {
+  position: relative;
+  aspect-ratio: 16 / 8;
+  background: var(--surface);
+}
+.pd-map-frame iframe {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  border: 0;
+  /* The embed ships a bright default palette; a touch of desaturation keeps
+     it from shouting next to the pine and paper around it. */
+  filter: saturate(0.85) contrast(1.02);
+}
+.pd-map-foot {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+.pd-map-pin {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 0.82rem;
+  color: var(--text-2);
+}
+.pd-map-pin svg { width: 16px; height: 16px; flex: none; color: var(--pine); }
+
+@media (max-width: 900px) {
+  .pd-map-frame { aspect-ratio: 4 / 3; }
 }

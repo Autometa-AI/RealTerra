@@ -1,12 +1,14 @@
 import Image from 'next/image';
+import AutoVideo from './AutoVideo';
 import { isVideoSrc, isGifSrc } from '../lib/media';
 
 /**
  * Renders whatever the CMS put in a media slot.
  *
  * Every image slot in the CMS also accepts a video or a GIF, so the site
- * can't assume an <img>. Videos autoplay muted, looped and inline, which
- * is the only combination browsers allow to start without a tap.
+ * can't assume an <img>. Video playback lives in <AutoVideo> because it needs
+ * a client component to honour "reduce motion"; this stays a server component
+ * so the far more common image case ships no JavaScript.
  *
  * Sizing is left entirely to the container's CSS (the callers all use
  * aspect-ratio boxes), so both branches just fill their parent.
@@ -26,20 +28,7 @@ export default function Media({
   if (!src) return null;
 
   if (isVideoSrc(src)) {
-    return (
-      <video
-        className={className}
-        style={style}
-        src={src}
-        poster={poster || undefined}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        aria-label={alt || undefined}
-      />
-    );
+    return <AutoVideo src={src} poster={poster} alt={alt} className={className} style={style} />;
   }
 
   const common = {

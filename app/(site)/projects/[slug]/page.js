@@ -3,7 +3,10 @@ import { notFound } from 'next/navigation';
 import '../projects.css';
 import './project-detail.css';
 import Media from '../../../../components/Media';
+import AmenityIcon from '../../../../components/AmenityIcon';
+import ProjectGallery from '../../../../components/ProjectGallery';
 import ProjectEnquiryForm from '../../../../components/ProjectEnquiryForm';
+import PropertyMap from '../../../../components/PropertyMap';
 import { getContent } from '../../../../lib/content';
 import { uniqueSlugs } from '../../../../lib/slug';
 
@@ -30,6 +33,36 @@ export async function generateMetadata({ params }) {
   };
 }
 
+/* Spec icons live here rather than in a shared module: the set is fixed by
+   the fact list below and nothing else on the site draws them. */
+const SPEC_ICONS = {
+  price: <path d="M3 12.5V5a2 2 0 0 1 2-2h7.5l8.5 8.5-9.5 9.5Z M7.5 7.5h.01" />,
+  yield: <path d="M3 17.5 9.5 11l4 4L21 7.5 M15.5 7.5H21v5.5" />,
+  handover: <path d="M4 6.5h16v14H4Z M8 3v6M16 3v6M4 12h16" />,
+  type: <path d="M3.5 10.5 12 3.5l8.5 7 M5.5 9v11.5h13V9" />,
+  bedrooms: <path d="M3 19v-8.5h13a4 4 0 0 1 4 4V19 M3 15.5h17 M6.5 10.5V7h9v3.5" />,
+  size: <path d="M3.5 3.5h17v17h-17Z M3.5 9h4M17 3.5v4M16.5 20.5v-4M20.5 15h-4" />,
+  plan: <path d="M2.5 6.5h19v11h-19Z M2.5 10.5h19 M6 14.5h4" />,
+  developer: <path d="M4 20.5V5.5L13 3v17.5 M13 9h7v11.5 M7 8h3M7 11.5h3M7 15h3M16 12.5h1M16 16h1" />,
+};
+
+function SpecIcon({ name }) {
+  return (
+    <svg
+      className="pd-spec-icon"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.3"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      {SPEC_ICONS[name]}
+    </svg>
+  );
+}
+
 export default async function ProjectDetail({ params }) {
   const { slug } = await params;
   const { c, projects, slugs } = await allProjects();
@@ -38,20 +71,27 @@ export default async function ProjectDetail({ params }) {
 
   const p = projects[index];
   const detail = c.detail || {};
-  const gallery = (p.gallery || []).map((g) => g?.image).filter(Boolean);
+  // The hero image also opens the gallery, so it leads the set unless the
+  // editor has already put it there.
+  const galleryImages = (p.gallery || []).map((g) => g?.image).filter(Boolean);
+  const gallery = p.image && !galleryImages.includes(p.image)
+    ? [p.image, ...galleryImages]
+    : galleryImages;
+  const amenities = (p.amenities || []).filter((a) => String(a || '').trim());
   const others = projects.filter((_, i) => i !== index).slice(0, 3);
+  const showMap = p.mapEmbedUrl || p.mapQuery || p.location;
 
-  // Only the facts that were actually filled in get a row.
+  // Only the facts that were actually filled in get a card.
   const facts = [
-    ['Starting price', p.from],
-    ['Gross yield', p.yield],
-    ['Handover', p.handover],
-    ['Property type', p.propertyType],
-    ['Bedrooms', p.bedrooms],
-    ['Size', p.size],
-    ['Payment plan', p.paymentPlan],
-    ['Developer', p.developer],
-  ].filter(([, v]) => v);
+    ['price', 'Starting price', p.from],
+    ['yield', 'Gross yield', p.yield],
+    ['handover', 'Handover', p.handover],
+    ['type', 'Property type', p.propertyType],
+    ['bedrooms', 'Bedrooms', p.bedrooms],
+    ['size', 'Size', p.size],
+    ['plan', 'Payment plan', p.paymentPlan],
+    ['developer', 'Developer', p.developer],
+  ].filter(([, , v]) => v);
 
   return (
     <main className="page">
@@ -61,22 +101,40 @@ export default async function ProjectDetail({ params }) {
         </div>
         <div className="pd-hero-inner">
           <Link href="/projects" className="pd-back">← {detail.backLabel || 'All projects'}</Link>
-          {p.badge && <span className="pd-badge">{p.badge}</span>}
+          <div className="pd-hero-tags">
+            {p.badge && <span className="pd-badge">{p.badge}</span>}
+            {p.developer && <span className="pd-hero-developer">{p.developer}</span>}
+          </div>
           <h1>{p.name}</h1>
-          <p className="pd-hero-meta">
-            {[p.developer, p.location].filter(Boolean).join(' · ')}
-          </p>
+          {p.location && (
+            <p className="pd-hero-meta">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true">
+                <path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z" />
+                <circle cx="12" cy="10" r="2.6" />
+              </svg>
+              {p.location}
+            </p>
+          )}
+          {(p.from || p.yield) && (
+            <p className="pd-hero-price">
+              {p.from && <span><em>From</em> {p.from}</span>}
+              {p.yield && <span><em>Yield</em> {p.yield}</span>}
+            </p>
+          )}
         </div>
       </div>
 
       <div className="pd-layout">
         <div className="pd-main">
           {facts.length > 0 && (
-            <section className="pd-facts">
-              {facts.map(([label, value]) => (
-                <div className="pd-fact" key={label}>
-                  <span className="pd-fact-label">{label}</span>
-                  <span className="pd-fact-value">{value}</span>
+            <section className="pd-specs" aria-label="Key facts">
+              {facts.map(([icon, label, value]) => (
+                <div className="pd-spec" key={label}>
+                  <SpecIcon name={icon} />
+                  <div>
+                    <span className="pd-spec-label">{label}</span>
+                    <span className="pd-spec-value">{value}</span>
+                  </div>
                 </div>
               ))}
             </section>
@@ -98,11 +156,16 @@ export default async function ProjectDetail({ params }) {
             </section>
           )}
 
-          {p.amenities?.length > 0 && (
+          {amenities.length > 0 && (
             <section className="pd-section">
               <h2>Amenities</h2>
               <ul className="pd-amenities">
-                {p.amenities.map((a, i) => <li key={i}>{a}</li>)}
+                {amenities.map((a, i) => (
+                  <li className="pd-amenity" key={`${a}-${i}`}>
+                    <AmenityIcon label={a} />
+                    <span>{a}</span>
+                  </li>
+                ))}
               </ul>
             </section>
           )}
@@ -110,13 +173,17 @@ export default async function ProjectDetail({ params }) {
           {gallery.length > 0 && (
             <section className="pd-section">
               <h2>Gallery</h2>
-              <div className="pd-gallery">
-                {gallery.map((src, i) => (
-                  <div className="pd-gallery-item" key={i}>
-                    <Media src={src} alt={`${p.name} — image ${i + 1}`} fill sizes="(max-width: 900px) 100vw, 33vw" />
-                  </div>
-                ))}
-              </div>
+              <ProjectGallery items={gallery} projectName={p.name} />
+            </section>
+          )}
+
+          {showMap && (
+            <section className="pd-section">
+              <h2>Location</h2>
+              <p className="pd-map-intro">
+                {p.locationNote || `Where ${p.name} sits on the map. Drag to explore the surrounding area.`}
+              </p>
+              <PropertyMap project={p} />
             </section>
           )}
         </div>

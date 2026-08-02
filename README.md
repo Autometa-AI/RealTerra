@@ -14,6 +14,12 @@ npm run build
 npm run start
 ```
 
+Content is served from Supabase. With no `SUPABASE_URL` set, `npm run dev` falls
+back to the `content/*.json` snapshot in the repo so the site runs on a fresh
+clone; `npm run build` does not — in production a missing credential is a
+misconfiguration, not something to paper over. Refresh the snapshot from the
+live database with `node --env-file=.env.local scripts/pull-content.js`.
+
 ## Brand
 
 The site implements `realterra_brand_kit-2.html` (Brand Identity Guidelines v2.0),
@@ -54,17 +60,19 @@ Fonts are self-hosted through `next/font/google` and exposed as
 ### Imagery
 
 Architecture, not lifestyle — facades, skylines, structural detail, off-plan
-progress. Every image gets the Pine→Ink duotone plus a diagonal hairline overlay.
-
-The duotone is `grayscale(1) sepia(1) hue-rotate(…)`, not `hue-rotate` alone:
-sepia collapses any source photo to a single hue first, so the rotation lands on
-pine regardless of the original colours. Rotating hue directly turned blue
-facades magenta.
+progress. Photographs run untreated: an earlier Pine→Ink duotone flattened the
+one thing a property buyer is actually looking at. Contrast against the pine
+comes from the layout and from scrims over text, not from filtering the image.
 
 ### Logo
 
 Wordmark only — no icon, monogram or symbol. Newsreader, one weight, one colour
 at a time. Pine or Ink on light, Paper on dark.
+
+The one exception is the favicon, which cannot show a wordmark at 16px:
+`app/icon.svg` crops the lockup to an italic serif R on pine, rasterised to
+`app/favicon.ico` (32px, for the browsers and crawlers that still ask for
+`/favicon.ico`) and `app/apple-icon.png` (180px, iOS home screen).
 
 ## Layout notes
 
@@ -80,6 +88,47 @@ at a time. Pine or Ink on light, Paper on dark.
   `globals.css`, so a base rule in `home.css` would beat a mobile media query in
   `globals.css` no matter the viewport. Each page's breakpoints are therefore
   defined at the bottom of its own stylesheet.
+- **One vertical rhythm.** Full-width content sections take their top and bottom
+  padding from `--section-y` (6rem desktop, 3.5rem mobile) rather than setting
+  their own, so the spacing between sections is the same on every page. Split
+  panels (hero halves, market bands, the contact columns) still set their own
+  padding — they are interior surfaces, not page sections.
+- **`aspect-ratio` and `align-self: stretch` do not mix.** Several media boxes
+  stretch to their grid row on desktop. When the mobile breakpoint gives them an
+  `aspect-ratio`, `align-self` and `min-height` have to be released in the same
+  rule — otherwise the box derives its *width* from the stretched row height and
+  overflows the viewport.
+- **Scroll reveal is gated on `[data-js]`**, stamped on `<html>` by an inline
+  script in the layout before first paint. Without the gate, `.reveal`'s
+  `opacity: 0` would leave every headline invisible if scripting fails, since
+  only the IntersectionObserver ever adds `.up`.
+
+## Media
+
+Every image slot in the CMS also accepts a video or GIF; `components/Media.js`
+picks the tag. Video playback lives in `components/AutoVideo.js` (a client
+component) so it can pause for `prefers-reduced-motion`, while images stay
+server-rendered.
+
+The home hero ships with a Dubai Marina clip (`public/videos/dubai-hero.mp4`,
+1920×1080, from Pexels under their free licence) and a poster frame pulled from
+the video itself. The poster matters: without one the hero is black until the
+file buffers. **The clip is 17 MB and should be compressed to roughly 5 MB
+before launch** — or replaced through the CMS with the client's own footage.
+
+Uploads go straight from the browser to Supabase Storage via a signed URL
+(`/api/admin/upload`), which keeps large files clear of the serverless body
+limit. `MAX_VIDEO_BYTES` in `lib/media.js` allows 100 MB; Supabase clamps that
+to the project-wide storage limit, which defaults to 50 MB — see the note in
+`supabase/schema.sql`.
+
+## Maps
+
+`components/PropertyMap.js` renders a real Google map from a place name, using
+the keyless `output=embed` endpoint so no API key has to be provisioned. Each
+project takes a `mapQuery` (or a pasted `mapEmbedUrl` for an exact pin), and the
+contact page uses the same component once `map.query` is filled in. A pasted
+embed URL is checked against Google's own hosts before it becomes an iframe.
 
 ## Structure
 
@@ -99,9 +148,13 @@ components/
 
 ## Known gaps
 
-- Contact details (`hello@blackridgere.com`, `+971 50 000 0000`) are carried over
-  from the previous brand and still need replacing.
-- The contact and newsletter forms are presentational — no submit handler or
-  backend is wired up.
-- Imagery is Unsplash placeholder. Photo IDs have rotated before and returned
-  unrelated subjects; art-directed assets should replace them.
+- Imagery is Unsplash placeholder and several photos do not match their subject
+  — the Contact hero and one project card are Toronto, not Dubai. Art-directed
+  assets should replace them.
+- The Google reviews on the home page are still the placeholder copy shipped
+  with the block ("Replace this with a real review…").
+- The hero video is 17 MB. Compress it, or replace it through the CMS, before
+  launch — see **Media** above.
+- `map.query` is set for the contact page and every project, but the values are
+  area-level ("Business Bay, Dubai"). Paste a Google "Embed a map" URL into
+  `mapEmbedUrl` for an exact pin per development.

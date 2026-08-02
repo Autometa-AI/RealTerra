@@ -3,6 +3,7 @@ import Media from '../../../components/Media';
 import { getContent } from '../../../lib/content';
 import Lines from '../../../components/Lines';
 import ContactForm from '../../../components/ContactForm';
+import PropertyMap from '../../../components/PropertyMap';
 
 export const metadata = {
   title: 'Contact',
@@ -92,13 +93,22 @@ export default async function Contact() {
         </div>
       </div>
 
-      {/* MAP */}
-      <div className="map-area">
-        <Media src={c.map.image} alt="Dubai aerial view" fill sizes="100vw" />
-        <div className="map-overlay">
-          <div className="map-pin">{c.map.pinLabel}</div>
+      {/* MAP — a real, draggable Google map once a location is set. The aerial
+          photo is the fallback for anyone who has not filled one in yet. */}
+      {c.map.query || c.map.embedUrl ? (
+        <div className="map-area map-area-live">
+          <PropertyMap
+            project={{ name: c.map.pinLabel, mapQuery: c.map.query, mapEmbedUrl: c.map.embedUrl, location: c.map.pinLabel }}
+          />
         </div>
-      </div>
+      ) : (
+        <div className="map-area">
+          <Media src={c.map.image} alt="Dubai aerial view" fill sizes="100vw" />
+          <div className="map-overlay">
+            <div className="map-pin">{c.map.pinLabel}</div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }

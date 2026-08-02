@@ -144,6 +144,16 @@ function useUploader() {
         headers: { 'Content-Type': file.type },
         body: file,
       });
+      // 413 is storage's own ceiling, which is set per project and can be
+      // lower than the limit this app allows — worth naming, because "try a
+      // smaller file" sends someone re-exporting a video that was never the
+      // problem.
+      if (put.status === 413) {
+        throw new Error(
+          `Storage rejected this file as too large (${prettyBytes(file.size)}). ` +
+            'Raise the upload size limit in Supabase → Settings → Storage, or upload a smaller file.'
+        );
+      }
       if (!put.ok) throw new Error(`Upload failed (${put.status}). Try a smaller file.`);
 
       setStatus('idle');
@@ -165,9 +175,23 @@ export function MediaField({ field, value, onChange }) {
   async function onFileSelected(e) {
     const file = e.target.files?.[0];
     if (!file) return;
-    setLocalPreview({ url: URL.createObjectURL(file), video: file.type.startsWith('video/') });
+
+    const objectUrl = URL.createObjectURL(file);
+    setLocalPreview({ url: objectUrl, video: file.type.startsWith('video/') });
+
     const url = await upload(file, field.label);
-    if (url) onChange(url);
+    if (url) {
+      // Keep the local preview up — it is the same bytes and saves a
+      // round trip to storage just to redraw what is already on screen.
+      onChange(url);
+      return;
+    }
+
+    // A failed upload must not leave the preview showing: it looks exactly
+    // like a saved file, so the editor would hit Save believing the new
+    // video is in place when nothing was stored.
+    setLocalPreview(null);
+    URL.revokeObjectURL(objectUrl);
   }
 
   const shown = localPreview?.url || value;

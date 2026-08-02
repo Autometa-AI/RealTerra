@@ -70,14 +70,20 @@
 
 .macro-strip {
   background: var(--surface);
-  padding: 4rem 3.5rem;
+  padding: var(--section-y) var(--gutter);
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 4rem;
-  align-items: center;
+  /* Top-aligned, not centred: the heading is two lines against a four-point
+     list, and centring it left a block of empty space above and below the
+     heading while the list ran past it at both ends. */
+  align-items: start;
   border-bottom: 1px solid var(--border);
 }
-.macro-strip h2 { font-size: 1.5rem; }
+.macro-strip h2 { font-size: 1.5rem; max-width: 18ch; }
+/* The right column is two-thirds of a full-bleed page; uncapped, a point runs
+   to well over 100 characters a line. */
+.macro-point p { max-width: 72ch; }
 .macro-points { display: flex; flex-direction: column; gap: 1rem; }
 .macro-point { display: flex; gap: 1rem; align-items: flex-start; }
 .macro-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--text-2); margin-top: 0.55rem; flex-shrink: 0; }
@@ -86,7 +92,9 @@
 /* Responsive — kept in this file so it lands after globals.css. */
 @media (max-width: 900px) {
   .market-full { grid-template-columns: 1fr; }
-  .market-img { aspect-ratio: 16 / 10; min-height: 0; order: 1; }
+  /* align-self has to be released with the min-height, or aspect-ratio sizes
+     the photo's width from a stretched row height instead of the column. */
+  .market-img { aspect-ratio: 16 / 10; min-height: 0; align-self: start; width: 100%; order: 1; }
   .market-text { order: 2; padding: 2.5rem var(--gutter); }
   .market-full:nth-child(even) .market-img { order: 1; }
   .market-full:nth-child(even) .market-text { order: 2; }

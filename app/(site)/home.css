@@ -72,13 +72,17 @@
 
 /* ── INTRO STRIP ───────────────────────── */
 .intro-strip {
-  padding: 3.5rem 3.5rem;
+  padding: var(--section-y) var(--gutter);
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
-  align-items: center;
+  /* Top-aligned so the headline and the paragraph beside it start on the same
+     line. Centred, the two columns floated at different heights and the band
+     read as two unrelated blocks. */
+  align-items: start;
   border-bottom: 1px solid var(--border-light);
 }
+.intro-strip h2 { margin-top: 0.15rem; }
 
 /* ── PHILOSOPHY SPLIT ──────────────────── */
 .philosophy-preview {
@@ -136,7 +140,7 @@
 .pillar-label { font-size: 0.79rem; color: rgba(250,249,246,0.6); font-weight: 400; }
 
 /* ── AREAS ─────────────────────────────── */
-.areas-preview { padding: 5rem 3.5rem; }
+.areas-preview { padding: var(--section-y) var(--gutter); }
 .areas-preview-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
 .areas-grid-home { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
 .area-card-home {
@@ -181,7 +185,7 @@
 .founder-strip-text p { max-width: 400px; margin-bottom: 2rem; }
 
 /* ── BLOGS PREVIEW ─────────────────────── */
-.insight-preview { padding: 5rem 3.5rem; background: var(--surface); }
+.insight-preview { padding: var(--section-y) var(--gutter); background: var(--surface); }
 .insight-preview-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
 .insight-cards-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
 .insight-card-home {
@@ -204,7 +208,7 @@
 
 /* ── FAQ ───────────────────────────────── */
 .faq-section {
-  padding: 5rem 3.5rem;
+  padding: var(--section-y) var(--gutter);
   display: grid;
   grid-template-columns: 1fr 1.6fr;
   gap: 4rem;
@@ -212,6 +216,21 @@
   border-top: 1px solid var(--border-light);
 }
 .faq-head h2 { margin-top: 0.2rem; }
+/* Sticky so the heading tracks the questions on a long list instead of
+   scrolling away and leaving the column empty. */
+.faq-head { position: sticky; top: calc(var(--nav-h) + 2.5rem); }
+.faq-head-aside {
+  margin-top: 2rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--border-light);
+  max-width: 34ch;
+}
+.faq-support {
+  font-size: 0.86rem;
+  line-height: 1.8;
+  color: var(--text-3);
+  margin-bottom: 1.1rem;
+}
 .faq-list { border-top: 1px solid var(--border-light); }
 .faq-item { border-bottom: 1px solid var(--border-light); }
 .faq-q {
@@ -249,7 +268,7 @@
 .faq-a p { font-size: 0.88rem; line-height: 1.85; color: var(--text-3); }
 
 /* ── REVIEWS ───────────────────────────── */
-.reviews-section { padding: 5rem 3.5rem; background: var(--surface); border-top: 1px solid var(--border-light); }
+.reviews-section { padding: var(--section-y) var(--gutter); background: var(--surface); border-top: 1px solid var(--border-light); }
 .reviews-header {
   display: flex;
   justify-content: space-between;
@@ -315,7 +334,10 @@
   .insight-cards-row { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
   .reviews-grid { grid-template-columns: 1fr 1fr; }
   .intro-strip { gap: 2.5rem; }
+  /* One column on mobile, so sticky has nothing to sit beside. */
   .faq-section { grid-template-columns: 1fr; gap: 2rem; }
+  .faq-head { position: static; }
+  .faq-head-aside { margin-top: 1.5rem; padding-top: 1.25rem; max-width: none; }
 }
 
 @media (max-width: 900px) {
@@ -361,8 +383,17 @@
   .areas-grid-home { grid-template-columns: 1fr; gap: 1.2rem; }
   .areas-preview-header { flex-direction: column; align-items: flex-start; gap: 1rem; margin-bottom: 2rem; }
 
-  .founders-strip { grid-template-columns: 1fr; }
-  .founder-strip-img { aspect-ratio: 16 / 10; min-height: 0; }
+  .founders-strip { grid-template-columns: 1fr; min-height: 0; }
+  /* `align-self: stretch` has to go with it. Stretched to the row height and
+     given an aspect-ratio, the box derives its *width* from that height and
+     ends up wider than the screen — the column width stops being what
+     decides it. Anchoring to the start puts width back in charge. */
+  .founder-strip-img {
+    aspect-ratio: 16 / 10;
+    min-height: 0;
+    align-self: start;
+    width: 100%;
+  }
   .founder-strip-text {
     padding: 3.5rem var(--gutter);
     border-left: none;

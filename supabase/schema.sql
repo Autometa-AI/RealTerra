@@ -33,6 +33,15 @@ insert into storage.buckets (id, name, public)
 values ('site-images', 'site-images', true)
 on conflict (id) do nothing;
 
+-- Every media slot in the CMS also accepts a video, so the bucket ceiling has
+-- to match MAX_VIDEO_BYTES in lib/media.js. Supabase clamps a bucket limit to
+-- the project-wide "Upload file size limit" under Settings → Storage, which
+-- defaults to 50 MB — raise that there first, or a 4K hero video is rejected
+-- with a 413 at the upload step no matter what this says.
+update storage.buckets
+   set file_size_limit = 104857600  -- 100 MB, matches MAX_VIDEO_BYTES
+ where id = 'site-images';
+
 -- The app talks to these tables exclusively through the Supabase
 -- service role key from server-side code, which bypasses RLS by design.
 -- Row Level Security stays enabled with no public policies, so the
