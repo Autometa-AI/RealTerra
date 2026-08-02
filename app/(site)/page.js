@@ -15,7 +15,9 @@ export default async function Home() {
           landscape image is never squeezed into a half-width column. */}
       <div className="hero">
         <div className="hero-media">
-          <Media src={c.hero.image} alt="" fill priority sizes="100vw" />
+          {/* The poster only applies when the slot holds a video — it covers
+              the black frame browsers show while the file buffers. */}
+          <Media src={c.hero.image} poster={c.hero.poster} alt="" fill priority sizes="100vw" />
         </div>
         <div className="hero-inner">
           <div className="hero-copy">

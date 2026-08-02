@@ -99,7 +99,17 @@
   .founder-full.flip .founder-full-img { grid-column: 1; grid-row: 1; }
   .founder-full .founder-full-text,
   .founder-full.flip .founder-full-text { grid-column: 1; grid-row: 2; }
-  .founder-full-img { aspect-ratio: 4 / 5; max-height: 460px; }
+  /* Same trap as the founders strip on the home page: left stretching, the
+     photo sizes its width from the row height via aspect-ratio and pushes
+     past the gutter. min-height also has to be cleared or it beats the
+     max-height below it. */
+  .founder-full-img {
+    aspect-ratio: 4 / 5;
+    align-self: start;
+    width: 100%;
+    min-height: 0;
+    max-height: 460px;
+  }
   .services-grid-about { grid-template-columns: 1fr; }
 }
 

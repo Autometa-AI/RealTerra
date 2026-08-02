@@ -73,7 +73,23 @@ export default async function RootLayout({ children }) {
     <html
       lang="en"
       className={`${serif.variable} ${sans.variable} ${mono.variable}`}
+      /* The inline script below stamps data-js on this element before React
+         hydrates, which React would otherwise report as a mismatch. Scoped to
+         <html>'s own attributes — children are still checked. */
+      suppressHydrationWarning
     >
+      <head>
+        {/* Marks the document as scripted before first paint. The scroll-reveal
+            styles hang off [data-js], so if scripting is unavailable the
+            content renders plainly instead of staying at opacity 0 forever.
+            A data attribute rather than a class: className on <html> is
+            React's to own, and adding to it here trips a hydration mismatch. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.setAttribute('data-js','')",
+          }}
+        />
+      </head>
       <body>
         <Nav site={site} />
         {children}

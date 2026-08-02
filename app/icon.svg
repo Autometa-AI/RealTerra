@@ -1,4 +1,16 @@
-<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-  <rect width="64" height="64" rx="8" fill="#0F3D33"/>
-  <text x="32" y="44" font-family="Georgia, 'Times New Roman', serif" font-size="38" font-style="italic" fill="#FAF9F6" text-anchor="middle">R</text>
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="RealTerra">
+  <!-- The brand is wordmark-only, so the icon is the wordmark cropped to its
+       first letter: pine ground, paper letterform, italic display serif to
+       echo the RealTerra lockup. The generic `serif` at the end of the stack
+       keeps the shape intact on platforms without Georgia. -->
+  <rect width="64" height="64" rx="6" fill="#0F3D33"/>
+  <text
+    x="32" y="47"
+    font-family="Georgia, 'Times New Roman', Times, serif"
+    font-size="46"
+    font-weight="600"
+    font-style="italic"
+    fill="#FAF9F6"
+    text-anchor="middle"
+  >R</text>
 </svg>

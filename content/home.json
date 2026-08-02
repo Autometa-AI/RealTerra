@@ -5,7 +5,8 @@
     "subhead": "An analytical brokerage for ultra-high-net-worth investors. We map every asset, trajectory, and exit window before we recommend a single square foot.",
     "ctaPrimary": "View the Market Data",
     "ctaSecondary": "Read the research",
-    "image": "/images/dubai-skyline.jpg"
+    "image": "/videos/dubai-hero.mp4",
+    "poster": "/images/dubai-hero-poster.jpg"
   },
   "marquee": [
     "Al Marjan Island",
@@ -149,7 +150,10 @@
         "question": "How does RealTerra select the projects it recommends?",
         "answer": "Every project passes a five-point screen: developer track record, completion risk, yield floor, exit liquidity, and a documented growth thesis. If a launch fails any of them, we do not present it."
       }
-    ]
+    ],
+    "supportText": "If the answer you need is not here, ask us directly — we reply to every enquiry ourselves.",
+    "linkLabel": "Ask a question",
+    "linkHref": "/contact"
   },
   "closingCta": {
     "eyebrow": "Ready to begin?",
