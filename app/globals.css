@@ -966,6 +966,7 @@ footer {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: stretch;
+  min-height: 56vh;
 }
 
 .page-hero-split-left {
@@ -1004,9 +1005,12 @@ footer {
   position: relative;
   overflow: hidden;
   background: var(--surface);
-  aspect-ratio: 8 / 5;
-  align-self: start;
-  width: 100%;
+  /* Fills the row so the photo and the copy panel end on the same line.
+     Width comes from the grid column; giving this an aspect-ratio instead
+     would make the width derive from the height and every panel would come
+     out a different size. */
+  align-self: stretch;
+  min-height: 100%;
 }
 
 .page-hero-split-right img,

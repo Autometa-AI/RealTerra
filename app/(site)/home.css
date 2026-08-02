@@ -85,6 +85,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: stretch;
+  min-height: 520px;
 }
 .philosophy-left {
   background: var(--navy);
@@ -110,9 +111,8 @@
 .philosophy-right {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 8 / 5;
-  align-self: start;
-  width: 100%;
+  align-self: stretch;
+  min-height: 100%;
   background: var(--surface);
 }
 .philosophy-right img,
@@ -161,13 +161,12 @@
 .area-pill-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--signal); }
 
 /* ── FOUNDERS STRIP ────────────────────── */
-.founders-strip { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; }
+.founders-strip { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; min-height: 470px; }
 .founder-strip-img {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 8 / 5;
-  align-self: start;
-  width: 100%;
+  align-self: stretch;
+  min-height: 100%;
   background: var(--surface);
 }
 .founder-strip-img img,

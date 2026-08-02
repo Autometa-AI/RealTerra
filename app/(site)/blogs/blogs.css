@@ -12,14 +12,14 @@
 .featured-insight {
   display: grid; grid-template-columns: 1fr 1fr;
   align-items: stretch;
+  min-height: 520px;
   border-bottom: 1px solid var(--border);
 }
 .fi-img {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 3 / 2;
-  align-self: start;
-  width: 100%;
+  align-self: stretch;
+  min-height: 100%;
   background: var(--surface);
 }
 .fi-img img, .fi-img video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover;   }

@@ -40,9 +40,8 @@
       "name": "Gaurav Sabhachandani",
       "image": "/images/gaurav-photo.jpg",
       "bio": [
-        "Gaurav Sabhachandani brings to RealTerra a professional foundation that is, by any measure, uncommon. Born into a family for whom real estate investment was a core discipline rather than a peripheral interest, he was exposed to asset selection, portfolio structuring, and capital allocation as foundational concepts long before most practitioners encounter them formally.",
-        "He pursued investment training systematically from an early age, consolidating a broad base of market knowledge spanning acquisition strategy, rental yield analysis, off-plan risk assessment, and portfolio construction. Over the years that followed, he extended this foundation into independent advisory practice, working with high-net-worth individuals and families across the GCC to structure UAE property exposure aligned with their specific financial objectives.",
-        "At RealTerra, Gaurav functions as the analytical backbone of the firm — responsible for market thesis development, developer evaluation, and the data infrastructure that underpins every client recommendation. His approach is defined by methodical rigour and a consistent emphasis on fundamentals over market sentiment."
+        "Gaurav was born into a family for whom real estate investment was a core discipline, and met asset selection, portfolio structuring and capital allocation long before most practitioners encounter them formally. He has since advised high-net-worth families across the GCC on structuring UAE property exposure around their objectives.",
+        "At RealTerra he is the analytical backbone of the firm, responsible for market thesis development, developer evaluation, and the data infrastructure behind every recommendation. His approach favours methodical rigour and fundamentals over market sentiment."
       ],
       "capabilities": [
         "Investment Strategy & Portfolio Architecture",
@@ -56,9 +55,8 @@
       "name": "Ruchika Malhotra",
       "image": "/images/ruchika-photo.jpg",
       "bio": [
-        "Ruchika Malhotra is a professional whose career is defined by an ability to operate at the intersection of aesthetic intelligence and commercial performance. As Mrs. India Worldwide 2022, and as the founder and creative director of a successful luxury fashion label spanning fifteen years, she built a comprehensive understanding of how high-net-worth individuals make decisions — what they value, what they respond to, and what they require from those they trust with significant transactions.",
-        "Her transition into ultra-luxury real estate was deliberate. The capabilities that underpin exceptional performance in high fashion — client discretion, a trained eye for quality, the ability to connect a vision to a tangible outcome — translate directly to property advisory at the top of the market. Clients at this level are not acquiring square footage. They are acquiring a considered expression of how they intend to live.",
-        "Ruchika has since established herself as one of the UAE's most consistently high-performing agents, with a transaction record spanning ultra-luxury villas, penthouses, and premium residences across Binghatti, DAMAC, Emaar, and other Tier-1 developers. As CEO of RealTerra, she leads client relationships, sales execution, and the developer network that gives the firm its market access."
+        "As Mrs. India Worldwide 2022 and founder of a luxury fashion label spanning fifteen years, Ruchika built a precise understanding of how high-net-worth clients decide: what they value, and what they expect from anyone they trust with a significant transaction.",
+        "She is now among the UAE's most consistently high-performing agents, with a record across ultra-luxury villas, penthouses and premium residences from Binghatti, DAMAC and Emaar. As CEO she leads client relationships, sales execution, and the developer network behind the firm's market access."
       ],
       "capabilities": [
         "Ultra-Luxury Villas & Penthouse Advisory",
@@ -72,12 +70,30 @@
     "eyebrow": "What We Do",
     "headline": "Our Services",
     "items": [
-      { "title": "Investment Advisory", "description": "End-to-end strategy for HNI and UHNI clients — from market entry thesis to portfolio construction, developer selection, and exit planning." },
-      { "title": "Research & Market Reports", "description": "Proprietary area reports, developer scorecards, and quarterly market intelligence briefings available to qualified investors and family offices." },
-      { "title": "Ultra-Luxury Sales", "description": "White-glove acquisition and disposition across Dubai, Abu Dhabi, and RAK. Discretion guaranteed. Off-market access available to network clients." },
-      { "title": "Off-Plan Curation", "description": "Every major off-plan launch pre-screened against completion risk, yield floor, and growth thesis. Clients receive only what passes." },
-      { "title": "Portfolio Review", "description": "A structured audit of existing UAE property exposure — yield optimisation, strategic reallocation, and repositioning recommendations." },
-      { "title": "Family Office Services", "description": "Multi-generational real estate capital management, UAE residency structuring, and multi-jurisdiction tax efficiency advisory." }
+      {
+        "title": "Investment Advisory",
+        "description": "End-to-end strategy for HNI and UHNI clients — from market entry thesis to portfolio construction, developer selection, and exit planning."
+      },
+      {
+        "title": "Research & Market Reports",
+        "description": "Proprietary area reports, developer scorecards, and quarterly market intelligence briefings available to qualified investors and family offices."
+      },
+      {
+        "title": "Ultra-Luxury Sales",
+        "description": "White-glove acquisition and disposition across Dubai, Abu Dhabi, and RAK. Discretion guaranteed. Off-market access available to network clients."
+      },
+      {
+        "title": "Off-Plan Curation",
+        "description": "Every major off-plan launch pre-screened against completion risk, yield floor, and growth thesis. Clients receive only what passes."
+      },
+      {
+        "title": "Portfolio Review",
+        "description": "A structured audit of existing UAE property exposure — yield optimisation, strategic reallocation, and repositioning recommendations."
+      },
+      {
+        "title": "Family Office Services",
+        "description": "Multi-generational real estate capital management, UAE residency structuring, and multi-jurisdiction tax efficiency advisory."
+      }
     ]
   },
   "closingCta": {

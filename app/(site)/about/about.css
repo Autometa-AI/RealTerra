@@ -1,4 +1,4 @@
-.about-hero { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; }
+.about-hero { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; min-height: 56vh; }
 .about-hero-left {
   background: var(--navy);
   padding: 5.5rem 3.5rem 4rem;
@@ -19,9 +19,8 @@
 .about-hero-right {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 8 / 5;
-  align-self: start;
-  width: 100%;
+  align-self: stretch;
+  min-height: 100%;
   background: var(--surface);
 }
 .about-hero-right img,
@@ -63,9 +62,13 @@
 .founder-full.flip .founder-full-img  { grid-column: 2; grid-row: 1; }
 .founder-full.flip .founder-full-text { grid-column: 1; grid-row: 1; }
 
-/* 4:5 matches the portrait size the CMS recommends. */
+/* Fills the row so the portrait and the bio end on the same line. The cap
+   stops an unusually long bio stretching the photo into a narrow sliver;
+   past that point the block simply top-aligns. */
 .founder-full-img {
-  aspect-ratio: 4 / 5;
+  align-self: stretch;
+  min-height: 475px;
+  max-height: 720px;
   overflow: hidden;
   position: relative;
   background: var(--paper-alt);
