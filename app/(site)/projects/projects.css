@@ -1,20 +1,18 @@
-.projects-hero {
-  /* Layout handled by .page-hero-split utility */
-}
+/* Criteria tags sit on the hero photo now, so they are light-on-dark. */
 .projects-hero-criteria {
   display: flex;
   gap: 1.5rem;
   flex-wrap: wrap;
-  margin-top: 2.5rem;
-  padding-top: 1.8rem;
-  border-top: 1px solid var(--border-light);
+  margin-top: 2.2rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid rgba(250,249,246,0.18);
 }
 .projects-hero-tag {
   font-size: 0.6rem;
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--text-3);
+  color: rgba(250,249,246,0.72);
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -23,13 +21,12 @@
   content: '';
   width: 4px; height: 4px;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--signal);
   display: inline-block;
   flex-shrink: 0;
 }
 @media (max-width: 900px) {
-  .projects-hero { padding: 0 !important; border-bottom: none !important; }
-  .projects-hero-criteria { gap: 1rem; }
+  .projects-hero-criteria { gap: 1rem; margin-top: 1.6rem; padding-top: 1.2rem; }
 }
 
 /* SEARCH BAR */

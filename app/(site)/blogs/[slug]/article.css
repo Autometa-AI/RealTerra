@@ -1,12 +1,116 @@
-/* ── ARTICLE ────────────────────────────────
-   A single reading column. Everything is capped near 68 characters,
-   which is the band where long-form prose stays comfortable to read.
+/* ── ARTICLE LAYOUT ─────────────────────────
+   Projects | article | contents + related. The centre column is still capped
+   near 68 characters — that is the band where long-form prose stays
+   comfortable to read, and widening it to fill the page is what made the
+   article look like a wall. The rails use the width either side of it that
+   was previously empty margin.
 ──────────────────────────────────────────── */
-.article {
-  max-width: 780px;
-  margin: 0 auto;
-  padding: 4.5rem var(--gutter) 5rem;
+.article-layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 780px) 280px;
+  gap: 3.5rem;
+  justify-content: center;
+  align-items: start;
+  padding: 3.5rem var(--gutter) 4.5rem;
 }
+
+.article-rail {
+  position: sticky;
+  top: calc(var(--nav-h) + 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  /* Long rails scroll inside themselves rather than running off the bottom
+     of a sticky box that can never be reached. */
+  max-height: calc(100svh - var(--nav-h) - 4rem);
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.article-rail-title {
+  font-size: 0.57rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--steel);
+  margin-bottom: 1.1rem;
+}
+.article-rail-link { font-size: 0.6rem; margin-top: 1.2rem; }
+
+/* ── CONTENTS RAIL ──────────────────────── */
+.article-toc-list { list-style: none; border-left: 1px solid var(--border-light); }
+.article-toc-list a {
+  display: block;
+  padding: 0.5rem 0 0.5rem 1rem;
+  margin-left: -1px;
+  border-left: 1px solid transparent;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--text-3);
+  transition: color var(--t-fast), border-color var(--t-fast), font-size var(--t-base) var(--ease);
+}
+.article-toc-list a:hover { color: var(--text-1); }
+/* The section being read comes forward — the "slightly zoomed" behaviour,
+   done with weight and a rule rather than a transform, which would blur the
+   text at these sizes. */
+.article-toc-list a.on {
+  color: var(--pine);
+  font-weight: 600;
+  border-left-color: var(--signal);
+}
+
+/* ── PROJECT + RELATED CARDS ────────────── */
+.article-project-list,
+.article-related-list { display: flex; flex-direction: column; gap: 1rem; }
+
+.article-project,
+.article-related {
+  display: grid;
+  grid-template-columns: 74px 1fr;
+  gap: 0.85rem;
+  align-items: center;
+  color: inherit;
+}
+.article-project-img,
+.article-related-img {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--surface);
+  display: block;
+}
+.article-project-img img,
+.article-project-img video,
+.article-related-img img,
+.article-related-img video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.article-project-body,
+.article-related-body { display: flex; flex-direction: column; gap: 0.2rem; min-width: 0; }
+.article-project-dev,
+.article-related-type {
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--steel);
+}
+.article-project-name,
+.article-related-title {
+  font-family: var(--serif);
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--text-1);
+  transition: color var(--t-fast);
+}
+.article-project:hover .article-project-name,
+.article-related:hover .article-related-title { color: var(--pine); }
+.article-project-from {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--text-3);
+}
+
+/* ── ARTICLE ────────────────────────────── */
+.article { min-width: 0; }
 
 .article-head { margin-bottom: 2.5rem; }
 .article-back {
@@ -67,6 +171,8 @@
   margin: 2.8rem 0 1rem;
 }
 .article-body h2:first-child { margin-top: 0; }
+/* Clears the fixed nav when the contents rail jumps to a section. */
+.article-body h2 { scroll-margin-top: calc(var(--nav-h) + 1.5rem); }
 .article-body > *:last-child { margin-bottom: 0; }
 
 .article-cta {
@@ -81,24 +187,60 @@
 }
 .article-cta h2 { font-size: 1.35rem; margin-top: 0.3rem; max-width: 22ch; }
 
-/* ── MORE POSTS ─────────────────────────── */
-.article-more {
-  padding: var(--section-y) var(--gutter);
-  background: var(--surface);
-  border-top: 1px solid var(--border-light);
+/* ── RESPONSIVE ─────────────────────────────
+   The rails give up their columns before the reading measure does: an
+   article squeezed to 400px is worse than one without a contents list.
+──────────────────────────────────────────── */
+@media (max-width: 1440px) {
+  .article-layout { grid-template-columns: 220px minmax(0, 720px) 250px; gap: 2.5rem; }
 }
-.article-more-head {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 2rem;
+
+/* Below this the page is only wide enough for one rail. Contents and
+   related reading is the one that belongs beside the text. */
+@media (max-width: 1180px) {
+  .article-layout { grid-template-columns: minmax(0, 720px) 250px; }
+  .article-rail-left {
+    position: static;
+    grid-column: 1 / -1;
+    max-height: none;
+    overflow: visible;
+    order: 3;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border-light);
+  }
+  .article-rail-left .article-project-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.5rem 2rem;
+  }
+  .article-rail-left .article-project { flex: 1 1 260px; }
 }
 
 @media (max-width: 900px) {
-  .article { padding: 3rem var(--gutter) 3.5rem; }
+  /* One column, both rails below the article — the reading order the
+     client asked for on a phone. */
+  .article-layout {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 0 0 3.5rem;
+  }
+  .article-rail {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    padding: 2.5rem var(--gutter) 0;
+    border-top: 1px solid var(--border-light);
+  }
+  .article-rail-left { order: 3; padding-top: 2.5rem; }
+  .article-rail-right { order: 2; }
+  .article-rail-left .article-project-list { flex-direction: column; }
+  /* The contents list is a desktop affordance: on a phone the article is
+     one thumb-scroll and a sticky index is just something else to scroll
+     past. */
+  .article-toc { display: none; }
+
+  .article { padding: 3rem var(--gutter) 2.5rem; }
   .article-hero { aspect-ratio: 16 / 10; margin-bottom: 2rem; }
   .article-body p { font-size: 0.95rem; }
-  .article-more { padding: 3rem var(--gutter) 3.5rem; }
   .article-cta { flex-direction: column; align-items: flex-start; }
 }

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { whatsappUrl, askUsLabel } from '../lib/site';
+import { whatsappUrl, askUsLabel, isNavActive } from '../lib/site';
 
 export default function Nav({ site }) {
   const pathname = usePathname();
@@ -50,17 +50,20 @@ export default function Nav({ site }) {
         </Link>
 
         <ul className="nav-links">
-          {links.map((l) => (
-            <li key={l.href}>
-              <Link
-                href={l.href}
-                className={pathname === l.href ? 'active' : undefined}
-                aria-current={pathname === l.href ? 'page' : undefined}
-              >
-                {l.label}
-              </Link>
-            </li>
-          ))}
+          {links.map((l) => {
+            const active = isNavActive(pathname, l.href);
+            return (
+              <li key={l.href}>
+                <Link
+                  href={l.href}
+                  className={active ? 'active' : undefined}
+                  aria-current={active ? 'page' : undefined}
+                >
+                  {l.label}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
 
         <a className="nav-cta" href={waHref} target="_blank" rel="noreferrer">
@@ -81,21 +84,24 @@ export default function Nav({ site }) {
 
       <div id="nav-drawer" className={`nav-drawer${open ? ' open' : ''}`}>
         <ul className="nav-drawer-links">
-          {links.map((l, i) => (
-            <li key={l.href}>
-              <Link
-                href={l.href}
-                className={pathname === l.href ? 'active' : undefined}
-                aria-current={pathname === l.href ? 'page' : undefined}
-                tabIndex={open ? undefined : -1}
-              >
-                <span className="nav-drawer-index">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                {l.label}
-              </Link>
-            </li>
-          ))}
+          {links.map((l, i) => {
+            const active = isNavActive(pathname, l.href);
+            return (
+              <li key={l.href}>
+                <Link
+                  href={l.href}
+                  className={active ? 'active' : undefined}
+                  aria-current={active ? 'page' : undefined}
+                  tabIndex={open ? undefined : -1}
+                >
+                  <span className="nav-drawer-index">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  {l.label}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
 
         <a

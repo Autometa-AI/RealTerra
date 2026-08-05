@@ -84,6 +84,21 @@ The one exception is the favicon, which cannot show a wordmark at 16px:
   the hero scrolls past. `--dock-h` reserves space so it never covers content.
 - **Mobile navigation** — `components/Nav.js` renders a drawer with scrim, Escape
   handling, scroll lock, and auto-close on route change or breakpoint growth.
+- **One hero treatment.** Every page header is a full-bleed photo or video
+  with the copy laid over it — the home page inline in `home.css`, every other
+  page through `components/PageHero.js` and the `.page-hero` block in
+  `globals.css`. The heroes used to be a 50/50 split (copy in a coloured half,
+  photo in the other), which squeezed a wide landscape image into a half-width
+  column and read as a seam across the top of the page. The overlay stays an
+  overlay on mobile: stacking it put a flat colour block under the photo, which
+  is the "white patch" the client kept flagging. Legibility comes from the
+  scrim, never from filtering the photograph.
+- **Shared page furniture lives in one place.** The FAQ and Google-review
+  blocks are rendered by `components/SharedSections.js`, which reads them from
+  the **Home** content — they are identical everywhere, and duplicating the
+  fields across six CMS pages would mean editing an answer six times. The
+  partner-logo band sits in `app/(site)/layout.js` for the same reason: it
+  arrives on every route, including ones added later.
 - **Responsive CSS lives with its page.** Page stylesheets are imported *after*
   `globals.css`, so a base rule in `home.css` would beat a mobile media query in
   `globals.css` no matter the viewport. Each page's breakpoints are therefore
@@ -141,20 +156,59 @@ app/
                      route           + scoped stylesheet
 components/
   Nav.js             desktop nav + mobile drawer
+  PageHero.js        full-bleed overlay header (every page but Home)
+  SharedSections.js  FAQ + reviews, read from the Home content
+  PartnerLogos.js    running developer-logo band above the footer
+  HeroSearch.js      home hero search → /projects?q=…
+  ApproachSlider.js  scroll-pinned tile slider for the four pillars
+  ArticleToc.js      contents rail beside a blog article, tracks scroll
+  WhatsAppFab.js     floating WhatsApp button (desktop)
   Footer.js
   Dock.js            sticky mobile action bar
   Effects.js         scroll reveal, parallax, counters, progress bar
 ```
 
+## The CMS "Save changes" button
+
+Editing Home, then About, then Markets, then pressing Save used to publish
+Markets and silently discard the other two — each page editor held its edits in
+React state and posted only its own page. Any images uploaded along the way were
+already in storage, but nothing pointed at them any more.
+
+Edits are now mirrored into `lib/admin-drafts.js` (localStorage, keyed by page)
+on every keystroke, so they survive navigation and reloads. One press of **Save
+changes** posts every page holding a draft as a batch to `/api/admin/save`,
+which writes them one at a time and returns the list it managed to save — a
+failure part-way through leaves the rest sitting safely as drafts rather than
+dropping them. The save bar names the other pages it is about to publish (each
+with a discard control) and the sidebar dots the pages still waiting.
+
 ## Known gaps
 
-- Imagery is Unsplash placeholder and several photos do not match their subject
-  — the Contact hero and one project card are Toronto, not Dubai. Art-directed
-  assets should replace them.
-- The Google reviews on the home page are still the placeholder copy shipped
-  with the block ("Replace this with a real review…").
+These all need an asset or an account from the client — the code side of each
+is in place and waiting.
+
+- **Partner logos.** The band renders every partner as a wordmark until a logo
+  file is uploaded against it (Site-Wide → Developer Partner Logos). Ten names
+  are seeded: Emaar, DAMAC, Sobha, Danube, Ellington, Meraas, Omniyat, Imtiaz,
+  Aldar, Binghatti.
+- **Google reviews** are still the placeholder copy shipped with the block
+  ("Replace this with a real review…"). The Google Business account is under
+  `operations@realterra.com`; the reviews block is CMS-authored, so pulling
+  them live is a separate integration.
+- **Social links** are placeholder profile URLs in Site-Wide → Social Media
+  Links. Paste the real ones and untick anything that does not exist yet.
+- **Gaurav's portrait** still has its background. Both founder windows are now
+  the same 4:5 box cropped from the top, so the two match — but the cut-out
+  itself has to be done to the file.
 - The hero video is 17 MB. Compress it, or replace it through the CMS, before
   launch — see **Media** above.
+- Imagery is Unsplash placeholder and several photos do not match their subject
+  — the Contact hero and one project card are Toronto, not Dubai. The page
+  heroes are now full-bleed, so they want 2400×1200 or larger.
+- **Project galleries are empty.** Every project supports one (Projects →
+  Project Grid → Gallery), and the main photo leads the set automatically; no
+  additional photography has been supplied yet.
 - `map.query` is set for the contact page and every project, but the values are
   area-level ("Business Bay, Dubai"). Paste a Google "Embed a map" URL into
   `mapEmbedUrl` for an exact pin per development.

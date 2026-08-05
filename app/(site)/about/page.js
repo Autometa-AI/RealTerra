@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import './about.css';
 import Media from '../../../components/Media';
+import PageHero from '../../../components/PageHero';
+import SharedSections from '../../../components/SharedSections';
 import { getContent } from '../../../lib/content';
 import Lines from '../../../components/Lines';
 
@@ -21,17 +23,14 @@ export default async function About() {
   return (
     <main className="page">
       {/* Same hero component as Markets, Projects and Contact, so every
-          page header is exactly the same height. */}
-      <div className="about-hero page-hero-split">
-        <div className="page-hero-split-left dark">
-          <p className="eyebrow reveal">{c.hero.eyebrow}</p>
-          <h1 className="reveal d1"><Lines text={c.hero.headline} /></h1>
-          <p className="reveal d2" style={{ maxWidth: '400px', marginTop: '1rem' }}>{c.hero.subhead}</p>
-        </div>
-        <div className="page-hero-split-right">
-          <Media src={c.hero.image} alt="" fill priority sizes="(max-width: 900px) 100vw, 50vw" />
-        </div>
-      </div>
+          page header opens exactly the same way. */}
+      <PageHero
+        eyebrow={c.hero.eyebrow}
+        headline={c.hero.headline}
+        subhead={c.hero.subhead}
+        image={c.hero.image}
+        poster={c.hero.poster}
+      />
 
       {/* PHILOSOPHY
           Heading sits inside the left column rather than above the grid, so
@@ -101,6 +100,8 @@ export default async function About() {
           ))}
         </div>
       </div>
+
+      <SharedSections />
 
       <div className="cta-band">
         <div className="reveal"><p className="eyebrow eyebrow-dark">{c.closingCta.eyebrow}</p><h2 style={{ color: 'var(--white)' }}><Lines text={c.closingCta.headline} /></h2></div>

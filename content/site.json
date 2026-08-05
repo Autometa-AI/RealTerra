@@ -59,6 +59,22 @@
     { "platform": "Facebook", "url": "https://facebook.com/", "visible": false },
     { "platform": "YouTube", "url": "https://youtube.com/", "visible": false }
   ],
+  "partners": {
+    "enabled": true,
+    "title": "Developer Partners",
+    "items": [
+      { "name": "Emaar", "logo": "", "url": "" },
+      { "name": "DAMAC", "logo": "", "url": "" },
+      { "name": "Sobha", "logo": "", "url": "" },
+      { "name": "Danube", "logo": "", "url": "" },
+      { "name": "Ellington", "logo": "", "url": "" },
+      { "name": "Meraas", "logo": "", "url": "" },
+      { "name": "Omniyat", "logo": "", "url": "" },
+      { "name": "Imtiaz", "logo": "", "url": "" },
+      { "name": "Aldar", "logo": "", "url": "" },
+      { "name": "Binghatti", "logo": "", "url": "" }
+    ]
+  },
   "dock": {
     "name": "RealTerra",
     "meta": "Dubai · UHNWI Advisory",

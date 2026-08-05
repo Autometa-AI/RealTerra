@@ -1,8 +1,11 @@
 import Link from 'next/link';
+import { Suspense } from 'react';
 import './projects.css';
 import Media from '../../../components/Media';
 import Lines from '../../../components/Lines';
+import PageHero from '../../../components/PageHero';
 import ProjectSearch from '../../../components/ProjectSearch';
+import SharedSections from '../../../components/SharedSections';
 import { getContent } from '../../../lib/content';
 
 export const metadata = {
@@ -15,23 +18,21 @@ export default async function Projects() {
   return (
     <main className="page">
       {/* HERO */}
-      <div className="projects-hero page-hero-split">
-        <div className="page-hero-split-left light">
-          <p className="eyebrow reveal">{c.hero.eyebrow}</p>
-          <h1 className="reveal d1" style={{ fontSize: 'clamp(2.4rem,5vw,4rem)' }}><Lines text={c.hero.headline} /></h1>
-          <p className="reveal d2" style={{ maxWidth: '360px', marginTop: '1rem' }}>{c.hero.subhead}</p>
-          <div className="projects-hero-criteria reveal d3">
-            {c.hero.criteriaTags.map((tag, i) => (
-              <span className="projects-hero-tag" key={`${tag}-${i}`}>{tag}</span>
-            ))}
-          </div>
+      <PageHero
+        eyebrow={c.hero.eyebrow}
+        headline={c.hero.headline}
+        subhead={c.hero.subhead}
+        image={c.hero.image}
+        poster={c.hero.poster}
+      >
+        <div className="projects-hero-criteria reveal d3">
+          {c.hero.criteriaTags.map((tag, i) => (
+            <span className="projects-hero-tag" key={`${tag}-${i}`}>{tag}</span>
+          ))}
         </div>
-        <div className="page-hero-split-right">
-          <Media src={c.hero.image} alt="" fill priority sizes="(max-width: 900px) 100vw, 50vw" />
-        </div>
-      </div>
+      </PageHero>
 
-      <div className="projects-main">
+      <div className="projects-main" id="project-search">
         {/* FEATURED */}
         <div className="featured-project reveal">
           <div className="fp-img">
@@ -50,9 +51,15 @@ export default async function Projects() {
           </div>
         </div>
 
-        {/* SEARCH + FILTERS + GRID */}
-        <ProjectSearch projects={c.projects} filters={c.filters} search={c.search} />
+        {/* SEARCH + FILTERS + GRID
+            Suspended because it reads ?q= from the URL: without a boundary
+            that read would opt the whole page out of static rendering. */}
+        <Suspense fallback={null}>
+          <ProjectSearch projects={c.projects} filters={c.filters} search={c.search} />
+        </Suspense>
       </div>
+
+      <SharedSections />
 
       {/* CTA */}
       <div className="cta-band">

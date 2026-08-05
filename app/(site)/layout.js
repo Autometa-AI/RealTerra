@@ -4,6 +4,8 @@ import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
 import Dock from '../../components/Dock';
 import Effects from '../../components/Effects';
+import PartnerLogos from '../../components/PartnerLogos';
+import WhatsAppFab from '../../components/WhatsAppFab';
 import { getContent } from '../../lib/content';
 
 // Content is DB-backed but pages render statically (cached, fast TTFB) —
@@ -93,8 +95,13 @@ export default async function RootLayout({ children }) {
       <body>
         <Nav site={site} />
         {children}
+        {/* The partner band sits in the layout, not on each page, so it
+            arrives on every route the moment logos are added — including
+            pages built later. */}
+        <PartnerLogos content={site.partners} />
         <Footer site={site} />
         <Dock site={site} />
+        <WhatsAppFab site={site} />
         <Effects />
       </body>
     </html>

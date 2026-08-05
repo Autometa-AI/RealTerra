@@ -2,11 +2,24 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { CMS_PAGES } from '../../lib/cms-schema';
+import { DRAFTS_EVENT, listDrafts } from '../../lib/admin-drafts';
 
 export default function AdminShell({ user, children }) {
   const pathname = usePathname();
   const router = useRouter();
+  // Edits are held per page until they are published, so the sidebar marks
+  // which pages are still waiting. Without it, leaving a page mid-edit gives
+  // no sign anywhere that unsaved work exists.
+  const [pending, setPending] = useState([]);
+
+  useEffect(() => {
+    const sync = () => setPending(listDrafts().map((d) => d.page));
+    sync();
+    window.addEventListener(DRAFTS_EVENT, sync);
+    return () => window.removeEventListener(DRAFTS_EVENT, sync);
+  }, [pathname]);
 
   async function logout() {
     await fetch('/api/admin/logout', { method: 'POST' });
@@ -30,6 +43,9 @@ export default function AdminShell({ user, children }) {
             return (
               <Link key={p.key} href={href} className={`admin-nav-link${pathname === href ? ' active' : ''}`}>
                 {p.label}
+                {pending.includes(p.key) && (
+                  <span className="admin-nav-dot" title="Unsaved changes" aria-label="Unsaved changes" />
+                )}
               </Link>
             );
           })}

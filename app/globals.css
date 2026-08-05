@@ -104,7 +104,7 @@ a { text-decoration: none; color: inherit; }
 /* Numerals are always mono — the one rule that governs the system. */
 .num, .stat-num, .hero-mini-num, .markets-hero-stat-val,
 .metric-val, .p-stat-val, .fp-stat-val,
-.pillar-num, .pillar-full-num, .service-num {
+.approach-num, .pillar-full-num, .service-num {
   font-family: var(--mono);
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.01em;
@@ -565,6 +565,134 @@ em, .accent-italic { font-family: var(--serif); font-style: italic; }
 .form-submit:hover { background: var(--pine-deep); }
 
 /* ─────────────────────────────────────────
+   PARTNER LOGOS — running band above the footer
+───────────────────────────────────────── */
+.partners {
+  background: var(--paper-alt);
+  border-top: 1px solid var(--border-light);
+  padding: 3rem 0;
+  overflow: hidden;
+}
+.partners-title {
+  font-size: 0.57rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--steel);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+/* Masked at both edges so logos fade in and out rather than being clipped
+   mid-glyph against the page gutter. */
+.partners-marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+.partners-track {
+  display: flex;
+  width: max-content;
+  animation: partners-scroll 46s linear infinite;
+}
+.partners-track:hover { animation-play-state: paused; }
+.partners-row { display: flex; list-style: none; align-items: center; }
+.partner-item {
+  display: grid;
+  place-items: center;
+  padding: 0 2.75rem;
+  flex: none;
+}
+.partner-logo-img {
+  width: auto;
+  height: 42px;
+  max-width: 190px;
+  object-fit: contain;
+  /* Developer logos arrive in a dozen different brand colours; on a single
+     paper band they read as clutter. Greyed back at rest, true colour on
+     hover — the usual treatment for a partner wall. */
+  filter: grayscale(1);
+  opacity: 0.55;
+  transition: filter var(--t-base), opacity var(--t-base);
+}
+.partner-item:hover .partner-logo-img { filter: grayscale(0); opacity: 1; }
+/* Stand-in until the artwork lands: the name set in the display face. */
+.partner-wordmark {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--steel);
+  white-space: nowrap;
+  transition: color var(--t-base);
+}
+.partner-item:hover .partner-wordmark { color: var(--pine); }
+/* The track holds two identical rows, so shifting by half its width lands
+   exactly where it started. */
+@keyframes partners-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ─────────────────────────────────────────
+   FLOATING WHATSAPP — desktop
+   The mobile dock carries the same action below 900px.
+───────────────────────────────────────── */
+.wa-fab {
+  position: fixed;
+  right: 1.75rem;
+  bottom: 1.75rem;
+  z-index: 175;
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  height: 56px;
+  padding: 0 15px;
+  border-radius: 999px;
+  background: var(--pine);
+  color: var(--paper);
+  box-shadow: 0 10px 30px rgba(10, 41, 33, 0.28);
+  animation: wa-bounce 2.4s var(--ease-in-out) infinite;
+  transition: background var(--t-base), box-shadow var(--t-base), padding var(--t-base);
+}
+.wa-fab:hover {
+  background: var(--signal);
+  color: var(--pine-deep);
+  box-shadow: 0 14px 36px rgba(10, 41, 33, 0.34);
+  /* Hovering stops the bounce — it has done its job by then, and a button
+     moving under the pointer is a button you miss. */
+  animation-play-state: paused;
+  padding-right: 22px;
+}
+.wa-fab-icon { display: inline-flex; flex: none; }
+/* The label unrolls on hover; collapsed, the button is a circle. */
+.wa-fab-label {
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: max-width var(--t-slow) var(--ease), margin-left var(--t-slow) var(--ease);
+}
+.wa-fab:hover .wa-fab-label,
+.wa-fab:focus-visible .wa-fab-label { max-width: 14rem; margin-left: 0.7rem; }
+
+@keyframes wa-bounce {
+  0%, 55%, 100% { transform: translateY(0); }
+  70%           { transform: translateY(-9px); }
+  85%           { transform: translateY(-4px); }
+}
+
+@media (max-width: 900px) {
+  .wa-fab { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wa-fab { animation: none; }
+  .partners-track { animation: none; }
+}
+
+/* ─────────────────────────────────────────
    FOOTER
 ───────────────────────────────────────── */
 footer {
@@ -796,12 +924,18 @@ footer {
    (flex / grid) and overriding it here would collapse their layout. */
 a.project-card-full,
 a.insight-card-full,
+a.insight-card-home,
+a.area-card-home,
 a.featured-insight { color: inherit; }
 a.project-card-full .project-name-full,
 a.insight-card-full .ic-title,
+a.insight-card-home .insight-title-home,
+a.area-card-home .area-name,
 a.featured-insight .fi-title { transition: color var(--t-fast); }
 a.project-card-full:hover .project-name-full,
 a.insight-card-full:hover .ic-title,
+a.insight-card-home:hover .insight-title-home,
+a.area-card-home:hover .area-name,
 a.featured-insight:hover .fi-title { color: var(--pine); }
 
 /* ─────────────────────────────────────────
@@ -871,9 +1005,6 @@ a.featured-insight:hover .fi-title { color: var(--pine); }
 
   .hero-scroll { display: none; }
 
-  .philosophy-preview { grid-template-columns: 1fr; }
-  .philosophy-left { padding: 3rem 1.5rem; }
-
   .areas-grid-home,
   .insight-cards-row,
   .projects-grid,
@@ -896,22 +1027,14 @@ a.featured-insight:hover .fi-title { color: var(--pine); }
 
   .founders-section { padding: 4rem 1.5rem; }
   .founder-full { grid-template-columns: 1fr !important; gap: 2rem; margin-bottom: 3.5rem; padding-bottom: 3.5rem; }
-  .founder-full-img { height: 360px !important; order: 1 !important; }
-  .founder-full-text { order: 2 !important; }
-  .founder-full-img.reversed { order: 1 !important; }
-  .founder-full-text.reversed { order: 2 !important; }
 
   .services-grid-about { grid-template-columns: 1fr !important; }
 
-  /* projects-hero-inner removed — projects now uses page-hero-split */
   .insights-hero-inner { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
-  /* markets-hero padding reset — handled by markets.html inline !important override */
 
   .market-full { grid-template-columns: 1fr !important; min-height: auto; }
-  .market-img { height: 240px; order: 1 !important; }
   .market-text { order: 2 !important; padding: 2.5rem 1.5rem !important; }
 
-  /* projects-hero padding reset — handled by projects.html inline !important override */
   .featured-project { grid-template-columns: 1fr !important; }
   .fp-img { height: 260px; }
   .fp-body { padding: 2rem 1.5rem !important; }
@@ -921,7 +1044,6 @@ a.featured-insight:hover .fi-title { color: var(--pine); }
   .fi-img { height: 240px; }
   .fi-body { padding: 2.5rem 1.5rem !important; }
 
-  .contact-hero { padding: 4rem 1.5rem 3rem !important; }
   .contact-main { grid-template-columns: 1fr !important; }
   .contact-info-panel { padding: 3rem 1.5rem !important; border-right: none !important; border-bottom: 1px solid var(--border-light); }
   .contact-form-panel { padding: 3rem 1.5rem !important; }
@@ -943,6 +1065,12 @@ a.featured-insight:hover .fi-title { color: var(--pine); }
   }
   .footer-top > :first-child { grid-column: 1 / -1; }
   .footer-tagline { max-width: none; }
+
+  .partners { padding: 2.25rem 0; }
+  .partners-title { margin-bottom: 1.4rem; }
+  .partner-item { padding: 0 1.75rem; }
+  .partner-logo-img { height: 34px; max-width: 140px; }
+  .partner-wordmark { font-size: 1.15rem; }
 
   /* Horizontal filter rail — no wrapping, no visible scrollbar. */
   .filter-bar {
@@ -977,73 +1105,58 @@ a.featured-insight:hover .fi-title { color: var(--pine); }
 /* Homepage hero — very slow, barely perceptible */
 
 /* ─────────────────────────────────────────
-   PAGE HERO SPLIT SYSTEM
-   Extends About page header as reference.
-   Applied to: Markets, Projects, Contact
+   PAGE HERO — full-bleed photo, copy overlaid
+   Applied to: About, Markets, Projects, Contact.
+   Same treatment as the home hero, so moving
+   between pages never changes the shape of the
+   header.
 ───────────────────────────────────────── */
-.page-hero-split {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: stretch;
-  /* A floor above the tallest hero's own content (Contact, at ~694px with
-     its three detail rows), so every page header renders at exactly the
-     same height instead of each being sized by its own copy.
-     Capped at the visible area, because 700px plus the fixed nav overruns a
-     laptop viewport and the header lands sliced across the fold — the split
-     reads as a cut rather than a full-height panel. Content still wins if it
-     needs more room; this only sets the floor. */
-  min-height: min(700px, calc(100svh - var(--nav-h)));
-}
-
-.page-hero-split-left {
-  padding: 6.5rem var(--gutter) 5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+.page-hero {
   position: relative;
+  isolation: isolate;
+  display: grid;
+  align-items: end;
+  /* Fills the screen below the fixed nav. The floor keeps it substantial on
+     a short laptop; the cap stops a tall desktop monitor turning the header
+     into a page of its own. */
+  min-height: clamp(520px, calc(100svh - var(--nav-h)), 860px);
   overflow: hidden;
+  background: var(--pine-deep);
+}
+.page-hero-media { position: absolute; inset: 0; z-index: 0; }
+.page-hero-media img,
+.page-hero-media video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
-.page-hero-split-left.dark {
-  background: var(--pine);
-}
-
-.page-hero-split-left.light {
-  background: var(--paper-alt);
-}
-
-.page-hero-split-left.dark h1 { color: var(--paper); }
-.page-hero-split-left.dark p  { color: rgba(250,249,246,0.5); }
-.page-hero-split-left.dark .eyebrow { color: var(--signal); }
-
-/* Soft radial ambient in dark panels */
-.page-hero-split-left.dark::before {
+/* Legibility comes from this scrim, never from tinting the photograph.
+   Weighted to the bottom-left, which is where the copy sits. */
+.page-hero::after {
   content: '';
-  position: absolute; top: -30%; right: -20%;
-  width: 70%; height: 70%;
-  background: radial-gradient(ellipse, var(--glow) 0%, transparent 65%);
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    linear-gradient(to right, rgba(10,41,33,0.88) 0%, rgba(10,41,33,0.62) 42%, rgba(10,41,33,0.14) 78%, rgba(10,41,33,0.06) 100%),
+    linear-gradient(to top, rgba(10,41,33,0.72) 0%, rgba(10,41,33,0.15) 48%, transparent 75%);
   pointer-events: none;
 }
 
-/* Aspect-ratio box matching the 1600x1000 panel guidance, so the photo
-   keeps its shape instead of being cropped into a tall half-column. */
-.page-hero-split-right {
+.page-hero-inner {
   position: relative;
-  overflow: hidden;
-  background: var(--surface);
-  /* Fills the row so the photo and the copy panel end on the same line.
-     Width comes from the grid column; giving this an aspect-ratio instead
-     would make the width derive from the height and every panel would come
-     out a different size. */
-  align-self: stretch;
-  min-height: 100%;
+  z-index: 2;
+  width: 100%;
+  padding: 8rem var(--gutter) 4.5rem;
 }
-
-.page-hero-split-right img,
-.page-hero-split-right video {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
+.page-hero-copy { max-width: 780px; }
+.page-hero h1 { color: var(--paper); max-width: 16ch; }
+.page-hero .eyebrow { color: var(--signal); }
+.page-hero-sub {
+  color: rgba(250,249,246,0.82);
+  font-size: 1rem;
+  line-height: 1.75;
+  max-width: 52ch;
+  margin-top: 1.1rem;
 }
 
 /* ─────────────────────────────────────────
@@ -1121,40 +1234,6 @@ nav.scrolled {
 /* ─────────────────────────────────────────
    MOBILE — Disable heavy animations + layout
 ───────────────────────────────────────── */
-@media (max-width: 900px) {
-  /* Page hero split — stack vertically */
-  .page-hero-split {
-    grid-template-columns: 1fr;
-    min-height: auto;
-  }
-  .page-hero-split-left {
-    min-height: 52vh;
-    justify-content: flex-end;
-    padding: 4.5rem var(--gutter) 3.5rem;
-  }
-  .page-hero-split-right {
-    height: 260px;
-  }
-}
-
-/* Page hero split right — overflow hidden clips Ken Burns animation */
-.page-hero-split-right {
-  overflow: hidden;
-}
-
-/* ─────────────────────────────────────────
-   NAV SCROLLED STATE
-───────────────────────────────────────── */
-nav.scrolled {
-  background: rgba(7, 29, 23, 0.985);
-  border-bottom-color: var(--line-dark-2);
-}
-
-/* ─────────────────────────────────────────
-   REMOVE DUPLICATE REVEAL-GRID SYSTEM
-   (replaced with lineStagger in JS)
-───────────────────────────────────────── */
-
 /* ─────────────────────────────────────────
    REDUCED MOTION + MOBILE
 ───────────────────────────────────────── */
@@ -1174,18 +1253,23 @@ nav.scrolled {
     transform: translateY(18px);
     filter: none;
   }
-  .page-hero-split {
-    grid-template-columns: 1fr;
-    min-height: auto;
+
+  /* The header stays an overlay on a phone rather than splitting into a
+     photo above a coloured block. Stacked, the photo took the top third and
+     the copy sat on a flat panel below it — the "white patch" the client
+     kept pointing at. Full-bleed with the copy over the bottom of the image
+     is the treatment they asked for. */
+  .page-hero {
+    min-height: calc(100svh - var(--nav-h) - var(--dock-h));
   }
-  .page-hero-split-left {
-    min-height: 52vh;
-    justify-content: flex-end;
-    padding: 4.5rem var(--gutter) 3.5rem;
+  .page-hero::after {
+    background:
+      linear-gradient(to top, rgba(10,41,33,0.9) 0%, rgba(10,41,33,0.6) 38%, rgba(10,41,33,0.2) 70%, rgba(10,41,33,0.1) 100%);
   }
-  .page-hero-split-right {
-    height: 260px;
-  }
+  .page-hero-inner { padding: 5rem var(--gutter) 3rem; }
+  .page-hero-copy { max-width: none; }
+  .page-hero h1 { max-width: none; }
+  .page-hero-sub { max-width: none; font-size: 0.92rem; }
 }
 
 /* ─────────────────────────────────────────

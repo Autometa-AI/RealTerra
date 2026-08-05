@@ -271,6 +271,8 @@
     "enquiryHeadline": "Enquire about this project",
     "enquiryIntro": "Send us your details and we will come back with pricing, availability and the full project breakdown.",
     "submitLabel": "Send Enquiry →",
-    "backLabel": "All projects"
+    "backLabel": "All projects",
+    "brochureLabel": "Download Brochure",
+    "brochureMessage": "Hi RealTerra, please send me the brochure and payment plan for {project}."
   }
 }

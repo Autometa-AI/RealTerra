@@ -4,10 +4,26 @@ import Media from '../../components/Media';
 import Reviews from '../../components/Reviews';
 import Faq from '../../components/Faq';
 import Lines from '../../components/Lines';
+import HeroSearch from '../../components/HeroSearch';
+import ApproachSlider from '../../components/ApproachSlider';
 import { getContent } from '../../lib/content';
+import { marketHref } from '../../lib/site';
+import { uniqueSlugs } from '../../lib/slug';
 
 export default async function Home() {
   const c = await getContent('home');
+
+  // The preview cards are authored on the home page but the articles live on
+  // the blogs page, so match them up by title and link the card at the piece
+  // it is advertising. A card whose title has no article falls back to the
+  // index rather than 404-ing.
+  const blogs = await getContent('blogs');
+  const posts = [blogs.featured, ...(blogs.posts || [])].filter((p) => p?.title);
+  const postSlugs = uniqueSlugs(posts);
+  const blogHref = (title) => {
+    const i = posts.findIndex((p) => p.title?.trim() === String(title || '').trim());
+    return i === -1 ? '/blogs' : `/blogs/${postSlugs[i]}`;
+  };
 
   return (
     <main className="page">
@@ -27,7 +43,15 @@ export default async function Home() {
             </div>
             <h1 className="reveal d1"><Lines text={c.hero.headline} /></h1>
             <p className="hero-sub reveal d2">{c.hero.subhead}</p>
-            <div className="hero-actions reveal d3">
+            {/* Search first, buttons under it: the first thing most visitors
+                arrive wanting is a specific development or area. */}
+            <div className="reveal d3">
+              <HeroSearch
+                placeholder={c.hero.searchPlaceholder}
+                buttonLabel={c.hero.searchButtonLabel}
+              />
+            </div>
+            <div className="hero-actions reveal d4">
               <Link href="/markets" className="btn btn-light">{c.hero.ctaPrimary}</Link>
               <Link href="/blogs" className="arrow-link arrow-link-light">{c.hero.ctaSecondary}</Link>
             </div>
@@ -59,28 +83,19 @@ export default async function Home() {
         </div>
       </div>
 
-      {/* PHILOSOPHY DARK */}
-      <div className="philosophy-preview">
-        <div className="philosophy-left reveal">
-          <div>
-            <p className="eyebrow eyebrow-dark">{c.philosophyPanel.eyebrow}</p>
-            <h2 style={{ color: 'var(--white)' }}>{c.philosophyPanel.headline}</h2>
-            <p className="philosophy-sub">{c.philosophyPanel.subtext}</p>
-          </div>
-          <div className="pillars-mini">
-            {c.philosophyPanel.pillars.map((label, i) => (
-              <div className="pillar-mini" key={`${label}-${i}`}>
-                <span className="pillar-num">{String(i + 1).padStart(2, '0')}</span>
-                <span className="pillar-label">{label}</span>
-              </div>
-            ))}
-          </div>
-          <Link href="/about" className="arrow-link arrow-link-light" style={{ marginTop: '2.5rem' }}>{c.philosophyPanel.linkLabel}</Link>
-        </div>
-        <div className="philosophy-right">
-          <Media src={c.philosophyPanel.image} alt="" fill sizes="(max-width: 900px) 100vw, 50vw" />
-        </div>
-      </div>
+      {/* PHILOSOPHY — the four pillars advance one at a time while the
+          section stays pinned to the screen. */}
+      <ApproachSlider
+        eyebrow={c.philosophyPanel.eyebrow}
+        headline={c.philosophyPanel.headline}
+        subtext={c.philosophyPanel.subtext}
+        pillars={c.philosophyPanel.pillars}
+        media={<Media src={c.philosophyPanel.image} alt="" fill sizes="100vw" />}
+      >
+        <Link href="/about" className="arrow-link arrow-link-light approach-link">
+          {c.philosophyPanel.linkLabel}
+        </Link>
+      </ApproachSlider>
 
       {/* AREAS */}
       <div className="areas-preview">
@@ -88,9 +103,16 @@ export default async function Home() {
           <div><p className="eyebrow">{c.focusMarkets.eyebrow}</p><h2>{c.focusMarkets.headline}</h2></div>
           <Link href="/markets" className="arrow-link">{c.focusMarkets.linkLabel}</Link>
         </div>
+        {/* The whole tile is the link — it was a dead card before, which is
+            not what a grid of photographed markets reads as. It lands on the
+            matching write-up on the Markets page rather than the top of it. */}
         <div className="areas-grid-home">
           {c.focusMarkets.cards.map((card, i) => (
-            <div className={`area-card-home reveal${i ? ` d${i}` : ''}`} key={`${card.name}-${i}`}>
+            <Link
+              href={marketHref(card.name)}
+              className={`area-card-home reveal${i ? ` d${i}` : ''}`}
+              key={`${card.name}-${i}`}
+            >
               <div className="area-img img-zoom">
                 <Media src={card.image} alt={card.name} fill sizes="(max-width: 900px) 100vw, 33vw" />
               </div>
@@ -100,7 +122,7 @@ export default async function Home() {
                 <div className="area-sub">{card.description}</div>
                 <div className="area-pill"><span className="area-pill-dot"></span>{card.yield}</div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
@@ -126,7 +148,11 @@ export default async function Home() {
         </div>
         <div className="insight-cards-row">
           {c.blogsPreview.cards.map((card, i) => (
-            <div className={`insight-card-home reveal${i ? ` d${i}` : ''}`} key={`${card.title}-${i}`}>
+            <Link
+              href={blogHref(card.title)}
+              className={`insight-card-home reveal${i % 3 ? ` d${i % 3}` : ''}`}
+              key={`${card.title}-${i}`}
+            >
               <div className="insight-img img-zoom">
                 <Media src={card.image} alt={card.title} fill sizes="(max-width: 900px) 100vw, 33vw" />
               </div>
@@ -135,7 +161,7 @@ export default async function Home() {
                 <div className="insight-title-home">{card.title}</div>
                 <div className="insight-meta">{card.meta}</div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
