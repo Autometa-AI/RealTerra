@@ -51,7 +51,7 @@ export default function ProjectGallery({ items, projectName }) {
           >
             <Media
               src={src}
-              alt={`${projectName} — image ${i + 1}`}
+              alt={`${projectName}, image ${i + 1}`}
               fill
               sizes="(max-width: 900px) 100vw, 33vw"
             />
@@ -78,7 +78,7 @@ export default function ProjectGallery({ items, projectName }) {
           <figure className="pd-lightbox-figure">
             <Media
               src={items[index]}
-              alt={`${projectName} — image ${index + 1}`}
+              alt={`${projectName}, image ${index + 1}`}
               width={1800}
               height={1200}
               sizes="100vw"

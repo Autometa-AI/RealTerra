@@ -30,7 +30,7 @@ export default function NewsletterForm({ content }) {
     return (
       <div className="request-form-mini reveal d1">
         <p style={{ fontSize: '0.9rem', color: 'var(--text-1)' }}>
-          Thank you — you&apos;re on the list. Watch your inbox for our next briefing.
+          Thank you. You&apos;re on the list. Watch your inbox for our next briefing.
         </p>
       </div>
     );

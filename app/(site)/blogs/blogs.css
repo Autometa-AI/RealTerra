@@ -100,7 +100,11 @@
   .insights-hero-inner { grid-template-columns: 1fr; gap: 1.25rem; }
   .insights-hero p { max-width: none; }
   .featured-insight { grid-template-columns: 1fr; }
-  .fi-img { aspect-ratio: 16 / 10; min-height: 0; }
+  /* `align-self: stretch` has to go with it. Stretch sizes the box from the
+     row height, and once there is an aspect-ratio the width is derived from
+     that height instead of from the column — which is why the photo stopped
+     384px short of the right edge of a 430px phone. */
+  .fi-img { aspect-ratio: 16 / 10; min-height: 0; align-self: start; width: 100%; }
   .fi-body { padding: 2.5rem var(--gutter); }
   .fi-title { font-size: 1.5rem; }
   .fi-excerpt { max-width: none; }

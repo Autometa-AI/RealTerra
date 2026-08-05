@@ -117,7 +117,25 @@ The one exception is the favicon, which cannot show a wordmark at 16px:
   stretch to their grid row on desktop. When the mobile breakpoint gives them an
   `aspect-ratio`, `align-self` and `min-height` have to be released in the same
   rule — otherwise the box derives its *width* from the stretched row height and
-  overflows the viewport.
+  overflows the viewport. `.fi-img` (blogs) and `.fp-img` (projects) both got
+  caught by this after the note above was written; they now set
+  `align-self: start; width: 100%` alongside the ratio.
+- **No bare element selectors for site chrome.** `nav { position: fixed }` also
+  matched the blog article's contents rail, which is a `<nav>` too: it was
+  pinned to the top of the viewport as a second dark bar, clipped behind the
+  real header. The site header is `.site-nav`, and `components/Effects.js`
+  looks it up by that class rather than taking whichever `<nav>` comes first.
+- **Only the last element on the page clears the mobile dock.** The dock is
+  fixed to the viewport, so the footer's `padding-bottom` is the whole of the
+  reservation. `main` used to reserve `--dock-h` as well, which showed up as a
+  band of empty page background between the closing section and the footer on
+  every route.
+- **No em dashes in anything a visitor or the client reads.** The client's
+  standing note is that they read as machine-written. That covers CMS content,
+  hardcoded strings, and the admin field labels — comments in the source are
+  fine. When rewriting one, pick the punctuation the sentence actually wants (a
+  comma, a colon, a full stop); swapping every one for a hyphen just trades one
+  tic for another.
 - **Scroll reveal is gated on `[data-js]`**, stamped on `<html>` by an inline
   script in the layout before first paint. Without the gate, `.reveal`'s
   `opacity: 0` would leave every headline invisible if scripting fails, since
@@ -164,7 +182,8 @@ components/
   PageHero.js        full-bleed overlay header (every page but Home)
   SharedSections.js  FAQ + reviews, read from the Home content
   PartnerLogos.js    running developer-logo band above the footer
-  HeroSearch.js      home hero search → /projects?q=…
+  HeroSearch.js      home hero search: typeahead over the real catalogue,
+                     submit hands off to /projects?q=…
   ApproachSlider.js  scroll-pinned tile slider for the four pillars
   ArticleToc.js      contents rail beside a blog article, tracks scroll
   WhatsAppFab.js     floating WhatsApp button (desktop)

@@ -17,6 +17,11 @@ export default async function Home() {
   // the blogs page, so match them up by title and link the card at the piece
   // it is advertising. A card whose title has no article falls back to the
   // index rather than 404-ing.
+  // The hero search reads the real catalogue, so a visitor who types a
+  // development name is offered that development rather than a blank box.
+  const projectsContent = await getContent('projects');
+  const projects = (projectsContent.projects || []).filter((p) => p?.name);
+
   const blogs = await getContent('blogs');
   const posts = [blogs.featured, ...(blogs.posts || [])].filter((p) => p?.title);
   const postSlugs = uniqueSlugs(posts);
@@ -45,10 +50,18 @@ export default async function Home() {
             <p className="hero-sub reveal d2">{c.hero.subhead}</p>
             {/* Search first, buttons under it: the first thing most visitors
                 arrive wanting is a specific development or area. */}
-            <div className="reveal d3">
+            {/* hero-search-slot lifts this above the buttons below it: the
+                reveal wrappers each set `filter`, which makes every one of
+                them a stacking context, so DOM order alone decided what the
+                results list was drawn under. */}
+            <div className="reveal d3 hero-search-slot">
+              {/* The catalogue is handed in so the box can show matches as
+                  they are typed. It is a few dozen entries and already on the
+                  page as JSON — nothing to fetch. */}
               <HeroSearch
                 placeholder={c.hero.searchPlaceholder}
                 buttonLabel={c.hero.searchButtonLabel}
+                projects={projects}
               />
             </div>
             <div className="hero-actions reveal d4">

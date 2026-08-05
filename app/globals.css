@@ -119,8 +119,15 @@ a { text-decoration: none; color: inherit; }
 
 /* ─────────────────────────────────────────
    NAVIGATION — Dark, integrated
+
+   Scoped to .site-nav, never the bare `nav`
+   element. A bare selector also caught the
+   article contents rail, which is a <nav>
+   too: it was pinned to the top of the
+   viewport as a second dark bar and clipped
+   behind the real header.
 ───────────────────────────────────────── */
-nav {
+.site-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
   height: var(--nav-h);
   display: flex; align-items: center; justify-content: space-between;
@@ -491,24 +498,44 @@ em, .accent-italic { font-family: var(--serif); font-style: italic; }
 }
 .cap-row {
   display: flex; align-items: center; gap: 1rem;
-  padding: 0.8rem 0;
+  padding: 0.8rem 0.9rem 0.8rem 0;
   border-bottom: 1px solid var(--border-light);
-  transition: background var(--t-fast);
+  cursor: default;
+  transition:
+    background var(--t-base) var(--ease),
+    padding-left var(--t-base) var(--ease),
+    border-color var(--t-base) var(--ease);
 }
+/* The rule in front of each capability grows into the row on hover and the
+   label steps forward with it. The whole row responds, not just the text —
+   these are the four things each founder is being trusted on, and they were
+   the one part of the page that gave nothing back. */
 .cap-row::before {
   content: '';
   width: 18px; height: 1px;
   background: var(--pine);
   flex-shrink: 0;
   opacity: 0.55;
+  transition: width var(--t-base) var(--ease), opacity var(--t-base) var(--ease);
 }
+/* A pine tint rather than a surface token: the founders sit on --surface on
+   About and on --paper elsewhere, and a flat token would be invisible against
+   one of the two. */
+.cap-row:hover {
+  background: rgba(15,61,51,0.06);
+  padding-left: 0.9rem;
+  border-color: var(--border);
+}
+.cap-row:hover::before { width: 30px; opacity: 1; }
 .cap-label {
   font-size: 0.76rem;
   font-weight: 400;
   letter-spacing: 0.02em;
   color: var(--text-2);
   line-height: 1.5;
+  transition: color var(--t-base) var(--ease);
 }
+.cap-row:hover .cap-label { color: var(--pine); }
 
 /* ─────────────────────────────────────────
    FORM
@@ -678,10 +705,16 @@ em, .accent-italic { font-family: var(--serif); font-style: italic; }
 .wa-fab:hover .wa-fab-label,
 .wa-fab:focus-visible .wa-fab-label { max-width: 14rem; margin-left: 0.7rem; }
 
+/* A 9px hop read as a twitch on a 27" screen. The bounce is there to be
+   noticed from across the page, so it now clears its own height and settles
+   in two diminishing hops. Still one bounce per cycle, with the long still
+   beat before it — a button that never stops moving is an irritation. */
 @keyframes wa-bounce {
   0%, 55%, 100% { transform: translateY(0); }
-  70%           { transform: translateY(-9px); }
-  85%           { transform: translateY(-4px); }
+  67%           { transform: translateY(-22px); }
+  78%           { transform: translateY(0); }
+  86%           { transform: translateY(-9px); }
+  94%           { transform: translateY(0); }
 }
 
 @media (max-width: 900px) {
@@ -914,9 +947,21 @@ footer {
 .d3 { transition-delay: 240ms; }
 .d4 { transition-delay: 320ms; }
 
-/* Images are deliberately static: no zoom, no drift, no hover scale.
-   `.img-zoom` is kept only as the overflow clip for its container. */
+/* `.img-zoom` is the overflow clip; the photo inside it lifts a little when
+   the card it belongs to is hovered. Deliberately small — 3% over half a
+   second reads as the card responding, where a 10% jump reads as a slideshow.
+   Nothing moves on its own: this only ever runs under a pointer. */
 .img-zoom { overflow: hidden; }
+.img-zoom img,
+.img-zoom video { transition: transform var(--t-slow) var(--ease); }
+a.area-card-home:hover .img-zoom img,
+a.area-card-home:hover .img-zoom video,
+a.project-card-full:hover .img-zoom img,
+a.project-card-full:hover .img-zoom video,
+a.insight-card-home:hover .img-zoom img,
+a.insight-card-home:hover .img-zoom video,
+a.insight-card-full:hover .img-zoom img,
+a.insight-card-full:hover .img-zoom video { transform: scale(1.03); }
 
 /* Cards that are whole links: the title carries the hover, since the
    image itself never moves. */
@@ -1121,14 +1166,17 @@ a.featured-insight:hover .fi-title { color: var(--pine); }
 @media (max-width: 900px) {
   :root { --nav-h: 62px; --gutter: 1.5rem; --dock-h: 66px; --section-y: 3.5rem; }
 
-  nav { padding: 0 var(--gutter); }
+  .site-nav { padding: 0 var(--gutter); }
   .nav-links { display: none; }
   .nav-cta { display: none; }
   .nav-toggle { display: inline-flex; }
   .dock { display: flex; }
 
-  /* Keep the last screenful of every page clear of the dock. */
-  main { padding-bottom: var(--dock-h); }
+  /* The dock is fixed to the bottom of the viewport, so only the very last
+     thing on the page has to clear it — and that is the footer, which
+     reserves the space in its own padding. Reserving it on <main> as well
+     put a band of empty page background between the closing section and the
+     footer on every route. */
 
   .section, .section-sm { padding: 4rem var(--gutter); }
   h1 { font-size: clamp(2.1rem, 8.5vw, 3.1rem); }
@@ -1208,15 +1256,9 @@ a.featured-insight:hover .fi-title { color: var(--pine); }
   .reviews-header { flex-direction: column; align-items: flex-start; margin-bottom: 2rem; }
   .reviews-summary { align-items: flex-start; }
 
-  /* Horizontal filter rail — no wrapping, no visible scrollbar. */
-  .filter-bar {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-  }
-  .filter-bar::-webkit-scrollbar { display: none; }
-  .filter-btn { white-space: nowrap; flex-shrink: 0; }
+  /* The filter rail's mobile rules live in projects.css, which is imported
+     after this file — a base rule there beat this media query, which is why
+     the chips kept wrapping on a phone. */
 }
 
 @media (max-width: 560px) {
@@ -1268,13 +1310,15 @@ a.featured-insight:hover .fi-title { color: var(--pine); }
 }
 
 /* Legibility comes from this scrim, never from tinting the photograph.
-   Weighted to the bottom-left, which is where the copy sits. */
+   Weighted to the bottom-left, which is where the copy sits. Carried a little
+   further right and a little deeper at the foot than it first was: the
+   standfirst sits low and was competing with lit windows behind it. */
 .page-hero::after {
   content: '';
   position: absolute; inset: 0; z-index: 1;
   background:
-    linear-gradient(to right, rgba(10,41,33,0.88) 0%, rgba(10,41,33,0.62) 42%, rgba(10,41,33,0.14) 78%, rgba(10,41,33,0.06) 100%),
-    linear-gradient(to top, rgba(10,41,33,0.72) 0%, rgba(10,41,33,0.15) 48%, transparent 75%);
+    linear-gradient(to right, rgba(10,41,33,0.92) 0%, rgba(10,41,33,0.74) 42%, rgba(10,41,33,0.28) 78%, rgba(10,41,33,0.12) 100%),
+    linear-gradient(to top, rgba(10,41,33,0.82) 0%, rgba(10,41,33,0.24) 48%, transparent 75%);
   pointer-events: none;
 }
 
@@ -1288,7 +1332,7 @@ a.featured-insight:hover .fi-title { color: var(--pine); }
 .page-hero h1 { color: var(--paper); max-width: 16ch; }
 .page-hero .eyebrow { color: var(--signal); }
 .page-hero-sub {
-  color: rgba(250,249,246,0.82);
+  color: rgba(250,249,246,0.94);
   font-size: 1rem;
   line-height: 1.75;
   max-width: 52ch;
@@ -1313,7 +1357,7 @@ a.featured-insight:hover .fi-title { color: var(--pine); }
 /* ─────────────────────────────────────────
    NAV SCROLL STATE
 ───────────────────────────────────────── */
-nav.scrolled {
+.site-nav.scrolled {
   background: rgba(7, 29, 23, 0.985);
   border-bottom-color: var(--line-dark-2);
 }

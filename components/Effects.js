@@ -42,7 +42,10 @@ export default function Effects() {
 
     // ── Nav scroll state ───────────────────────────────────────────
     (function initNavScroll() {
-      const nav = document.querySelector('nav');
+      // By class, not by element: an article page has a second <nav> for
+      // its contents rail, and `querySelector('nav')` only happened to miss
+      // it because the header is rendered first.
+      const nav = document.querySelector('.site-nav');
       if (!nav) return;
       const update = () => {
         nav.classList.toggle('scrolled', window.scrollY > 60);

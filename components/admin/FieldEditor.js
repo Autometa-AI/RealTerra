@@ -13,7 +13,7 @@ function WordHint({ text, words }) {
   else if (n > max) cls = 'over';
   return (
     <p className={`a-help ${cls}`}>
-      {n} word{n === 1 ? '' : 's'} — suggested {min}–{max}
+      {n} word{n === 1 ? '' : 's'} · suggested {min}–{max}
       {n < min && ' (a bit short)'}
       {n > max && ' (a bit long)'}
     </p>
