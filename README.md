@@ -99,10 +99,15 @@ The one exception is the favicon, which cannot show a wordmark at 16px:
   fields across six CMS pages would mean editing an answer six times. The
   partner-logo band sits in `app/(site)/layout.js` for the same reason: it
   arrives on every route, including ones added later.
+  Their **styles have to move with them**: the FAQ and review rules started out
+  in `home.css`, which only the home page imports, so the moment the components
+  went shared every other page rendered them as raw `<details>` markup and an
+  unstyled list. A block used off the home page belongs in `globals.css`.
 - **Responsive CSS lives with its page.** Page stylesheets are imported *after*
   `globals.css`, so a base rule in `home.css` would beat a mobile media query in
   `globals.css` no matter the viewport. Each page's breakpoints are therefore
-  defined at the bottom of its own stylesheet.
+  defined at the bottom of its own stylesheet — and a block whose base rules sit
+  in `globals.css` keeps its breakpoints there too, for the same reason.
 - **One vertical rhythm.** Full-width content sections take their top and bottom
   padding from `--section-y` (6rem desktop, 3.5rem mobile) rather than setting
   their own, so the spacing between sections is the same on every page. Split
