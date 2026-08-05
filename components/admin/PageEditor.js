@@ -1,8 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import Field from './Field';
+import { CMS_PAGES } from '../../lib/cms-schema';
+import { DRAFTS_EVENT, dropDraft, dropDrafts, getDraft, listDrafts, putDraft } from '../../lib/admin-drafts';
+
+const pageLabelFor = (key) => CMS_PAGES.find((p) => p.key === key)?.label || key;
 
 // A short single-line field takes half a row; anything that needs room
 // (paragraphs, media, repeating groups) takes the full width. This is what
@@ -52,6 +56,44 @@ export default function PageEditor({ pageKey, pageLabel, groups, initialContent 
   // Only the first section starts open, so the page opens as a short list
   // of headings you can scan instead of every field at once.
   const [openSections, setOpenSections] = useState(() => new Set([groups[0]?.title]));
+  // Every page holding unsaved edits — including ones edited earlier in this
+  // session and then navigated away from. This is what "Save changes"
+  // publishes, so the editor has to show it before the button is pressed.
+  const [pending, setPending] = useState([]);
+  const [restored, setRestored] = useState(false);
+  const [storageFull, setStorageFull] = useState(false);
+  // Nothing is written back to the draft store until the stored draft for
+  // this page has been read in — otherwise the first pass, still holding the
+  // server copy, would clear the very draft it is about to restore.
+  const [hydrated, setHydrated] = useState(false);
+
+  // Drafts live in localStorage, which does not exist during the server
+  // render — read them once the component is on the client.
+  useEffect(() => {
+    const sync = () => setPending(listDrafts());
+    const draft = getDraft(pageKey);
+    if (draft && JSON.stringify(draft) !== JSON.stringify(initialContent)) {
+      setContent(draft);
+      setRestored(true);
+    }
+    sync();
+    setHydrated(true);
+    window.addEventListener(DRAFTS_EVENT, sync);
+    return () => window.removeEventListener(DRAFTS_EVENT, sync);
+  }, [pageKey, initialContent]);
+
+  const dirty = JSON.stringify(content) !== JSON.stringify(saved);
+
+  // Mirror the working copy into the draft store on every edit, and clear it
+  // again if the editor undoes their way back to what is already published.
+  useEffect(() => {
+    if (!hydrated) return;
+    if (dirty) {
+      if (!putDraft(pageKey, content)) setStorageFull(true);
+    } else {
+      dropDraft(pageKey);
+    }
+  }, [hydrated, dirty, content, pageKey]);
 
   function toggleSection(title) {
     setOpenSections((prev) => {
@@ -67,7 +109,27 @@ export default function PageEditor({ pageKey, pageLabel, groups, initialContent 
     setOpenSections(allOpen ? new Set() : new Set(groups.map((g) => g.title)));
   }
 
+  // Everything one press of "Save changes" will publish: this page's working
+  // copy plus any other page still holding a draft.
+  const updates = useMemo(() => {
+    const byPage = new Map(pending.map((d) => [d.page, d.content]));
+    if (dirty) byPage.set(pageKey, content);
+    else byPage.delete(pageKey);
+    return [...byPage].map(([page, pageContent]) => ({ page, content: pageContent }));
+  }, [pending, dirty, content, pageKey]);
+
+  const otherPending = updates.filter((u) => u.page !== pageKey).map((u) => u.page);
+
+  const discard = useCallback((page) => {
+    dropDraft(page);
+    if (page === pageKey) {
+      setContent(saved);
+      setRestored(false);
+    }
+  }, [pageKey, saved]);
+
   async function onSave() {
+    if (updates.length === 0) return;
     setStatus('saving');
     setError('');
     const attempted = content;
@@ -75,19 +137,23 @@ export default function PageEditor({ pageKey, pageLabel, groups, initialContent 
       const res = await fetch('/api/admin/save', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ page: pageKey, content: attempted }),
+        body: JSON.stringify({ updates }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Save failed.');
-      setSaved(attempted);
+      // Only the pages the server confirmed are cleared, so a partial failure
+      // leaves the rest of the work sitting safely in the draft store.
+      dropDrafts(data.saved || updates.map((u) => u.page));
+      if ((data.saved || []).includes(pageKey) || !data.saved) setSaved(attempted);
       setStatus('success');
+      setRestored(false);
     } catch (err) {
       setStatus('error');
       setError(err.message);
     }
   }
 
-  const hasChanges = JSON.stringify(content) !== JSON.stringify(saved);
+  const hasChanges = updates.length > 0;
 
   return (
     <div>
@@ -103,6 +169,17 @@ export default function PageEditor({ pageKey, pageLabel, groups, initialContent 
           {allOpen ? 'Collapse all' : 'Expand all'}
         </button>
       </div>
+
+      {restored && (
+        <p className="admin-note">
+          Your unsaved edits to this page were restored. They are published with the next save.
+        </p>
+      )}
+      {storageFull && (
+        <p className="admin-note admin-note-warn">
+          This browser has run out of room to hold unsaved edits. Save now so nothing is lost.
+        </p>
+      )}
 
       {groups.map((group) => (
         <Section
@@ -120,14 +197,41 @@ export default function PageEditor({ pageKey, pageLabel, groups, initialContent 
           {status === 'saving' && 'Saving…'}
           {status === 'error' && <span style={{ color: 'var(--a-danger)' }}>{error}</span>}
           {/* Editing after a save must not keep reading "Saved". */}
-          {status !== 'saving' && status !== 'error' && hasChanges && 'Unsaved changes'}
+          {status !== 'saving' && status !== 'error' && hasChanges && (
+            <>
+              {dirty ? 'Unsaved changes' : 'Unsaved changes on other pages'}
+              {otherPending.length > 0 && (
+                <span className="admin-savebar-pending">
+                  {' — also publishing '}
+                  {otherPending.map((page, i) => (
+                    <span key={page}>
+                      {i > 0 && ', '}
+                      <strong>{pageLabelFor(page)}</strong>
+                      <button
+                        type="button"
+                        className="admin-discard"
+                        onClick={() => discard(page)}
+                        title={`Discard unsaved edits to ${pageLabelFor(page)}`}
+                      >
+                        ×
+                      </button>
+                    </span>
+                  ))}
+                </span>
+              )}
+            </>
+          )}
           {status === 'success' && !hasChanges && (
             <span style={{ color: 'var(--a-accent)' }}>Saved — live on the site now.</span>
           )}
           {status === 'idle' && !hasChanges && 'No changes yet'}
         </span>
         <button className="a-btn a-btn-primary" onClick={onSave} disabled={status === 'saving' || !hasChanges}>
-          {status === 'saving' ? 'Saving…' : 'Save changes'}
+          {status === 'saving'
+            ? 'Saving…'
+            : updates.length > 1
+              ? `Save changes (${updates.length} pages)`
+              : 'Save changes'}
         </button>
       </div>
     </div>

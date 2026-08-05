@@ -1,5 +1,5 @@
-/* Hero uses the shared .page-hero-split system in globals.css so it
-   matches Markets, Projects and Contact exactly. Nothing bespoke here. */
+/* Hero uses the shared <PageHero> overlay in globals.css so it matches
+   Markets, Projects and Contact exactly. Nothing bespoke here. */
 
 /* Philosophy */
 .philosophy-full { padding: 6rem 3.5rem; }
@@ -50,13 +50,16 @@
 .founder-full.flip .founder-full-img  { grid-column: 2; grid-row: 1; }
 .founder-full.flip .founder-full-text { grid-column: 1; grid-row: 1; }
 
-/* Fills the row so the portrait and the bio end on the same line. The cap
-   stops an unusually long bio stretching the photo into a narrow sliver;
-   past that point the block simply top-aligns. */
+/* Both portrait windows are the same shape, full stop.
+   They used to stretch to their own row, so each founder's photo was framed
+   to whatever length their bio happened to run to — which is why the two
+   windows never quite matched however carefully the photos were cropped. A
+   fixed 4:5 box in a fixed-width column makes them identical by
+   construction, and the bio length stops being part of the equation. */
 .founder-full-img {
-  align-self: stretch;
-  min-height: 475px;
-  max-height: 720px;
+  align-self: start;
+  aspect-ratio: 4 / 5;
+  width: 100%;
   overflow: hidden;
   position: relative;
   background: var(--paper-alt);
@@ -64,7 +67,13 @@
 .founder-full-img img,
 .founder-full-img video {
   position: absolute; inset: 0;
-  width:100%; height:100%; object-fit:cover;
+  width:100%; height:100%;
+  object-fit: cover;
+  /* Anchored above centre. On a portrait `cover` crop the excess comes off
+     the top and bottom equally, which is what was taking the top of the
+     head off; heads sit in the upper third of a portrait, so that is where
+     the crop should be biased. */
+  object-position: 50% 22%;
 }
 .founder-role-tag { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--signal); margin-bottom: 0.6rem; }
 .founder-full-name { font-size: 2.3rem; font-weight: 500; letter-spacing: -0.02em; color: var(--text-1); margin-bottom: 1.5rem; line-height: 1.1; }
@@ -99,17 +108,9 @@
   .founder-full.flip .founder-full-img { grid-column: 1; grid-row: 1; }
   .founder-full .founder-full-text,
   .founder-full.flip .founder-full-text { grid-column: 1; grid-row: 2; }
-  /* Same trap as the founders strip on the home page: left stretching, the
-     photo sizes its width from the row height via aspect-ratio and pushes
-     past the gutter. min-height also has to be cleared or it beats the
-     max-height below it. */
-  .founder-full-img {
-    aspect-ratio: 4 / 5;
-    align-self: start;
-    width: 100%;
-    min-height: 0;
-    max-height: 460px;
-  }
+  /* The portrait box already sizes from its column width, so nothing about
+     it has to change here — only the width it is given. */
+  .founder-full-img { max-width: 420px; }
   .services-grid-about { grid-template-columns: 1fr; }
 }
 

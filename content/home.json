@@ -3,6 +3,8 @@
     "eyebrow": "RealTerra Global Properties · Dubai, UAE",
     "headline": "Off-plan property in Dubai,\nquantified before it's sold.",
     "subhead": "An analytical brokerage for ultra-high-net-worth investors. We map every asset, trajectory, and exit window before we recommend a single square foot.",
+    "searchPlaceholder": "Search by project, developer or area",
+    "searchButtonLabel": "Search",
     "ctaPrimary": "View the Market Data",
     "ctaSecondary": "Read the research",
     "image": "/videos/dubai-hero.mp4",
@@ -93,6 +95,24 @@
         "title": "DAMAC vs Emaar: Completion Rate and Yield Comparison Across 12 Projects",
         "meta": "Comparative · 2025",
         "image": "/images/developer-analysis.jpg"
+      },
+      {
+        "tag": "Area Spotlight",
+        "title": "Dubai Maritime City: The Waterfront District the Market Hasn't Priced Yet",
+        "meta": "Area Analysis · 2025",
+        "image": "/images/dubai-maritime-city.jpg"
+      },
+      {
+        "tag": "Investor Guide",
+        "title": "Building a UAE Portfolio Across Three Horizons: Yield, Growth & Off-Plan Value",
+        "meta": "Framework · 2025",
+        "image": "/images/founders-strip.jpg"
+      },
+      {
+        "tag": "Area Spotlight",
+        "title": "Saadiyat Island: Why Abu Dhabi's Cultural District Is an Institutional-Grade Bet",
+        "meta": "Area Analysis · 2025",
+        "image": "/images/saadiyat-island.jpg"
       }
     ]
   },

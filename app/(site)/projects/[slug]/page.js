@@ -7,8 +7,11 @@ import AmenityIcon from '../../../../components/AmenityIcon';
 import ProjectGallery from '../../../../components/ProjectGallery';
 import ProjectEnquiryForm from '../../../../components/ProjectEnquiryForm';
 import PropertyMap from '../../../../components/PropertyMap';
+import SharedSections from '../../../../components/SharedSections';
+import SocialIcon from '../../../../components/SocialIcon';
 import { getContent } from '../../../../lib/content';
 import { uniqueSlugs } from '../../../../lib/slug';
+import { whatsappUrlWithMessage } from '../../../../lib/site';
 
 async function allProjects() {
   const c = await getContent('projects');
@@ -71,6 +74,14 @@ export default async function ProjectDetail({ params }) {
 
   const p = projects[index];
   const detail = c.detail || {};
+
+  // Brochure request. It opens WhatsApp with the project already named
+  // rather than downloading a file: an enquiry form is a form to fill in,
+  // this is one tap, and it lands in the same inbox as everything else.
+  const site = await getContent('site');
+  const brochureMessage = (detail.brochureMessage || 'Hi RealTerra, please send me the brochure for {project}.')
+    .replace(/\{project\}/g, p.name);
+  const brochureHref = whatsappUrlWithMessage(site, brochureMessage);
   // The hero image also opens the gallery, so it leads the set unless the
   // editor has already put it there.
   const galleryImages = (p.gallery || []).map((g) => g?.image).filter(Boolean);
@@ -121,6 +132,10 @@ export default async function ProjectDetail({ params }) {
               {p.yield && <span><em>Yield</em> {p.yield}</span>}
             </p>
           )}
+          <a className="pd-brochure pd-brochure-hero" href={brochureHref} target="_blank" rel="noreferrer">
+            <SocialIcon platform="WhatsApp" size={17} />
+            {detail.brochureLabel || 'Download Brochure'}
+          </a>
         </div>
       </div>
 
@@ -190,6 +205,13 @@ export default async function ProjectDetail({ params }) {
 
         <aside className="pd-aside">
           <ProjectEnquiryForm project={p.name} content={detail} />
+          {/* Repeated beside the form because that is where someone lands
+              once they have decided they want the numbers, and it converts
+              far better than a form does. */}
+          <a className="pd-brochure pd-brochure-aside" href={brochureHref} target="_blank" rel="noreferrer">
+            <SocialIcon platform="WhatsApp" size={18} />
+            {detail.brochureLabel || 'Download Brochure'}
+          </a>
         </aside>
       </div>
 
@@ -220,6 +242,8 @@ export default async function ProjectDetail({ params }) {
           </div>
         </section>
       )}
+
+      <SharedSections />
     </main>
   );
 }

@@ -1,8 +1,11 @@
 import Link from 'next/link';
 import './markets.css';
 import Media from '../../../components/Media';
+import PageHero from '../../../components/PageHero';
+import SharedSections from '../../../components/SharedSections';
 import { getContent } from '../../../lib/content';
 import Lines from '../../../components/Lines';
+import { marketHref } from '../../../lib/site';
 
 export const metadata = {
   title: 'Markets',
@@ -14,24 +17,23 @@ export default async function Markets() {
   return (
     <main className="page">
       {/* HERO */}
-      <div className="markets-hero page-hero-split">
-        <div className="page-hero-split-left dark">
-          <p className="eyebrow reveal" style={{ color: 'var(--text-2)' }}>{c.hero.eyebrow}</p>
-          <h1 className="reveal d1"><Lines text={c.hero.headline} /></h1>
-          <p className="reveal d2" style={{ maxWidth: '360px', marginTop: '1rem' }}>{c.hero.subhead}</p>
-          <div className="markets-hero-meta reveal d3">
-            {c.hero.stats.map((s) => (
-              <div key={s.label}>
-                <span className="markets-hero-stat-val">{s.value}</span>
-                <span className="markets-hero-stat-lbl">{s.label}</span>
-              </div>
-            ))}
-          </div>
+      <PageHero
+        eyebrow={c.hero.eyebrow}
+        headline={c.hero.headline}
+        subhead={c.hero.subhead}
+        image={c.hero.image}
+        poster={c.hero.poster}
+        alt="UAE skyline"
+      >
+        <div className="markets-hero-meta reveal d3">
+          {c.hero.stats.map((s) => (
+            <div key={s.label}>
+              <span className="markets-hero-stat-val">{s.value}</span>
+              <span className="markets-hero-stat-lbl">{s.label}</span>
+            </div>
+          ))}
         </div>
-        <div className="page-hero-split-right">
-          <Media src={c.hero.image} alt="UAE skyline" fill priority sizes="(max-width: 900px) 100vw, 50vw" />
-        </div>
-      </div>
+      </PageHero>
 
       {/* MACRO STRIP */}
       <div className="macro-strip">
@@ -46,15 +48,19 @@ export default async function Markets() {
         </div>
       </div>
 
-      {/* MARKETS */}
+      {/* MARKETS
+          The photo and the market name are both links to Contact: by the time
+          someone has read one of these write-ups the next thing they want is
+          to ask about it, and the "request report" link at the foot of the
+          block was the only way to do that. */}
       {c.markets.map((m) => (
-        <div className="market-full" key={m.name}>
-          <div className="market-img img-zoom">
+        <div className="market-full" id={marketHref(m.name).split('#')[1]} key={m.name}>
+          <Link href="/contact" className="market-img img-zoom" aria-label={`Enquire about ${m.name}`}>
             <Media src={m.image} alt={m.name} fill sizes="(max-width: 900px) 100vw, 50vw" />
-          </div>
+          </Link>
           <div className="market-text reveal">
             <p className="market-location">{m.location}</p>
-            <h2 className="market-name">{m.name}</h2>
+            <h2 className="market-name"><Link href="/contact">{m.name}</Link></h2>
             <p className="market-desc">{m.description}</p>
             <div className="market-metrics">
               <div className="market-metric"><span className="metric-lbl">Capital Growth (3yr)</span><span className="metric-val metric-up">{m.capitalGrowth}</span></div>
@@ -66,6 +72,8 @@ export default async function Markets() {
           </div>
         </div>
       ))}
+
+      <SharedSections />
 
       {/* CTA */}
       <div className="cta-band">

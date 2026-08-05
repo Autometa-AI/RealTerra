@@ -1,7 +1,8 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import Media from './Media';
 import { uniqueSlugs } from '../lib/slug';
 
@@ -16,8 +17,18 @@ export default function ProjectSearch({ projects, filters, search }) {
   // Computed over the full list, not the filtered one, so a card's link
   // never shifts when the visible set changes.
   const slugs = useMemo(() => uniqueSlugs(projects, 'name'), [projects]);
-  const [query, setQuery] = useState('');
+  // The home hero's search box hands off here as ?q=… . It is read on the
+  // client rather than as a server `searchParams` prop so this page stays
+  // statically rendered — reading search params on the server would make
+  // every visit to /projects a dynamic render.
+  const urlQuery = useSearchParams().get('q') || '';
+  const [query, setQuery] = useState(urlQuery);
   const [active, setActive] = useState(filters?.[0] || 'All');
+
+  // Arriving from a second search — same route, new query — has to move the
+  // box, since the component is already mounted and would otherwise keep
+  // showing the first search.
+  useEffect(() => setQuery(urlQuery), [urlQuery]);
 
   const isAll = (f) => !f || f.toLowerCase() === 'all';
 

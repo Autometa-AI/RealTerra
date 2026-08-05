@@ -1,36 +1,37 @@
-.contact-hero {
-  /* Layout handled by .page-hero-split utility */
-}
+/* The three contact rows sit on the hero photo. Laid out in a row on
+   desktop, they read across the bottom of the image instead of pushing the
+   header a screen taller. */
 .contact-hero-details {
   display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  margin-top: 2.8rem;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(250,249,246,0.08);
+  flex-wrap: wrap;
+  gap: 1.2rem 3.5rem;
+  margin-top: 2.2rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid rgba(250,249,246,0.18);
 }
 .contact-hero-detail-label {
   font-size: 0.55rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(250,249,246,0.3);
-  margin-bottom: 0.15rem;
+  color: rgba(250,249,246,0.55);
+  margin-bottom: 0.25rem;
 }
 .contact-hero-detail-val {
-  font-size: 0.88rem;
-  color: rgba(250,249,246,0.75);
+  font-size: 0.92rem;
+  color: var(--paper);
   font-weight: 400;
 }
 .contact-hero-detail-val a {
-  color: rgba(250,249,246,0.75);
-  transition: color var(--t-fast);
+  color: var(--paper);
+  border-bottom: 1px solid rgba(250,249,246,0.28);
+  padding-bottom: 1px;
+  transition: color var(--t-fast), border-color var(--t-fast);
 }
-.contact-hero-detail-val a:hover { color: var(--white); }
+.contact-hero-detail-val a:hover { color: var(--signal); border-color: var(--signal); }
 
 @media (max-width: 900px) {
-  .contact-hero { padding: 0 !important; }
-  .contact-hero-details { gap: 1rem; }
+  .contact-hero-details { flex-direction: column; gap: 0.9rem; margin-top: 1.6rem; padding-top: 1.2rem; }
 }
 
 .contact-main {
@@ -70,7 +71,7 @@
   margin-top: 0.5rem;
 }
 .whatsapp-btn:hover { background: var(--signal); color: var(--pine-deep); }
-.whatsapp-icon { font-size: 0.95rem; color: var(--signal); transition: color var(--t-base); }
+.whatsapp-icon { display: inline-flex; color: var(--signal); transition: color var(--t-base); }
 .whatsapp-btn:hover .whatsapp-icon { color: var(--pine-deep); }
 
 /* MAP BAND

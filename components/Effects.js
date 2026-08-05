@@ -75,7 +75,7 @@ export default function Effects() {
     // ── Section line counter stagger ───────────────────────────────
     (function initLineStagger() {
       const staggerGroups = document.querySelectorAll(
-        '.market-metrics, .founder-capabilities, .pillars-mini, .macro-points, .contact-hero-details'
+        '.market-metrics, .founder-capabilities, .macro-points, .contact-hero-details'
       );
 
       const obs = new IntersectionObserver(

@@ -411,6 +411,41 @@
   box-shadow: var(--a-shadow);
 }
 .admin-savebar-status { font-size: 0.8rem; color: var(--a-text-2); }
+/* One press of Save publishes every page holding unsaved edits, so the bar
+   has to name them — the alternative is a button whose blast radius is
+   larger than what is on screen. */
+.admin-savebar-pending { color: var(--a-text-3); }
+.admin-savebar-pending strong { color: var(--a-text-1); font-weight: 600; }
+.admin-discard {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--a-text-3);
+  font-size: 0.95rem;
+  line-height: 1;
+  padding: 0 0.15rem 0 0.3rem;
+}
+.admin-discard:hover { color: var(--a-danger); }
+
+.admin-note {
+  font-size: 0.8rem;
+  color: var(--a-accent);
+  background: var(--a-accent-soft);
+  border-radius: var(--a-radius);
+  padding: 0.65rem 0.9rem;
+  margin-bottom: 1rem;
+}
+.admin-note-warn { color: var(--a-danger); background: var(--a-danger-soft); }
+
+/* A dot beside any page in the sidebar that is holding unsaved edits. */
+.admin-nav-dot {
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--a-danger);
+  margin-left: 0.45rem;
+  vertical-align: middle;
+}
 
 @media (prefers-color-scheme: dark) {
   .admin {

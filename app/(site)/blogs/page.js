@@ -4,6 +4,7 @@ import Media from '../../../components/Media';
 import { getContent } from '../../../lib/content';
 import Lines from '../../../components/Lines';
 import NewsletterForm from '../../../components/NewsletterForm';
+import SharedSections from '../../../components/SharedSections';
 import { uniqueSlugs } from '../../../lib/slug';
 
 export const metadata = {
@@ -75,6 +76,8 @@ export default async function Blogs() {
         </div>
         <NewsletterForm content={c.newsletter} />
       </div>
+
+      <SharedSections />
 
       {/* CTA */}
       <div className="cta-band">

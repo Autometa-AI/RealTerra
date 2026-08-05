@@ -1,9 +1,12 @@
 import './contact.css';
 import Media from '../../../components/Media';
+import PageHero from '../../../components/PageHero';
+import SharedSections from '../../../components/SharedSections';
 import { getContent } from '../../../lib/content';
-import Lines from '../../../components/Lines';
 import ContactForm from '../../../components/ContactForm';
 import PropertyMap from '../../../components/PropertyMap';
+import SocialIcon from '../../../components/SocialIcon';
+import { whatsappUrl } from '../../../lib/site';
 
 export const metadata = {
   title: 'Contact',
@@ -13,34 +16,41 @@ export default async function Contact() {
   const c = await getContent('contact');
   const site = await getContent('site');
   const info = site.contactInfo;
+  // `contactInfo` has no whatsappUrl field — the page was rendering
+  // href={undefined}, so tapping the number in the hero did nothing at all.
+  // The number and the opening message both live under askUs, which is what
+  // every other WhatsApp link on the site already uses.
+  const waHref = whatsappUrl(site);
+  const telHref = `tel:${String(info.phoneDisplay || '').replace(/[^0-9+]/g, '')}`;
 
   return (
     <main className="page">
       {/* HERO */}
-      <div className="contact-hero page-hero-split">
-        <div className="page-hero-split-left dark">
-          <p className="eyebrow reveal" style={{ color: 'var(--text-2)' }}>{c.hero.eyebrow}</p>
-          <h1 className="reveal d1"><Lines text={c.hero.headline} /></h1>
-          <p className="reveal d2" style={{ maxWidth: '360px', marginTop: '1rem' }}>{c.hero.subhead}</p>
-          <div className="contact-hero-details reveal d3">
-            <div>
-              <div className="contact-hero-detail-label">{c.heroDetailLabels.email}</div>
-              <div className="contact-hero-detail-val"><a href={`mailto:${info.email}`}>{info.email}</a></div>
-            </div>
-            <div>
-              <div className="contact-hero-detail-label">{c.heroDetailLabels.whatsapp}</div>
-              <div className="contact-hero-detail-val"><a href={info.whatsappUrl}>{info.phoneDisplay}</a></div>
-            </div>
-            <div>
-              <div className="contact-hero-detail-label">{c.heroDetailLabels.location}</div>
-              <div className="contact-hero-detail-val">{info.location}</div>
+      <PageHero
+        eyebrow={c.hero.eyebrow}
+        headline={c.hero.headline}
+        subhead={c.hero.subhead}
+        image={c.hero.image}
+        poster={c.hero.poster}
+        alt="RealTerra office Dubai"
+      >
+        <div className="contact-hero-details reveal d3">
+          <div>
+            <div className="contact-hero-detail-label">{c.heroDetailLabels.email}</div>
+            <div className="contact-hero-detail-val"><a href={`mailto:${info.email}`}>{info.email}</a></div>
+          </div>
+          <div>
+            <div className="contact-hero-detail-label">{c.heroDetailLabels.whatsapp}</div>
+            <div className="contact-hero-detail-val">
+              <a href={waHref} target="_blank" rel="noreferrer">{info.phoneDisplay}</a>
             </div>
           </div>
+          <div>
+            <div className="contact-hero-detail-label">{c.heroDetailLabels.location}</div>
+            <div className="contact-hero-detail-val">{info.location}</div>
+          </div>
         </div>
-        <div className="page-hero-split-right">
-          <Media src={c.hero.image} alt="RealTerra office Dubai" fill priority sizes="(max-width: 900px) 100vw, 50vw" />
-        </div>
-      </div>
+      </PageHero>
 
       {/* MAIN */}
       <div className="contact-main">
@@ -60,9 +70,12 @@ export default async function Contact() {
 
           <div className="contact-detail reveal d2">
             <p className="contact-detail-label">{c.infoPanel.whatsapp.label}</p>
-            <p className="contact-detail-val">{info.phoneDisplay}</p>
-            <a href={info.whatsappUrl} className="whatsapp-btn" target="_blank" rel="noreferrer">
-              <span className="whatsapp-icon">✓</span> {c.infoPanel.whatsapp.buttonLabel}
+            <p className="contact-detail-val">
+              <a href={telHref} style={{ color: 'var(--text-1)' }}>{info.phoneDisplay}</a>
+            </p>
+            <a href={waHref} className="whatsapp-btn" target="_blank" rel="noreferrer">
+              <span className="whatsapp-icon"><SocialIcon platform="WhatsApp" size={17} /></span>
+              {c.infoPanel.whatsapp.buttonLabel}
             </a>
           </div>
 
@@ -92,6 +105,8 @@ export default async function Contact() {
           <ContactForm content={c.form} />
         </div>
       </div>
+
+      <SharedSections />
 
       {/* MAP — a real, draggable Google map once a location is set. The aerial
           photo is the fallback for anyone who has not filled one in yet. */}
