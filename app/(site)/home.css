@@ -301,123 +301,6 @@
 .insight-title-home { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; color: var(--text-1); line-height: 1.4; margin-bottom: 0.6rem; flex: 1; }
 .insight-meta { font-size: 0.64rem; color: var(--text-3); letter-spacing: 0.06em; }
 
-/* ── FAQ ───────────────────────────────── */
-.faq-section {
-  padding: var(--section-y) var(--gutter);
-  display: grid;
-  grid-template-columns: 1fr 1.6fr;
-  gap: 4rem;
-  align-items: start;
-  border-top: 1px solid var(--border-light);
-}
-.faq-head h2 { margin-top: 0.2rem; }
-/* Sticky so the heading tracks the questions on a long list instead of
-   scrolling away and leaving the column empty. */
-.faq-head { position: sticky; top: calc(var(--nav-h) + 2.5rem); }
-.faq-head-aside {
-  margin-top: 2rem;
-  padding-top: 1.6rem;
-  border-top: 1px solid var(--border-light);
-  max-width: 34ch;
-}
-.faq-support {
-  font-size: 0.86rem;
-  line-height: 1.8;
-  color: var(--text-3);
-  margin-bottom: 1.1rem;
-}
-.faq-list { border-top: 1px solid var(--border-light); }
-.faq-item { border-bottom: 1px solid var(--border-light); }
-.faq-q {
-  list-style: none;
-  cursor: pointer;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 2rem;
-  padding: 1.35rem 0;
-  font-family: var(--serif);
-  font-size: 1.02rem;
-  font-weight: 600;
-  color: var(--text-1);
-  transition: color var(--t-fast);
-}
-.faq-q::-webkit-details-marker { display: none; }
-.faq-q:hover { color: var(--pine); }
-.faq-mark {
-  position: relative;
-  flex-shrink: 0;
-  width: 13px; height: 13px;
-  margin-top: 0.35rem;
-}
-.faq-mark::before,
-.faq-mark::after {
-  content: '';
-  position: absolute;
-  background: var(--text-2);
-}
-.faq-mark::before { top: 6px; left: 0; width: 13px; height: 1px; }
-.faq-mark::after  { left: 6px; top: 0; width: 1px; height: 13px; }
-.faq-item[open] .faq-mark::after { transform: rotate(90deg); opacity: 0; }
-.faq-a { padding: 0 0 1.5rem; max-width: 62ch; }
-.faq-a p { font-size: 0.88rem; line-height: 1.85; color: var(--text-3); }
-
-/* ── REVIEWS ───────────────────────────── */
-.reviews-section { padding: var(--section-y) var(--gutter); background: var(--surface); border-top: 1px solid var(--border-light); }
-.reviews-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 2rem;
-  flex-wrap: wrap;
-  margin-bottom: 3rem;
-}
-.reviews-summary { display: flex; flex-direction: column; align-items: flex-end; gap: 0.6rem; }
-.reviews-summary-line {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em;
-  text-transform: uppercase; color: var(--text-2);
-}
-.google-g { flex-shrink: 0; }
-.reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-.review-card {
-  background: var(--white);
-  border: 1px solid var(--border-light);
-  padding: 1.8rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  transition: border-color var(--t-base), box-shadow var(--t-base);
-}
-.review-card:hover { border-color: var(--border); box-shadow: 0 4px 20px rgba(20,32,28,0.06); }
-.review-stars { display: flex; gap: 2px; }
-.review-stars svg.on  { fill: #E7A33E; }
-.review-stars svg.off { fill: var(--border); }
-.review-text {
-  font-size: 0.88rem;
-  line-height: 1.8;
-  color: var(--text-2);
-  flex: 1;
-  margin: 0;
-}
-.review-foot { display: flex; align-items: center; gap: 0.8rem; border-top: 1px solid var(--border-light); padding-top: 1rem; }
-.review-avatar {
-  position: relative;
-  width: 40px; height: 40px;
-  border-radius: 50%;
-  overflow: hidden;
-  flex-shrink: 0;
-  background: var(--paper-alt);
-  display: grid; place-items: center;
-}
-.review-avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.review-avatar-fallback {
-  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em;
-  color: var(--text-2);
-}
-.review-name { display: block; font-size: 0.84rem; font-weight: 600; color: var(--text-1); }
-.review-date { display: block; font-size: 0.68rem; color: var(--text-3); margin-top: 0.1rem; }
-
 /* ─────────────────────────────────────────
    RESPONSIVE
    These live here, not in globals.css: this
@@ -427,12 +310,7 @@
 ───────────────────────────────────────── */
 @media (max-width: 1024px) {
   .insight-cards-row { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-  .reviews-grid { grid-template-columns: 1fr 1fr; }
   .intro-strip { gap: 2.5rem; }
-  /* One column on mobile, so sticky has nothing to sit beside. */
-  .faq-section { grid-template-columns: 1fr; gap: 2rem; }
-  .faq-head { position: static; }
-  .faq-head-aside { margin-top: 1.5rem; padding-top: 1.25rem; max-width: none; }
 }
 
 @media (max-width: 900px) {
@@ -512,14 +390,6 @@
   .insight-preview { padding: 3.5rem var(--gutter); }
   .insight-cards-row { grid-template-columns: 1fr; gap: 1.2rem; }
   .insight-preview-header { flex-direction: column; align-items: flex-start; gap: 1rem; margin-bottom: 2rem; }
-
-  .faq-section { padding: 3.5rem var(--gutter); }
-  .faq-q { font-size: 0.95rem; gap: 1.2rem; }
-
-  .reviews-section { padding: 3.5rem var(--gutter); }
-  .reviews-grid { grid-template-columns: 1fr; gap: 1.2rem; }
-  .reviews-header { flex-direction: column; align-items: flex-start; margin-bottom: 2rem; }
-  .reviews-summary { align-items: flex-start; }
 }
 
 /* Same reasoning as the mobile fallback: a pinned section that has to be
