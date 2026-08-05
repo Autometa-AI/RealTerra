@@ -2,12 +2,12 @@
   "hero": {
     "eyebrow": "Market Intelligence",
     "headline": "Research &\nInsights",
-    "intro": "We publish independently-produced research on UAE real estate — area analyses, developer comparisons, and investment frameworks for serious allocators. All available on request."
+    "intro": "We publish independently-produced research on UAE real estate: area analyses, developer comparisons, and investment frameworks for serious allocators. All available on request."
   },
   "featured": {
     "type": "Flagship Report · 2025",
     "title": "The Al Marjan Inflection: Why the Wynn Effect Will Permanently Reprice RAK Residential",
-    "excerpt": "A 42-page deep-dive into the supply-demand dynamics, infrastructure commitments, and comparable case studies — Macau, Singapore Marina Bay — that make Al Marjan one of the clearest asymmetric real estate bets in the GCC this decade. Covers entry windows, developer selection, and projected 5-year IRR bands.",
+    "excerpt": "A 42-page deep-dive into the supply-demand dynamics, infrastructure commitments, and comparable case studies from Macau and Singapore Marina Bay that make Al Marjan one of the clearest asymmetric real estate bets in the GCC this decade. Covers entry windows, developer selection, and projected 5-year IRR bands.",
     "image": "/images/al-marjan-report.jpg",
     "linkLabel": "Request this report",
     "meta": "42 pages · Available to qualified investors",
@@ -16,14 +16,14 @@
     "date": "2026",
     "readTime": "6 min read",
     "body": [
-      "A 42-page deep-dive into the supply-demand dynamics, infrastructure commitments, and comparable case studies — Macau, Singapore Marina Bay — that make Al Marjan one of the clearest asymmetric real estate bets in the GCC this decade. Covers entry windows, developer selection, and projected 5-year IRR bands."
+      "A 42-page deep-dive into the supply-demand dynamics, infrastructure commitments, and comparable case studies from Macau and Singapore Marina Bay that make Al Marjan one of the clearest asymmetric real estate bets in the GCC this decade. Covers entry windows, developer selection, and projected 5-year IRR bands."
     ]
   },
   "posts": [
     {
       "type": "Market Brief",
       "title": "Dubai South: Reading the Airport Signal Before the Market Does",
-      "excerpt": "Al Maktoum's expansion timeline decoded — what it means for residential demand, which sub-zones sit in the appreciation corridor, and how to size a position today.",
+      "excerpt": "Al Maktoum's expansion timeline decoded: what it means for residential demand, which sub-zones sit in the appreciation corridor, and how to size a position today.",
       "meta": "Area Analysis",
       "image": "/images/dubai-south.jpg",
       "slug": "dubai-south-reading-the-airport-signal-before-the-market-does",
@@ -87,7 +87,7 @@
     {
       "type": "Investor Guide",
       "title": "Building a UAE Portfolio Across Three Horizons: Yield, Growth & Off-Plan Value",
-      "excerpt": "A framework for structuring property exposure across short, medium, and long time horizons — using the UAE's unique tax environment to compound returns.",
+      "excerpt": "A framework for structuring property exposure across short, medium, and long time horizons, using the UAE's unique tax environment to compound returns.",
       "meta": "Framework · 2025",
       "image": "/images/founders-strip.jpg",
       "slug": "building-a-uae-portfolio-across-three-horizons-yield-growth-off-plan-value",
@@ -108,7 +108,7 @@
     {
       "type": "Area Spotlight",
       "title": "Saadiyat Island: Why Abu Dhabi's Cultural District Is an Institutional-Grade Bet",
-      "excerpt": "Louvre, Guggenheim, Formula 1 — and a government-linked developer track record that reduces completion risk to near zero. The full investment case.",
+      "excerpt": "Louvre, Guggenheim, Formula 1, and a government-linked developer track record that reduces completion risk to near zero. The full investment case.",
       "meta": "Area Analysis · 2025",
       "image": "/images/saadiyat-island.jpg",
       "slug": "saadiyat-island-why-abu-dhabis-cultural-district-is-an-institutional-grade-bet",
@@ -127,7 +127,7 @@
     {
       "type": "Macro Brief",
       "title": "UAE Real Estate in 2025: The Four Structural Tailwinds Every Investor Should Understand",
-      "excerpt": "Zero CGT, Golden Visa demand lock-in, infrastructure pipeline, and HNI inflows. The macro case for UAE real estate — written for allocators, not speculators.",
+      "excerpt": "Zero CGT, Golden Visa demand lock-in, infrastructure pipeline, and HNI inflows. The macro case for UAE real estate, written for allocators, not speculators.",
       "meta": "Macro · Q1 2025",
       "image": "/images/dubai-skyline.jpg",
       "slug": "uae-real-estate-in-2025-the-four-structural-tailwinds-every-investor-should-unde",
@@ -135,7 +135,7 @@
       "date": "2026",
       "readTime": "6 min read",
       "body": [
-        "Zero CGT, Golden Visa demand lock-in, infrastructure pipeline, and HNI inflows. The macro case for UAE real estate — written for allocators, not speculators."
+        "Zero CGT, Golden Visa demand lock-in, infrastructure pipeline, and HNI inflows. The macro case for UAE real estate, written for allocators, not speculators."
       ]
     }
   ],
@@ -143,7 +143,7 @@
   "newsletter": {
     "eyebrow": "Stay Informed",
     "headline": "Receive our research\nas it's published.",
-    "body": "Quarterly briefings, area reports, and developer analyses — delivered directly. No spam. Unsubscribe anytime.",
+    "body": "Quarterly briefings, area reports, and developer analyses, delivered directly. No spam. Unsubscribe anytime.",
     "buttonLabel": "Subscribe",
     "disclaimer": "We respect your privacy. No third-party sharing."
   },

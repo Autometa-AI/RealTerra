@@ -41,7 +41,7 @@ export async function generateMetadata() {
     metadataBase: new URL('https://realterra.ae'),
     title: {
       default: site.seo.titleDefault,
-      template: '%s — RealTerra Global Properties',
+      template: '%s | RealTerra Global Properties',
     },
     description: site.seo.description,
     applicationName: 'RealTerra Global Properties',

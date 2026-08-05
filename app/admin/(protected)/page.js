@@ -6,7 +6,7 @@ export default function AdminOverview() {
     <div>
       <h1 className="admin-h1">Overview</h1>
       <p className="admin-sub">
-        Pick a page to edit. Saves are instant — the live site reflects them on the next page load.
+        Pick a page to edit. Saves are instant. The live site reflects them on the next page load.
       </p>
       <div className="admin-grid">
         {CMS_PAGES.map((p) => (

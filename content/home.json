@@ -22,7 +22,7 @@
   "philosophyIntro": {
     "eyebrow": "Philosophy",
     "headline": "An analytics practice\nfirst. A luxury one\nsecond.",
-    "body": "RealTerra exists for investors who want their real estate decisions underwritten the way a portfolio allocation would be — with a defined trajectory, exit window, and liquidity profile, not a lifestyle narrative.",
+    "body": "RealTerra exists for investors who want their real estate decisions underwritten the way a portfolio allocation would be: with a defined trajectory, exit window, and liquidity profile, not a lifestyle narrative.",
     "linkLabel": "Our approach"
   },
   "philosophyPanel": {
@@ -60,7 +60,7 @@
       {
         "tag": "Dubai",
         "name": "Dubai Maritime City",
-        "description": "Waterfront living between Port Rashid and Business Bay — the decade's most underpriced waterfront opportunity.",
+        "description": "Waterfront living between Port Rashid and Business Bay, the decade's most underpriced waterfront opportunity.",
         "yield": "Yield 6.2 – 7.8%",
         "image": "/images/dubai-maritime-city.jpg"
       }
@@ -171,7 +171,7 @@
         "answer": "Every project passes a five-point screen: developer track record, completion risk, yield floor, exit liquidity, and a documented growth thesis. If a launch fails any of them, we do not present it."
       }
     ],
-    "supportText": "If the answer you need is not here, ask us directly — we reply to every enquiry ourselves.",
+    "supportText": "If the answer you need is not here, ask us directly. We reply to every enquiry ourselves.",
     "linkLabel": "Ask a question",
     "linkHref": "/contact"
   },

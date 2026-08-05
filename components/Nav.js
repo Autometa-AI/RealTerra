@@ -43,9 +43,9 @@ export default function Nav({ site }) {
 
   return (
     <>
-      <nav>
+      <nav className="site-nav">
         {/* Wordmark only — the mark is the entire logo. */}
-        <Link href="/" className="nav-logo" aria-label={`${site.nav.wordmark} — home`}>
+        <Link href="/" className="nav-logo" aria-label={`${site.nav.wordmark}, home`}>
           {site.nav.wordmark}
         </Link>
 

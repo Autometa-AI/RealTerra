@@ -129,7 +129,7 @@ function RepeatField({ field, value, onChange }) {
                 <span className="a-repeat-chevron" aria-hidden="true" />
                 <span className="a-repeat-name">
                   {noun} {i + 1}
-                  {summary ? ` — ${summary}` : ''}
+                  {summary ? ` · ${summary}` : ''}
                 </span>
               </button>
               <div className="a-repeat-tools">

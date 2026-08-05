@@ -202,7 +202,7 @@ export default function PageEditor({ pageKey, pageLabel, groups, initialContent 
               {dirty ? 'Unsaved changes' : 'Unsaved changes on other pages'}
               {otherPending.length > 0 && (
                 <span className="admin-savebar-pending">
-                  {' — also publishing '}
+                  {' · also publishing '}
                   {otherPending.map((page, i) => (
                     <span key={page}>
                       {i > 0 && ', '}
@@ -222,7 +222,7 @@ export default function PageEditor({ pageKey, pageLabel, groups, initialContent 
             </>
           )}
           {status === 'success' && !hasChanges && (
-            <span style={{ color: 'var(--a-accent)' }}>Saved — live on the site now.</span>
+            <span style={{ color: 'var(--a-accent)' }}>Saved. Live on the site now.</span>
           )}
           {status === 'idle' && !hasChanges && 'No changes yet'}
         </span>

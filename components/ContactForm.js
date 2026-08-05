@@ -44,7 +44,7 @@ export default function ContactForm({ content }) {
     return (
       <div className="reveal d2">
         <p style={{ fontSize: '0.95rem', color: 'var(--text-1)', lineHeight: 1.7 }}>
-          Thank you — your enquiry has been sent. We&apos;ll come back to you within 24 hours.
+          Thank you. Your enquiry has been sent. We&apos;ll come back to you within 24 hours.
         </p>
       </div>
     );

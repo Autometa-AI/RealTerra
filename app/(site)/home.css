@@ -125,6 +125,83 @@
 }
 .hero-search-btn:hover { background: var(--signal); }
 
+/* ── HERO SEARCH RESULTS ────────────────────
+   The matches drop out of the field on paper rather than more glass: this is
+   a list to read, and the hero video behind it is the last thing that should
+   be showing through. It is absolutely positioned so opening it never pushes
+   the hero buttons down the screen. */
+.hero-search-slot { position: relative; z-index: 5; }
+.hero-search-wrap { position: relative; max-width: 560px; }
+.hero-search-results {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0; right: 0;
+  z-index: 20;
+  background: var(--white);
+  border: 1px solid var(--border);
+  box-shadow: 0 18px 44px rgba(10, 41, 33, 0.22);
+  max-height: min(420px, 52svh);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.hero-search-result {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 0.9rem;
+  align-items: center;
+  padding: 0.7rem 0.9rem;
+  border-bottom: 1px solid var(--border-light);
+  color: inherit;
+  transition: background var(--t-fast);
+}
+.hero-search-result.on { background: var(--paper-alt); }
+.hero-search-result-img {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--surface);
+  display: block;
+}
+.hero-search-result-img img,
+.hero-search-result-img video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero-search-result-body { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; }
+.hero-search-result-dev {
+  font-size: 0.53rem; font-weight: 600; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--steel);
+}
+.hero-search-result-name {
+  font-family: var(--serif);
+  font-size: 0.95rem; font-weight: 600;
+  color: var(--text-1);
+  line-height: 1.3;
+}
+.hero-search-result.on .hero-search-result-name { color: var(--pine); }
+.hero-search-result-meta {
+  font-size: 0.7rem; color: var(--text-3);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.hero-search-all {
+  display: block;
+  width: 100%;
+  border: none;
+  background: var(--paper-alt);
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 0.6rem; font-weight: 600; letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pine);
+  padding: 0.85rem 0.9rem;
+  text-align: left;
+  transition: background var(--t-fast), color var(--t-fast);
+}
+.hero-search-all:hover { background: var(--pine); color: var(--paper); }
+.hero-search-empty {
+  padding: 1.1rem 0.9rem;
+  font-size: 0.82rem;
+  color: var(--text-3);
+}
+.hero-search-empty a { color: var(--pine); font-weight: 600; text-decoration: underline; }
+
 /* ── APPROACH — pinned tile slider ──────────
    The section is a tall scroll runway; the panel inside sticks to the
    viewport while the page moves through it, and each screenful advances one
@@ -150,7 +227,10 @@
   padding: 4rem var(--gutter);
   isolation: isolate;
 }
-.approach-media { position: absolute; inset: 0; z-index: -1; opacity: 0.28; }
+/* The photograph is atmosphere, not subject matter: it sits well back so the
+   four pillars are legible at a glance. At 0.28 with a scrim that thinned to
+   0.62 on the right, the tiles were being read against lit windows. */
+.approach-media { position: absolute; inset: 0; z-index: -1; opacity: 0.16; }
 .approach-media img,
 .approach-media video { width: 100%; height: 100%; object-fit: cover; }
 .approach-pin::before {
@@ -158,13 +238,13 @@
   position: absolute; inset: 0;
   z-index: -1;
   background:
-    linear-gradient(to right, var(--navy) 0%, rgba(15,61,51,0.86) 55%, rgba(15,61,51,0.62) 100%);
+    linear-gradient(to right, var(--navy) 0%, rgba(15,61,51,0.94) 55%, rgba(15,61,51,0.86) 100%);
   pointer-events: none;
 }
 .approach-head { max-width: 30rem; }
 .approach-head h2 { color: var(--paper); }
 .approach-sub {
-  color: rgba(250,249,246,0.55);
+  color: rgba(250,249,246,0.78);
   margin-top: 1rem;
   font-size: 0.92rem;
   max-width: 38ch;
@@ -186,22 +266,25 @@
   gap: 1.4rem;
   padding: 1.6rem 1.8rem;
   border: 1px solid var(--line-dark);
-  background: rgba(250,249,246,0.03);
-  /* Off-tiles sit back and dim; the active one comes forward. */
-  opacity: 0.35;
-  transform: translateX(2.5rem) scale(0.97);
+  /* Each tile carries its own dark fill rather than letting the photograph
+     through, so a pillar reads the same whichever frame is behind it. */
+  background: rgba(10,41,33,0.55);
+  /* Off-tiles sit back; they no longer fade to the point of being unreadable
+     — the client could not make out three of the four pillars. */
+  opacity: 0.72;
+  transform: translateX(2.5rem) scale(0.98);
   transition:
     opacity var(--t-slow) var(--ease),
     transform var(--t-slow) var(--ease),
     border-color var(--t-slow) var(--ease),
     background var(--t-slow) var(--ease);
 }
-.approach-tile.past { opacity: 0.28; transform: translateX(0) scale(0.97); }
+.approach-tile.past { opacity: 0.66; transform: translateX(0) scale(0.98); }
 .approach-tile.on {
   opacity: 1;
   transform: translateX(0) scale(1);
-  border-color: var(--line-dark-2);
-  background: rgba(250,249,246,0.07);
+  border-color: var(--signal);
+  background: rgba(10,41,33,0.82);
 }
 .approach-num {
   font-family: var(--mono);
@@ -216,7 +299,7 @@
   font-size: 1.25rem;
   font-weight: 500;
   letter-spacing: -0.01em;
-  color: rgba(250,249,246,0.92);
+  color: var(--paper);
   line-height: 1.3;
 }
 

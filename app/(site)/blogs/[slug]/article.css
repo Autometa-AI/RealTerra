@@ -234,6 +234,10 @@
   .article-rail-left { order: 3; padding-top: 2.5rem; }
   .article-rail-right { order: 2; }
   .article-rail-left .article-project-list { flex-direction: column; }
+  /* The tablet rule above gives each card `flex: 1 1 260px` so they share a
+     row. Back in a column, flex-basis is a height, so every card became a
+     260px box with a 74px thumbnail floating in the middle of it. */
+  .article-rail-left .article-project { flex: 0 0 auto; }
   /* The contents list is a desktop affordance: on a phone the article is
      one thumb-scroll and a sticky index is just something else to scroll
      past. */
