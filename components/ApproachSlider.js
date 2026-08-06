@@ -95,8 +95,12 @@ export default function ApproachSlider({ pillars, eyebrow, headline, subtext, me
           {children}
         </div>
 
+        {/* `reveal` is here only to collect the `.up` class when the track
+            scrolls into view — that is what starts the tiles on a phone,
+            where there is no pinned scroll to advance them. The track itself
+            must not move, so the reveal transform is cancelled in CSS. */}
         <ol
-          className="approach-track"
+          className="approach-track reveal"
           style={{ '--approach-active': active }}
         >
           {items.map((label, i) => (

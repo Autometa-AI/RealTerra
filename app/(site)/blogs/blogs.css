@@ -1,12 +1,5 @@
-.insights-hero {
-  padding: 8rem 3.5rem 5rem;
-  background: var(--navy);
-}
-.insights-hero-inner {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end;
-}
-.insights-hero h1 { color: var(--white); }
-.insights-hero p { color: rgba(250,249,246,0.45); max-width:400px; margin-top:1rem; }
+/* The hero is <PageHero> now, styled with every other page header in
+   globals.css — this page no longer has one of its own. */
 
 /* FEATURED */
 .featured-insight {
@@ -96,9 +89,6 @@
 }
 
 @media (max-width: 900px) {
-  .insights-hero { padding: 3.5rem var(--gutter) 2.5rem; }
-  .insights-hero-inner { grid-template-columns: 1fr; gap: 1.25rem; }
-  .insights-hero p { max-width: none; }
   .featured-insight { grid-template-columns: 1fr; }
   /* `align-self: stretch` has to go with it. Stretch sizes the box from the
      row height, and once there is an aspect-ratio the width is derived from

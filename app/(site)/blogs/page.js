@@ -3,6 +3,7 @@ import './blogs.css';
 import Media from '../../../components/Media';
 import { getContent } from '../../../lib/content';
 import Lines from '../../../components/Lines';
+import PageHero from '../../../components/PageHero';
 import NewsletterForm from '../../../components/NewsletterForm';
 import SharedSections from '../../../components/SharedSections';
 import { uniqueSlugs } from '../../../lib/slug';
@@ -21,18 +22,19 @@ export default async function Blogs() {
 
   return (
     <main className="page">
-      {/* HERO */}
-      <div className="insights-hero">
-        <div className="insights-hero-inner">
-          <div>
-            <p className="eyebrow reveal" style={{ color: 'var(--text-2)' }}>{c.hero.eyebrow}</p>
-            <h1 className="reveal d1"><Lines text={c.hero.headline} /></h1>
-          </div>
-          <div className="reveal d2">
-            <p>{c.hero.intro}</p>
-          </div>
-        </div>
-      </div>
+      {/* HERO — the shared header, same as every other page. This one kept a
+          bespoke flat block when the rest were unified, which is why it was
+          the only page with no way to put a picture behind the title. The
+          standfirst is still `hero.intro` in the CMS, not `hero.subhead`:
+          renaming it would orphan the copy already written against it. */}
+      <PageHero
+        eyebrow={c.hero.eyebrow}
+        headline={c.hero.headline}
+        subhead={c.hero.intro}
+        image={c.hero.image}
+        poster={c.hero.poster}
+        alt="RealTerra research and market insights"
+      />
 
       {/* FEATURED */}
       <Link href={hrefFor(c.featured)} className="featured-insight">
