@@ -77,8 +77,8 @@ export default async function Home() {
         <div className="marquee-track">
           {[...c.marquee, ...c.marquee].map((item, i) => (
             <span className="marquee-cell" key={i}>
-              <span className={`marquee-item${i % c.marquee.length < 3 ? ' accent' : ''}`}>{item}</span>
-              <span className="marquee-item" aria-hidden="true">·</span>
+              <span className="marquee-item">{item}</span>
+              <span className="marquee-item dot" aria-hidden="true">·</span>
             </span>
           ))}
         </div>

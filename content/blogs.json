@@ -2,7 +2,9 @@
   "hero": {
     "eyebrow": "Market Intelligence",
     "headline": "Research &\nInsights",
-    "intro": "We publish independently-produced research on UAE real estate: area analyses, developer comparisons, and investment frameworks for serious allocators. All available on request."
+    "intro": "We publish independently-produced research on UAE real estate: area analyses, developer comparisons, and investment frameworks for serious allocators. All available on request.",
+    "image": "",
+    "poster": ""
   },
   "featured": {
     "type": "Flagship Report · 2025",

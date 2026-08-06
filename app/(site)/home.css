@@ -260,6 +260,14 @@
 .approach-dot.on { background: var(--signal); }
 
 .approach-track { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+/* The track carries `reveal` purely to be handed `.up` by the shared observer.
+   Cancel the lift-and-blur that class normally brings: the tiles inside are
+   what animates, and a track that faded in as a block would drag them with it. */
+[data-js] .approach-track.reveal {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
 .approach-tile {
   display: flex;
   align-items: center;
@@ -267,25 +275,41 @@
   padding: 1.6rem 1.8rem;
   border: 1px solid var(--line-dark);
   /* Each tile carries its own dark fill rather than letting the photograph
-     through, so a pillar reads the same whichever frame is behind it. */
-  background: rgba(10,41,33,0.55);
-  /* Off-tiles sit back; they no longer fade to the point of being unreadable
-     — the client could not make out three of the four pillars. */
-  opacity: 0.72;
-  transform: translateX(2.5rem) scale(0.98);
+     through, so a pillar reads the same whichever frame is behind it. Solid
+     from the moment it lands: a tile is either off-frame or fully arrived,
+     never a half-transparent ghost sitting over the skyline. */
+  background: var(--pine-deep);
+}
+/* Waiting tiles are parked past the right edge of the panel — far enough that
+   the whole tile clears the frame, since `.approach-pin` clips it. They slide
+   in one at a time as the scroll brings each one up.
+
+   Behind [data-js] like every other motion on the site: something has to put
+   the tiles back, and with scripting unavailable nothing would. The plain
+   markup is a legible stacked list, which is the right thing to fall back to. */
+[data-js] .approach-tile {
+  transform: translateX(calc(100% + var(--gutter) + 2rem));
+  opacity: 0;
   transition:
     opacity var(--t-slow) var(--ease),
     transform var(--t-slow) var(--ease),
-    border-color var(--t-slow) var(--ease),
-    background var(--t-slow) var(--ease);
+    border-color var(--t-slow) var(--ease);
 }
-.approach-tile.past { opacity: 0.66; transform: translateX(0) scale(0.98); }
-.approach-tile.on {
-  opacity: 1;
-  transform: translateX(0) scale(1);
-  border-color: var(--signal);
-  background: rgba(10,41,33,0.82);
+/* Arrived — current and already-passed tiles hold the same solid treatment;
+   only the border marks which one the copy is talking about.
+
+   Scoped to the pinned breakpoint, the same one the component checks before
+   it tracks scroll at all. Below it nothing ever advances the active index,
+   so the first tile would arrive on its own and the other three would wait
+   for a signal that never comes; there, `.up` on the track drives all four. */
+@media (min-width: 901px) {
+  [data-js] .approach-tile.on,
+  [data-js] .approach-tile.past {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
+.approach-tile.on { border-color: var(--signal); }
 .approach-num {
   font-family: var(--mono);
   font-size: 0.66rem;
@@ -440,12 +464,25 @@
   .approach-head { max-width: none; }
   .approach-progress { display: none; }
   .approach-track { gap: 0.75rem; }
-  .approach-tile,
-  .approach-tile.past {
+  .approach-tile { padding: 1.2rem 1.3rem; }
+  /* Nothing is driving `.on` here — the component stops tracking scroll below
+     this breakpoint — so the highlight would sit on the first tile forever,
+     reading as a selection that never moves. All four are equal on a phone. */
+  .approach-tile.on { border-color: var(--line-dark); }
+
+  /* The tiles still arrive from the right, just triggered by the track coming
+     into view rather than by a pinned scroll. Same motion, no scroll hijack:
+     pinning five screens of runway under a thumb is the thing that made this
+     section hostile on touch in the first place. */
+  [data-js] .approach-track.up .approach-tile {
+    transform: translateX(0);
     opacity: 1;
-    transform: none;
-    padding: 1.2rem 1.3rem;
   }
+  [data-js] .approach-track.up .approach-tile:nth-child(1) { transition-delay: 0ms; }
+  [data-js] .approach-track.up .approach-tile:nth-child(2) { transition-delay: 110ms; }
+  [data-js] .approach-track.up .approach-tile:nth-child(3) { transition-delay: 220ms; }
+  [data-js] .approach-track.up .approach-tile:nth-child(4) { transition-delay: 330ms; }
+  [data-js] .approach-track.up .approach-tile:nth-child(5) { transition-delay: 440ms; }
   .approach-label { font-size: 1.05rem; }
 
   .areas-preview  { padding: 3.5rem var(--gutter); }
@@ -481,6 +518,7 @@
 @media (prefers-reduced-motion: reduce) {
   .approach { height: auto; }
   .approach-pin { position: static; height: auto; }
-  .approach-tile,
-  .approach-tile.past { opacity: 1; transform: none; transition: none; }
+  [data-js] .approach-tile,
+  [data-js] .approach-tile.past,
+  [data-js] .approach-tile.on { opacity: 1; transform: none; transition: none; }
 }

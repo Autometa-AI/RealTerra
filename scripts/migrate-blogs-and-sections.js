@@ -14,8 +14,26 @@ const { createClient } = require('@supabase/supabase-js');
 const contentDir = path.join(__dirname, '..', 'content');
 const defaults = (name) => JSON.parse(fs.readFileSync(path.join(contentDir, `${name}.json`), 'utf-8'));
 
+/**
+ * Copy any top-level section the live row is missing out of the repo
+ * defaults.
+ *
+ * A section added to the code and to content/*.json but never to the database
+ * row renders as nothing at all in production — the partner logo band went
+ * out that way — and the failure is silent, because a component handed
+ * `undefined` just returns null. Backfilling every absent key means a new
+ * section only has to be listed in the repo copy once.
+ */
+function fillMissingSections(live, repoDefaults) {
+  const next = { ...live };
+  for (const [key, value] of Object.entries(repoDefaults)) {
+    if (next[key] === undefined) next[key] = value;
+  }
+  return next;
+}
+
 function migrateSite(site, siteDefaults) {
-  const next = { ...site };
+  const next = fillMissingSections(site, siteDefaults);
 
   next.nav = { ...site.nav };
   next.nav.links = (site.nav.links || []).map((l) =>
@@ -42,7 +60,7 @@ function migrateSite(site, siteDefaults) {
 }
 
 function migrateHome(home, homeDefaults) {
-  const next = { ...home };
+  const next = fillMissingSections(home, homeDefaults);
   const h = home.hero || {};
 
   // Old hero was a two-part headline plus a split eyebrow and mini stats.
